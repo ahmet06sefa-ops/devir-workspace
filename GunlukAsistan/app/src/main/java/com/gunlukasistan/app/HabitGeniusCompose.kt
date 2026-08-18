@@ -172,10 +172,12 @@ class HabitGeniusComposeActivity : ComponentActivity() {
 fun HabitGeniusMainScreen() {
     var currentTab by remember { mutableStateOf(AppTab.HABITS) }
     var showSettings by remember { mutableStateOf(false) }
+    var hizliIslemAcik by remember { mutableStateOf(false) }
+    var olusturmaEkrani by remember { mutableStateOf(0) } // 0 yok, 1 Alışkanlık, 2 Periyodik, 3 Görev
 
     Scaffold(
         bottomBar = {
-            if (!showSettings) {
+            if (!showSettings && olusturmaEkrani == 0) {
                 NavigationBar(
                     containerColor = SurfaceColor.copy(alpha = 0.9f),
                     modifier = Modifier.clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
@@ -207,32 +209,174 @@ fun HabitGeniusMainScreen() {
                 .padding(paddingValues)
                 .background(BackgroundColor)
         ) {
-            if (showSettings) {
-                HabitGeniusSettingsScreen(onBack = { showSettings = false })
-            } else {
-                AnimatedContent(
-                    targetState = currentTab,
-                    transitionSpec = { fadeIn() togetherWith fadeOut() },
-                    label = "ScreenTransition"
-                ) { targetTab ->
-                    when (targetTab) {
-                        AppTab.BUGUN -> TodayScreen()
-                        AppTab.HABITS -> HabitTrackerScreen()
-                        AppTab.TASKS -> TasksScreen()
-                        AppTab.STATS -> ReportsScreen()
+            when {
+                olusturmaEkrani == 1 -> HabitOlusturEkrani(onGeri = { olusturmaEkrani = 0 })
+                olusturmaEkrani == 3 -> GorevOlusturEkrani(onGeri = { olusturmaEkrani = 0 })
+                olusturmaEkrani == 2 -> PeriyodikGorevOlusturEkrani(onGeri = { olusturmaEkrani = 0 })
+                showSettings -> HabitGeniusSettingsScreen(onBack = { showSettings = false })
+                else -> {
+                    AnimatedContent(
+                        targetState = currentTab,
+                        transitionSpec = { fadeIn() togetherWith fadeOut() },
+                        label = "ScreenTransition"
+                    ) { targetTab ->
+                        when (targetTab) {
+                            AppTab.BUGUN -> TodayScreen()
+                            AppTab.HABITS -> HabitTrackerScreen()
+                            AppTab.TASKS -> TasksScreen()
+                            AppTab.STATS -> ReportsScreen()
+                        }
+                    }
+                    // Alt ortada büyük + butonu (gerçek HabitGenius)
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(bottom = 16.dp)
+                            .size(56.dp)
+                            .clip(CircleShape)
+                            .background(HabitAccent)
+                            .clickable { hizliIslemAcik = !hizliIslemAcik },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text("+", fontSize = 34.sp, color = Color.Black, fontWeight = FontWeight.Bold)
                     }
                 }
-                IconButton(
-                    onClick = { showSettings = true },
+            }
+
+            // Hızlı İşlemler menüsü (+, Alışkanlık/Periyodik/Görev)
+            if (hizliIslemAcik) {
+                Box(Modifier.fillMaxSize().background(Color(0x99000000)).clickable { hizliIslemAcik = false })
+                Column(
                     modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(top = 8.dp, end = 12.dp)
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .background(Color(0x66000000))
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 84.dp)
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Icon(Icons.Default.Settings, contentDescription = "Ayarlar", tint = TextSecondary)
+                    HizliIslemCipi("Alışkanlık", "Detaylı takip ve analitik veriler içeren tekrarlayan aktivite.", HabitAccent) { hizliIslemAcik = false; olusturmaEkrani = 1 }
+                    Spacer(Modifier.height(8.dp))
+                    HizliIslemCipi("Periyodik Görev", "İzleme veya istatistiksel analiz olmadan tekrarlayan aktivite.", MoodAccent) { hizliIslemAcik = false; olusturmaEkrani = 2 }
+                    Spacer(Modifier.height(8.dp))
+                    HizliIslemCipi("Görev", "Sürekli takip gerektirmeyen tek seferlik iş.", ExpenseAccent) { hizliIslemAcik = false; olusturmaEkrani = 3 }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun HizliIslemCipi(baslik: String, alt: String, renk: Color, onClick: () -> Unit) {
+    Card(colors = CardDefaults.cardColors(containerColor = SurfaceColor), shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth().clickable { onClick() }) {
+        Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(Modifier.size(40.dp).clip(RoundedCornerShape(12.dp)).background(renk.copy(alpha = 0.15f)), contentAlignment = Alignment.Center) {
+                Icon(Icons.Default.Add, null, tint = renk, modifier = Modifier.size(20.dp))
+            }
+            Spacer(Modifier.width(12.dp))
+            Column(Modifier.weight(1f)) {
+                Text(baslik, fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = TextPrimary)
+                Text(alt, fontSize = 12.sp, color = TextSecondary)
+            }
+            Text("›", fontSize = 20.sp, color = TextSecondary)
+        }
+    }
+}
+
+// Alışkanlık oluştur formu (gerçek HabitGenius alanları)
+@Composable
+fun HabitOlusturEkrani(onGeri: () -> Unit) {
+    Column(Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(onClick = onGeri) { Icon(Icons.Default.ArrowBack, contentDescription = "Geri", tint = TextPrimary) }
+            Text("Alışkanlık oluştur", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
+        }
+        FormAlan("Kategori", "Diğer ›")
+        FormAlan("Alışkanlık adı", "Alışkanlık adı girin")
+        FormAlan("Başlangıç tarihi", "18 Ağu 2026 ›")
+        FormAlan("Öncelik", "Varsayılan ›")
+        FormAlan("Bitiş tarihi", "Seçilmedi")
+        Text("SIKLIK", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+        ChipSatiri(listOf("Saatlik", "Günlük", "Haftalık", "Aylık"), 1)
+        Text("Tekrar (Her N günde bir)", fontSize = 13.sp, color = TextSecondary)
+        Text("Her dönemde bazı günler", fontSize = 13.sp, color = HabitAccent)
+        Text("Yılın belirli günleri", fontSize = 13.sp, color = HabitAccent)
+        Text("DEGERLENDİRME TÜRÜ", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+        ChipSatiri(listOf("Evet/Hayır", "Sayısal", "Kontrol Listesi", "Zamanlayıcı", "Kronometre"), 0)
+        Text("EK HEDEFLER", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+        FormAlan("Haftalık hedef", "Hedef yok")
+        FormAlan("Aylık hedef", "Hedef yok")
+        Text("HATIRLATICILAR", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+        FormAlan("Hatırlatıcı ekle", "İsteğe bağlı")
+        FormAlan("Notlar", "Not ekle")
+        Spacer(Modifier.height(8.dp))
+        Button(onClick = onGeri, colors = ButtonDefaults.buttonColors(containerColor = HabitAccent), shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()) { Text("Kaydet", color = Color.Black, fontWeight = FontWeight.Bold) }
+    }
+}
+
+// Periyodik görev oluştur
+@Composable
+fun PeriyodikGorevOlusturEkrani(onGeri: () -> Unit) {
+    Column(Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(onClick = onGeri) { Icon(Icons.Default.ArrowBack, contentDescription = "Geri", tint = TextPrimary) }
+            Text("Create periodic task", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
+        }
+        FormAlan("Kategori", "Diğer ›")
+        FormAlan("Görev adı", "Görev adı girin")
+        FormAlan("Başlangıç tarihi", "18 Ağu 2026 ›")
+        FormAlan("Öncelik", "Varsayılan ›")
+        FormAlan("Bitiş tarihi", "Seçilmedi")
+        Text("SIKLIK", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+        ChipSatiri(listOf("Günlük", "Haftalık", "Aylık"), 0)
+        Text("DEGERLENDİRME TÜRÜ", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+        ChipSatiri(listOf("Evet/Hayır", "Kontrol Listesi", "Zamanlayıcı", "Kronometre"), 0)
+        Text("HATIRLATICILAR", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+        FormAlan("Hatırlatıcı ekle", "İsteğe bağlı")
+        FormAlan("Notlar", "Not ekle")
+        Spacer(Modifier.height(8.dp))
+        Button(onClick = onGeri, colors = ButtonDefaults.buttonColors(containerColor = HabitAccent), shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()) { Text("Kaydet", color = Color.Black, fontWeight = FontWeight.Bold) }
+    }
+}
+
+// Görev oluştur formu (gerçek alanlar)
+@Composable
+fun GorevOlusturEkrani(onGeri: () -> Unit) {
+    Column(Modifier.fillMaxSize().padding(16.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(onClick = onGeri) { Icon(Icons.Default.ArrowBack, contentDescription = "Geri", tint = TextPrimary) }
+            Text("Görev oluştur", fontSize = 22.sp, fontWeight = FontWeight.Bold, color = TextPrimary)
+        }
+        FormAlan("Kategori", "Diğer ›")
+        FormAlan("Görev adı", "Görev adı girin")
+        FormAlan("Tarih", "18 Ağu 2026 ›")
+        FormAlan("Öncelik", "Varsayılan ›")
+        Text("HATIRLATICILAR", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+        FormAlan("Hatırlatıcı ekle", "İsteğe bağlı")
+        Text("KONTROL LİSTESİ", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+        FormAlan("Kontrol listesi", "İsteğe bağlı")
+        FormAlan("Açıklama / Not", "Açıklama ekle")
+        FormAlan("Beklenen efor", "Seçilmedi")
+        Spacer(Modifier.height(8.dp))
+        Button(onClick = onGeri, colors = ButtonDefaults.buttonColors(containerColor = HabitAccent), shape = RoundedCornerShape(12.dp), modifier = Modifier.fillMaxWidth()) { Text("Kaydet", color = Color.Black, fontWeight = FontWeight.Bold) }
+    }
+}
+
+@Composable
+fun FormAlan(etiket: String, deger: String) {
+    Card(colors = CardDefaults.cardColors(containerColor = SurfaceColor), shape = RoundedCornerShape(14.dp), modifier = Modifier.fillMaxWidth()) {
+        Row(Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+            Text(etiket, fontSize = 14.sp, color = TextPrimary)
+            Text(deger, fontSize = 13.sp, color = TextSecondary)
+        }
+    }
+}
+
+@Composable
+fun ChipSatiri(secenekler: List<String>, seciliIdx: Int) {
+    LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        items(secenekler.size) { i ->
+            Box(Modifier.clip(RoundedCornerShape(50)).background(if (i == seciliIdx) HabitAccent else SurfaceColor).clickable { }.padding(horizontal = 12.dp, vertical = 6.dp)) {
+                Text(secenekler[i], fontSize = 12.sp, color = if (i == seciliIdx) Color.Black else TextPrimary)
             }
         }
     }
