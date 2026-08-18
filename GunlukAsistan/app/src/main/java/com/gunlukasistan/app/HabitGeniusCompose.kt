@@ -981,6 +981,14 @@ fun TodayScreen() {
     var takvimAcik by remember { mutableStateOf(false) }
     var seciliGun by remember { mutableStateOf(18) }
     var ay by remember { mutableStateOf("Ağustos 2026") }
+    // Modül navigasyonu: 0 = Bugün ana ekran, 1..5 = seçili modül tam ekran
+    var seciliModul by remember { mutableStateOf(0) }
+
+    // Seçili modül ekranı (tam ekran, kendi içinde kaydırma var — iç içe değil)
+    if (seciliModul != 0) {
+        ModulGorunumEkrani(seciliModul, onGeri = { seciliModul = 0 })
+        return
+    }
 
     Box(Modifier.fillMaxSize()) {
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
@@ -1029,14 +1037,14 @@ fun TodayScreen() {
             // Seçili günün aktiviteleri
             Text("Aktivite bulunamadı.", fontSize = 14.sp, color = TextSecondary, modifier = Modifier.padding(horizontal = 16.dp))
             Spacer(Modifier.height(24.dp))
-            // Takipçiler başlığı
+            // Takipçiler başlığı — dokununca modüle git (genişletme yok, iç içe kaydırma yok)
             Text("TAKİPÇİLER", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold, modifier = Modifier.padding(horizontal = 16.dp))
             Spacer(Modifier.height(8.dp))
-            TakipciKarti("Alışkanlıklar ve Görevler", "Tekrarlayan aktiviteler, görevler ve analitik", HabitAccent) { MoodJournalScreen() }
-            TakipciKarti("Duygular", "Ruh hali takibi ve içgörüler", MoodAccent) { MoodJournalScreen() }
-            TakipciKarti("Harcamalar", "Gelir, gider ve bütçe takibi", ExpenseAccent) { ExpenseTrackerScreen() }
-            TakipciKarti("Günlük", "Düşüncelerini kaydet", JournalAccent) { DigitalJournalScreen() }
-            TakipciKarti("Odaklanma", "Pomodoro zamanlayıcı ve istatistikler", FocusAccent) { FocusTimerScreen() }
+            TakipciKarti("Alışkanlıklar ve Görevler", "Tekrarlayan aktiviteler, görevler ve analitik", HabitAccent) { seciliModul = 1 }
+            TakipciKarti("Duygular", "Ruh hali takibi ve içgörüler", MoodAccent) { seciliModul = 2 }
+            TakipciKarti("Harcamalar", "Gelir, gider ve bütçe takibi", ExpenseAccent) { seciliModul = 3 }
+            TakipciKarti("Günlük", "Düşüncelerini kaydet", JournalAccent) { seciliModul = 4 }
+            TakipciKarti("Odaklanma", "Pomodoro zamanlayıcı ve istatistikler", FocusAccent) { seciliModul = 5 }
             Spacer(Modifier.height(16.dp))
         }
 
@@ -1053,11 +1061,11 @@ fun TodayScreen() {
                     Spacer(Modifier.height(16.dp))
                     Text("TAKİPÇİLER", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(8.dp))
-                    MenuSatiri(Icons.Default.CheckCircle, "Alışkanlıklar ve Görevler", HabitAccent) { menuAcik = false }
-                    MenuSatiri(Icons.Default.Face, "Duygular", MoodAccent) { menuAcik = false }
-                    MenuSatiri(Icons.Default.ShoppingCart, "Harcamalar", ExpenseAccent) { menuAcik = false }
-                    MenuSatiri(Icons.Default.Edit, "Günlük", JournalAccent) { menuAcik = false }
-                    MenuSatiri(Icons.Default.PlayArrow, "Odaklanma", FocusAccent) { menuAcik = false }
+                    MenuSatiri(Icons.Default.CheckCircle, "Alışkanlıklar ve Görevler", HabitAccent) { menuAcik = false; seciliModul = 1 }
+                    MenuSatiri(Icons.Default.Face, "Duygular", MoodAccent) { menuAcik = false; seciliModul = 2 }
+                    MenuSatiri(Icons.Default.ShoppingCart, "Harcamalar", ExpenseAccent) { menuAcik = false; seciliModul = 3 }
+                    MenuSatiri(Icons.Default.Edit, "Günlük", JournalAccent) { menuAcik = false; seciliModul = 4 }
+                    MenuSatiri(Icons.Default.PlayArrow, "Odaklanma", FocusAccent) { menuAcik = false; seciliModul = 5 }
                     Spacer(Modifier.height(16.dp))
                     Text("SİSTEM", fontSize = 12.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
                     Spacer(Modifier.height(8.dp))
@@ -1082,12 +1090,10 @@ fun TodayScreen() {
                         IconButton(onClick = {}) { Text("›", fontSize = 22.sp, color = TextPrimary) }
                     }
                     Spacer(Modifier.height(8.dp))
-                    // Gün başlıkları
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                         listOf("PAZ", "PZT", "SAL", "ÇAR", "PER", "CUM", "CMT").forEach { Text(it, fontSize = 10.sp, color = TextSecondary) }
                     }
                     Spacer(Modifier.height(8.dp))
-                    // Tarih grid (16-31)
                     repeat(2) { satir ->
                         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                             (1..7).forEach { kol ->
@@ -1110,6 +1116,27 @@ fun TodayScreen() {
     }
 }
 
+// Seçili Takipçi modülünü tam ekran gösterir (geri butonuyla Bugün'e dönülür)
+@Composable
+fun ModulGorunumEkrani(modul: Int, onGeri: () -> Unit) {
+    Column(Modifier.fillMaxSize()) {
+        Row(Modifier.fillMaxWidth().padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
+            IconButton(onClick = onGeri) { Icon(Icons.Default.ArrowBack, contentDescription = "Geri", tint = TextPrimary) }
+            Text("Geri", fontSize = 15.sp, color = TextPrimary)
+        }
+        Box(Modifier.weight(1f)) {
+            when (modul) {
+                1 -> MoodJournalScreen()          // Alışkanlıklar ve Görevler (demo)
+                2 -> MoodJournalScreen()          // Duygular
+                3 -> ExpenseTrackerScreen()       // Harcamalar
+                4 -> DigitalJournalScreen()       // Günlük
+                5 -> FocusTimerScreen()           // Odaklanma
+                else -> Text("Modül", color = TextPrimary)
+            }
+        }
+    }
+}
+
 @Composable
 fun MenuSatiri(ikon: ImageVector, baslik: String, renk: Color, onClick: () -> Unit) {
     Row(Modifier.fillMaxWidth().clickable { onClick() }.padding(vertical = 10.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -1122,22 +1149,18 @@ fun MenuSatiri(ikon: ImageVector, baslik: String, renk: Color, onClick: () -> Un
 }
 
 @Composable
-fun TakipciKarti(baslik: String, alt: String, renk: Color, icerik: @Composable () -> Unit) {
-    var acik by remember { mutableStateOf(false) }
-    Card(colors = CardDefaults.cardColors(containerColor = SurfaceColor), shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).clickable { acik = !acik }) {
-        Column(Modifier.fillMaxWidth().padding(16.dp)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(Modifier.size(40.dp).clip(RoundedCornerShape(12.dp)).background(renk.copy(alpha = 0.15f)), contentAlignment = Alignment.Center) {
-                    Box(Modifier.size(10.dp).clip(CircleShape).background(renk))
-                }
-                Spacer(Modifier.width(12.dp))
-                Column(Modifier.weight(1f)) {
-                    Text(baslik, fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = TextPrimary)
-                    Text(alt, fontSize = 12.sp, color = TextSecondary)
-                }
-                Text(if (acik) "▾" else "›", fontSize = 18.sp, color = TextSecondary)
+fun TakipciKarti(baslik: String, alt: String, renk: Color, onClick: () -> Unit) {
+    Card(colors = CardDefaults.cardColors(containerColor = SurfaceColor), shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).clickable { onClick() }) {
+        Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Box(Modifier.size(40.dp).clip(RoundedCornerShape(12.dp)).background(renk.copy(alpha = 0.15f)), contentAlignment = Alignment.Center) {
+                Box(Modifier.size(10.dp).clip(CircleShape).background(renk))
             }
-            if (acik) { Spacer(Modifier.height(10.dp)); icerik() }
+            Spacer(Modifier.width(12.dp))
+            Column(Modifier.weight(1f)) {
+                Text(baslik, fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color = TextPrimary)
+                Text(alt, fontSize = 12.sp, color = TextSecondary)
+            }
+            Text("›", fontSize = 18.sp, color = TextSecondary)
         }
     }
 }
