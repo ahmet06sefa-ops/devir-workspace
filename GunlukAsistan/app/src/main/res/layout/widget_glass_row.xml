@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rowRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="48dp"
+        android:orientation="horizontal">
+
+        <!-- Dairesel onay kutusu -->
+        <TextView
+            android:id="@+id/rowCheck"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/g_check_off"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text=""
+            android:textColor="#8AB4F8"
+            android:textSize="@dimen/ga_yazi_widget_madde" />
+
+        <!-- Metin + isteğe bağlı renkli nokta -->
+        <TextView
+            android:id="@+id/rowText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-light"
+            android:lineSpacingExtra="6dp"
+            android:maxLines="1"
+            android:minHeight="25dp"
+            android:textColor="#FCFCFE"
+            android:textSize="@dimen/ga_yazi_widget_madde"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/rowBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="#A8A8AA"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+    </LinearLayout>
+
+    <!-- İnce ayraç.
+         🔴 v8.7: burada `<View>` kullanılıyordu. RemoteViews (widget)
+         `<View>` desteklemiyor — v7.40.1'de aynı hata yaşanmış ve
+         diğer widget layout'larında düzeltilmişti ama bu dosya
+         gözden kaçmış. Bu satır liste öğesi olarak RemoteViews ile
+         şişiriliyor (GlassListService), yani widget'ı kırma riski
+         taşıyordu. Sıfır metinli TextView aynı görevi görüyor. -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="43dp"
+        android:background="#26FFFFFF"
+        android:importantForAccessibility="no"
+        android:text=""
+        android:textSize="1sp" />
+</LinearLayout>

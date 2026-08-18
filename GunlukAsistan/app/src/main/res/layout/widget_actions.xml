@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/actBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="@dimen/w_kart_pay">
+
+    <LinearLayout
+        android:id="@+id/actTimer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/w_btn"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/w_act_focus"
+            android:id="@+id/actTimYazi"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/actQuestion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/w_btn"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔢"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/w_act_question"
+            android:id="@+id/actSoruYazi"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/actTask"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/w_btn"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✅"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/w_act_task"
+            android:id="@+id/actGorevYazi"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/actToday"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/w_btn"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🗓"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/w_act_today"
+            android:id="@+id/actBugunYazi"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+    
+    <!-- v7.71: bas-konus hizli not -->
+    <LinearLayout
+        android:id="@+id/actSes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/w_btn"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎙"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sn_widget"
+            android:id="@+id/actSesYazi"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>
+</FrameLayout>

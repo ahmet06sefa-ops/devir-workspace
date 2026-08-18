@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0E0E13"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- ÜST BAŞLIK KARTI -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#1A1B23"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="0dp"
+            app:strokeColor="#2A2B35"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/dfBaslik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df_baslik"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_buyuk"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/dfAltBaslik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/df_alt_baslik"
+                    android:textColor="#8B8D98"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDersKatalogRehber"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="#4C7DFF"
+                    android:text="📚 100 UZMAN ÖĞRENME &amp; KOLAYLIK KATALOGU"
+                    android:textColor="#FFFFFF"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    app:cornerRadius="@dimen/ga_kose_orta" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 1. MODÜL: İleri Leitner Kutu & SR-2-7-30 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#1A1B23"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="0dp"
+            app:strokeColor="#2A2B35"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df_mod1_leitner"
+                    android:textColor="#4C7DFF"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtLeitnerKartSoru"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="❓ Soru: Lozan'da çözülemeyen tek konu nedir? (Kutu: 1)"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtLeitnerKartCevap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="💡 Cevap: Irak Sınırı / Musul Sorunu (1926 Ankara Antlaşması)"
+                    android:textColor="#8B8D98"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <TextView
+                    android:id="@+id/txtLeitnerDagilim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Kutu 1: 1 Kart | Kutu 2: 1 Kart | Kutu 3: 1 Kart"
+                    android:textColor="#4C7DFF"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnKartDogru"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:backgroundTint="#22C55E"
+                        android:text="✅ DOĞRU (ÜST KUTU)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        app:cornerRadius="@dimen/ga_kose_orta" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnKartYanlis"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:backgroundTint="#EF4444"
+                        android:text="❌ YANLIŞ (KUTU 1)"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        app:cornerRadius="@dimen/ga_kose_orta" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 2. MODÜL: PDF Sayfa Üzeri Otomatik Flaş Kart & Vurgu Üreticisi -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#1A1B23"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="0dp"
+            app:strokeColor="#2A2B35"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df_mod2_pdf"
+                    android:textColor="#4C7DFF"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtPdfVurguDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="✂️ Örnek Vurgu: 'Lozan Boğazlar - 1936 Montrö sözleşmesi ile tam egemenlik sağlandı'"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPdfFlasKartUret"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#22232C"
+                    android:text="✂️ VURGUDAN OTOMATİK FLAŞ KART ÜRET &amp; DESTEYE EKLE"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    app:cornerRadius="@dimen/ga_kose_orta"
+                    app:strokeColor="#4C7DFF"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 3. MODÜL: KPSS / YKS Deneme Sınavı Net Eğrisi & Hız Radarı -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#1A1B23"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="0dp"
+            app:strokeColor="#2A2B35"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df_mod3_net"
+                    android:textColor="#4C7DFF"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDenemeEgriDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Ortalama NET: 44.75 | Son NET: 47.50 (📈 YÜKSELİŞTE) | Hız: 60 sn/soru"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDenemeKayitEkle"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#22232C"
+                    android:text="📈 YENİ DENEME EKLE (+52 DOĞRU, 8 YANLIŞ ➔ 50 NET)"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    app:cornerRadius="@dimen/ga_kose_orta"
+                    app:strokeColor="#4C7DFF"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 4. MODÜL: Aktif Geri Çağırma & Feynman Testi -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#1A1B23"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="0dp"
+            app:strokeColor="#2A2B35"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df_mod4_recall"
+                    android:textColor="#4C7DFF"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtActiveRecallDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="📝 Active Recall: 'Lozan antlaşması boğazlar sözleşmesidir. Montrö ile komisyon kalkmıştır. Türkiye tam egemen olmuştur.'"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnActiveRecallTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#22232C"
+                    android:text="📝 ACTİVE RECALL SKORUNU ÖLÇ (%95 ANLATIM PUANI)"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    app:cornerRadius="@dimen/ga_kose_orta"
+                    app:strokeColor="#4C7DFF"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 5. MODÜL: Animedoro & Ultradian Biyo-Ritm -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#1A1B23"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="0dp"
+            app:strokeColor="#2A2B35"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df_mod5_sprint"
+                    android:textColor="#4C7DFF"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtBiyoSprintDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="⏱️ Animedoro (40m/20m): 40m Yüksek Odak ➔ 20m Anime/Ödül Molası"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBiyoSprintToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#22232C"
+                    android:text="⏱️ SEANS DEĞİŞTİR (ANİMEDORO 40/20 vs ULTRADİAN 90/20)"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    app:cornerRadius="@dimen/ga_kose_orta"
+                    app:strokeColor="#4C7DFF"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 6. MODÜL: AI Sokratik Koç & ÖSYM Çeldirici Şık Defteri -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#1A1B23"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="0dp"
+            app:strokeColor="#2A2B35"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df_mod6_sokratik"
+                    android:textColor="#4C7DFF"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtCeldiriciDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="⚠️ ÖSYM Çeldiricisi (Tarih): Soru kökünde 'İlk defa' veya 'Kesinlikle' ifadelerine dikkat!"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCeldiriciDersSec"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#22232C"
+                    android:text="⚠️ ÖSYM ÇELDİRİCİSİ DEĞİŞTİR (TARİH / TÜRKÇE / MATEMATİK)"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    app:cornerRadius="@dimen/ga_kose_orta"
+                    app:strokeColor="#4C7DFF"
+                    app:strokeWidth="1dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 7. MODÜL: Çevrimdışı Altın Formül Kasası & CSV Dışa Aktarıcı -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="#1A1B23"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="0dp"
+            app:strokeColor="#2A2B35"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df_mod7_formul"
+                    android:textColor="#4C7DFF"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtIleriCsvDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="📦 Leitner Destesi: 3 Kart hazır · Deneme Eğrisi: 2 Sınav hazır"
+                    android:textColor="#F5F5F7"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnLeitnerCsvKopyala"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:backgroundTint="#22232C"
+                        android:text="📋 LEITNER CSV KOPYALA"
+                        android:textColor="#F5F5F7"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        app:cornerRadius="@dimen/ga_kose_orta" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnDenemeEgriCsvKopyala"
+                        android:layout_width="0dp"
+                        android:layout_height="44dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:backgroundTint="#22232C"
+                        android:text="📋 NET EĞRİ CSV KOPYALA"
+                        android:textColor="#F5F5F7"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        app:cornerRadius="@dimen/ga_kose_orta" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

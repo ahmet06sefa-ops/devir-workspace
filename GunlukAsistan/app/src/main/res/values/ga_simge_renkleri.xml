@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v8.3 · Öneri 12: alternatif uygulama simgeleri.
+
+  Her simge bir arka plan rengi + ortak vektör ön plandan oluşuyor.
+  Ayrı PNG üretmek yerine adaptive-icon kullanıldı: tek vektör,
+  5 renk, ~2 KB toplam. PNG olsaydı 5 simge × 5 yoğunluk = 25 dosya.
+-->
+<resources>
+    <color name="ga_simge_karamel">#B08968</color>
+    <color name="ga_simge_mor">#7C5CBF</color>
+    <color name="ga_simge_gece">#111A2B</color>
+    <color name="ga_simge_yesil">#3E7A4E</color>
+    <color name="ga_simge_minimal">#FAF4E8</color>
+</resources>

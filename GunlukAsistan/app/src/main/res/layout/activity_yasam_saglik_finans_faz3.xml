@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Üst Başlık ve Geri Butonu -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp">
+
+            <ImageButton
+                android:id="@+id/btnGeri"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/app_name"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="?attr/colorOnSurface" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf3_baslik"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_buyuk"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAltBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf3_altbaslik"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- KART 1: Modül 1 (#52, #54, #55) Deprem Tahliye & SOS -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf3_mod1_deprem"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtSosSonuc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="🚨 Deprem tahliye adımları ve SOS acil durum mesajı oluşturma paneli hazır."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnDepremTest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="TAHLİYE PLANI"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <Button
+                        android:id="@+id/btnSosTest"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="SOS OLUŞTUR"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 2: Modül 2 & 3 (#56, #57, #59, #60) Pusula, Hayatta Kalma & Tıbbi Kart -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf3_mod3_kart"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtKartOzeti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="🧭 Çevrimdışı Pusula &amp; Kıble rehberi aktif.\n🛡️ Gizlilik Kalkanı: AÇIK"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnKartTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/ysf3_btn_kart_test"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 3: Modül 4 (#93, #94) Depolama Analizörü & Çökme Tanı Arşivi -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf3_mod4_depolama"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDepolamaOzeti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Depolama Analizi ve Çökme Tanı günlüğü yükleniyor..."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 4: Modül 5 & 6 (#98, #99, #100) Arama & Bütüncül JSON Yedekleme -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf3_mod6_export"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtExportOzeti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Tüm medikal ve yaşam verilerini tek tıkla JSON formatında dışa aktarın."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnExportTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/ysf3_btn_export_test"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 5: Modül 7 (#63, #80) Kilit Ekranı Canlı Odak & Yüzebilen Hap -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf3_mod7_canli"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtCanliOzeti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="🔒 Kilit Ekranı Canlı Şerit &amp; 🫧 Yüzebilen Durum Hapı simülasyonu hazır."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

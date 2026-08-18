@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════
+  v8.8 · Öneri 3 — Android 11 ve öncesi otomatik yedekleme kuralları
+  ══════════════════════════════════════════════════════════════════
+
+  🔴 DÜZELTİLEN HATA (lint bunu yakaladı):
+  Eskiden yalnız `sharedpref` dahil ediliyordu ama `file` ve
+  `external` alanlarından `<exclude>` yazılmıştı. Lint haklı olarak
+  "pdf_cache is not in an included path" dedi: dahil edilmemiş bir
+  alandan bir şey çıkaramazsın. Bu satırlar hiçbir şey yapmıyordu —
+  yani geçici PDF önbelleği ASLINDA yedeklenmiyordu (şans eseri
+  doğru sonuç) ama kural yanlış yazılmıştı ve release derlemesini
+  kırıyordu.
+
+  ══════════════════════════════════════════════════════════════════
+  GİZLİLİK KARARI (öneri 3)
+  ══════════════════════════════════════════════════════════════════
+  Otomatik yedek Google sunucularına gidiyor. Şunları BİLEREK
+  dışarıda bırakıyoruz:
+
+  · ai_settings      → API anahtarları. v8.8'de Keystore ile
+                       şifrelendiler ve şifre çözme anahtarı CİHAZDA
+                       kalıyor — yani yedeklenseler bile yeni
+                       telefonda çözülemezler. Yine de göndermenin
+                       anlamı yok.
+  · crash_log        → yığın izleri, hassas olabilir
+  · ai_onbellek_v1   → AI cevap önbelleği, yeniden üretilebilir
+  · konu_anlatim_v1  → üretilmiş anlatımlar (megabaytlarca)
+  · ai_model_cache   → model listesi önbelleği
+
+  Ders notları, görevler ve ilerleme yedekleniyor — telefon
+  kaybolduğunda kullanıcının asıl kaybedeceği şey bunlar.
+-->
+<full-backup-content>
+    <!-- Tüm uygulama tercihleri ve verisi -->
+    <include
+        domain="sharedpref"
+        path="." />
+
+    <!-- Cihaz içi elle yedek dosyası -->
+    <include
+        domain="external"
+        path="yedek-gunluk-asistan.txt" />
+
+    <!-- Room veritabanı (görevler + notlar, v8.1'den beri) -->
+    <include
+        domain="database"
+        path="gunluk_asistan.db" />
+
+    <!-- ── Hassas veya gereksiz olanlar ── -->
+    <exclude
+        domain="sharedpref"
+        path="ai_settings.xml" />
+    <exclude
+        domain="sharedpref"
+        path="crash_log.xml" />
+    <exclude
+        domain="sharedpref"
+        path="ai_onbellek_v1.xml" />
+    <exclude
+        domain="sharedpref"
+        path="ai_model_cache.xml" />
+    <exclude
+        domain="sharedpref"
+        path="konu_anlatim_v1.xml" />
+</full-backup-content>

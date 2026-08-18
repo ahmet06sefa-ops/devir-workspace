@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:orientation="vertical">
+
+    <!-- Üst Başlık Barı -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/colorSurfaceVariant"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <ImageButton
+            android:id="@+id/btnGeri"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/close"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="?attr/colorOnSurface" />
+
+        <TextView
+            android:id="@+id/txtBaslik"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="🌱 Kişisel Gelişim &amp; Farkındalık Merkezi"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/ga_yazi_orta" />
+    </LinearLayout>
+
+    <!-- 5 Sekmeli Otonom Seçici Şerit (Retroperspektif, Manifesto, SWOT, Derin Çalışma, Reset Günü) -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/layoutKisiselGelisimCipleri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <!-- İçerik Alanı: 5 Sekme İçin Gövde Panelleri -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="6dp">
+
+        <!-- 1. RETROPERSPEKTİF PANELİ (Son 1 Yıl Ay Ay İnceleme) -->
+        <ScrollView
+            android:id="@+id/layoutRetroPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:padding="12dp"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="🗓️ Son 1 Yılın Retroperspektif &amp; Farkındalık Tablosu"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_orta" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Geçirdiğin son bir yılı ay ay incele. Bu yıl sana neler kattı, sende neler değişti, bu sana çok farkındalık kazandıracak."
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <!-- 12 Aylık Puan Grafiği -->
+                    <TextView
+                        android:id="@+id/txtRetroGrafik"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="?attr/colorSurfaceVariant"
+                        android:fontFamily="monospace"
+                        android:padding="8dp"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_mini" />
+
+                    <TextView
+                        android:id="@+id/txtRetroOrtalama"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/listeRetroAylar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical" />
+
+                <Button
+                    android:id="@+id/btnRetroKaydet"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="💾 Tüm Ay İncelemelerini Kaydet"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- 2. MANİFESTO PANELİ (Değerler, Vizyon, 5 Yıl Sonra Neredeyim) -->
+        <ScrollView
+            android:id="@+id/layoutManifestoPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:padding="12dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Manifesto Özeti ve Netlik Skoru Kartı -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="📜 Kişisel Manifesto &amp; 5 Yıllık Gelecek Planı"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_orta" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Neye değer veriyorsun, nasıl biri olmak istiyorsun, 5 yıl sonra nerede görüyorsun. Bunları net bir şekilde görebilmek kafandaki karışıklığı siliyor."
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <ProgressBar
+                        android:id="@+id/progressManifestoNetlik"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="85"
+                        android:progressTint="?attr/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/txtManifestoNetlik"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Değerler Kartı -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="💎 1. Neye Değer Veriyorum? (Temel Değerlerim)"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <LinearLayout
+                        android:id="@+id/layoutManifestoDegerler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edtYeniDeger"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/g_card"
+                            android:hint="Yeni bir değer ekle (Örn: Sadakat)"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <Button
+                            android:id="@+id/btnDegerEkle"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:layout_marginStart="8dp"
+                            android:text="➕ Ekle"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="@dimen/ga_yazi_kucuk"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Kimlik Tanımı Kartı -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="🌟 2. Nasıl Biri Olmak İstiyorum? (Kimlik &amp; Karakter Tanımım)"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <EditText
+                        android:id="@+id/edtKimlikTanimi"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="8dp"
+                        android:background="?attr/colorSurfaceVariant"
+                        android:gravity="top|start"
+                        android:hint="Kendini nasıl tanımlıyor ve geliştirmek istiyorsun?"
+                        android:padding="10dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_normal" />
+                </LinearLayout>
+
+                <!-- 5 Yıl Sonra Neredeyim (Vizyon Tablosu) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="🚀 3. 5 Yıl Sonra Nerede Görüyorum? (2031 Vizyon Tablosu)"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="• Kariyer &amp; İş Vizyonu:"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtBesYilKariyer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="?attr/colorSurfaceVariant"
+                        android:padding="8dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="• Sağlık &amp; Fiziksel Beden Vizyonu:"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtBesYilSaglik"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="?attr/colorSurfaceVariant"
+                        android:padding="8dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="• Finans &amp; Varlık Vizyonu:"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtBesYilFinans"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="?attr/colorSurfaceVariant"
+                        android:padding="8dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="• Sosyal &amp; İlişkiler Vizyonu:"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtBesYilSosyal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="?attr/colorSurfaceVariant"
+                        android:padding="8dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="• Kişisel Bilgelik &amp; Zihin Vizyonu:"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtBesYilBilgelik"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="?attr/colorSurfaceVariant"
+                        android:padding="8dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnManifestoKaydet"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="💾 Manifestomu ve Vizyon Tablomu Kaydet"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- 3. SWOT ANALİZİ PANELİ (Güçlü, Zayıf, Fırsatlar, Tehditler) -->
+        <ScrollView
+            android:id="@+id/layoutSwotPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:padding="12dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="📊 Objektif SWOT Analizi &amp; Denge Matrisi"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_orta" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Güçlü yönlerini, zayıf yönlerini, fırsatlarını ve tehditleri objektif bir şekilde gör."
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <!-- SWOT Denge Çubuğu -->
+                    <ProgressBar
+                        android:id="@+id/progressSwotDenge"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="60"
+                        android:progressTint="?attr/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/txtSwotDengeMetni"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- 4 Kadranlı SWOT Matrisi -->
+                <!-- 1. Güçlü Yönler -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="💪 GÜÇLÜ YÖNLER (Strengths)"
+                        android:textColor="#2E7D32"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <LinearLayout
+                        android:id="@+id/listeGucluler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edtGucluEkle"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:background="?attr/colorSurfaceVariant"
+                            android:hint="Yeni güçlü yön ekle..."
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <Button
+                            android:id="@+id/btnGucluEkle"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:text="➕ Ekle"
+                            android:textColor="#2E7D32"
+                            android:textSize="@dimen/ga_yazi_kucuk"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 2. Zayıf Yönler -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="⚠️ ZAYIF YÖNLER (Weaknesses)"
+                        android:textColor="#E65100"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <LinearLayout
+                        android:id="@+id/listeZayiflar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edtZayifEkle"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:background="?attr/colorSurfaceVariant"
+                            android:hint="Yeni zayıf yön ekle..."
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <Button
+                            android:id="@+id/btnZayifEkle"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:text="➕ Ekle"
+                            android:textColor="#E65100"
+                            android:textSize="@dimen/ga_yazi_kucuk"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 3. Fırsatlar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="🌟 FIRSATLAR (Opportunities)"
+                        android:textColor="#1565C0"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <LinearLayout
+                        android:id="@+id/listeFirsatlar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edtFirsatEkle"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:background="?attr/colorSurfaceVariant"
+                            android:hint="Yeni fırsat ekle..."
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <Button
+                            android:id="@+id/btnFirsatEkle"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:text="➕ Ekle"
+                            android:textColor="#1565C0"
+                            android:textSize="@dimen/ga_yazi_kucuk"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 4. Tehditler -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="🛡️ TEHDİTLER (Threats)"
+                        android:textColor="#C62828"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <LinearLayout
+                        android:id="@+id/listeTehditler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edtTehditEkle"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:background="?attr/colorSurfaceVariant"
+                            android:hint="Yeni tehdit / risk ekle..."
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <Button
+                            android:id="@+id/btnTehditEkle"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:text="➕ Ekle"
+                            android:textColor="#C62828"
+                            android:textSize="@dimen/ga_yazi_kucuk"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- 4. DERİN ÇALIŞMA PERİYODU PANELİ (3-4 Saatlik Odak) -->
+        <ScrollView
+            android:id="@+id/layoutDerinPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:padding="12dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="⚡ 3-4 Saatlik Derin Çalışma Periyodu (Deep Work)"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_orta" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Boş zaman geçirmek yerine 3-4 saatini gerçekten sevdiğin bir konuya ayırıp derin bir çalışma zamanı oluştur."
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <!-- Haftalık Çalışma Grafiği -->
+                    <TextView
+                        android:id="@+id/txtDerinHaftalikGrafik"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="?attr/colorSurfaceVariant"
+                        android:fontFamily="monospace"
+                        android:padding="8dp"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_mini" />
+
+                    <TextView
+                        android:id="@+id/txtDerinHaftalikToplam"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Sevdiğim Konular Listesi -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="🎯 Sevdiğim Konular &amp; Derin Odak Alanlarım"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <LinearLayout
+                        android:id="@+id/listeDerinKonular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edtYeniKonu"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:background="?attr/colorSurfaceVariant"
+                            android:hint="Yeni bir odak konusu ekle (Örn: Yapay Zekâ)"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <Button
+                            android:id="@+id/btnKonuEkle"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:text="➕ Ekle"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="@dimen/ga_yazi_kucuk"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 3-4 Saat Seçici ve Başlat Butonu -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="⏱️ Odak Süresi Kurucusu (180 - 240 Dakika)"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btn180Dk"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="?attr/colorPrimary"
+                            android:text="🔥 3 SAAT ODAK (180 Dk)"
+                            android:textColor="?attr/colorOnPrimary"
+                            android:textSize="@dimen/ga_yazi_mini"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btn240Dk"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="?attr/colorSurfaceVariant"
+                            android:text="🚀 4 SAAT ODAK (240 Dk)"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_mini"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnDerinCalismayiBaslat"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="12dp"
+                        android:backgroundTint="?attr/colorPrimary"
+                        android:text="⚡ Seçili Konuda Derin Çalışmayı Başlat (Zamanlayıcıya Gönder)"
+                        android:textColor="?attr/colorOnPrimary"
+                        android:textSize="@dimen/ga_yazi_normal"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- 5. RESET GÜNÜ PANELİ (Hayatı Toparla & Dağınıklığı Ortadan Kaldır) -->
+        <ScrollView
+            android:id="@+id/layoutResetPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:padding="12dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="🧹 Reset Günü — Hayatı Toparla &amp; Dağınıklığı Ortadan Kaldır"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_orta" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Burada sadece hayatını toparla: Odanı topla, bilgisayarını düzenle, hedefler ve yapılacaklar listesi oluştur. Bugünü sadece dağınıklığı ortadan kaldırmak için ayır."
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+
+                    <ProgressBar
+                        android:id="@+id/progressReset"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progress="65"
+                        android:progressTint="?attr/colorPrimary" />
+
+                    <TextView
+                        android:id="@+id/txtResetDurum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/ga_yazi_kucuk"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Görev Ekleme Alanı -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/g_card"
+                    android:orientation="vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="➕ Yeni Reset / Toparlama Görevi Ekle"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_normal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/edtResetBaslik"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:background="?attr/colorSurfaceVariant"
+                            android:hint="Yeni toparlama görevi yaz (Örn: Çekmeceleri düzelt)"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <Button
+                            android:id="@+id/btnResetEkle"
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="44dp"
+                            android:layout_marginStart="8dp"
+                            android:text="➕ Ekle"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="@dimen/ga_yazi_kucuk"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Kategori Başlığı ve Kontrol Listesi -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="📋 1. Oda, 2. Bilgisayar &amp; 3. Hedefler Kontrol Listesi"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal" />
+
+                <LinearLayout
+                    android:id="@+id/listeResetGorevler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical" />
+
+                <Button
+                    android:id="@+id/btnResetSifirla"
+                    style="?attr/borderlessButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="✨ Tüm Görevleri Yeniden Başlat / Sıfırla"
+                    android:textColor="?attr/colorSecondary"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+</LinearLayout>

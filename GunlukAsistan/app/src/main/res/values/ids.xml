@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v8.2 — View.setTag(key, value) için gereken benzersiz anahtarlar.
+
+  Android, setTag(int, Object) çağrısında anahtarın bir kaynak kimliği
+  olmasını zorunlu kılar; rastgele bir int verilirse
+  IllegalArgumentException fırlatır.
+-->
+<resources>
+    <item name="ga_tag_animator" type="id" />
+    <item name="ga_tag_onceki_deger" type="id" />
+    <item name="ga_tag_kaydirma" type="id" />
+    <!-- v8.7: Duzen.uygula'nın iki kez çalışmasını önler -->
+    <item name="ga_tag_duzen" type="id" />
+</resources>

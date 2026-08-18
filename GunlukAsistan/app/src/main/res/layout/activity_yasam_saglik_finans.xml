@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Üst Başlık ve Geri Butonu -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp">
+
+            <ImageButton
+                android:id="@+id/btnGeri"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/app_name"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="?attr/colorOnSurface" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf2_baslik"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_buyuk"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAltBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf2_altbaslik"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- KART 1: Modül 1 (#4, #6) Tansiyon/Şeker & 4-7-8 Nefes -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf2_mod1_saglik"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtMedikalDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Tansiyon: 120/80 mmHg (Normal) · Kan Şekeri: 95 mg/dL (İdeal)"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnNefesTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/ysf2_btn_nefes_test"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 2: Modül 2 (#8, #10) 16:8 Aralıklı Oruç & Dengeli Öğün -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf2_mod2_beslen"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtOrucDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="16:8 Aralıklı Oruç penceresi hesaplanıyor..."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnOrucTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/ysf2_btn_oruc_test"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 3: Modül 3 & 4 (#13..#16) Bütçe, Borç/Alacak & Altın Portföyü -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💰 Bütçe, Borç/Alacak &amp; Altın Portföyü (#13..#16)"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtFinansOzeti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Finansal portföy, borç/alacak ve günlük harcama radarı yükleniyor..."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 4: Modül 5 (#18) Abonelik Kapatma & Tasarruf Simülatörü -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf2_mod5_tasarruf"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtSimSonuc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Kullanılmayan abonelikleri kapatarak yılda 11.640 ₺ tasarruf edin!"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnSimTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/ysf2_btn_sim_test"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 5: Modül 6 (#29, #30) Özel AI Prompt Kasası & TTS Hız/Pitch -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf2_mod6_ai"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAiTtsOzeti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="🔊 TTS Konuşma Hızı: 1.00x · Ses Tonu: 1.00\nÖzel Prompt: Stoacı motivasyon ve sade dil aktif."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 6: Modül 7 (#39, #47, #54) Pofi Başarı Rozetleri & Binaural Odak -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ysf2_mod7_frekans"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtFrekansOzeti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="40 Hz Gamma Frekansı: Yüksek bilişsel odak ve analitik problem çözme dalgası."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnFrekansTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/ysf2_btn_frekans_test"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

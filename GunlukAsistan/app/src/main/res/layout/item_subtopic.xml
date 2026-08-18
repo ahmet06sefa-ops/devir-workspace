@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <!-- v8.5 · Öneri 22: ağaç bağlantı çizgisi.
+         Alt maddenin hangi konuya ait olduğu artık gözle görülüyor. -->
+    <com.gunlukasistan.app.AgacCizgiView
+        android:id="@+id/subAgac"
+        android:layout_width="18dp"
+        android:layout_height="match_parent"
+        android:minHeight="40dp" />
+
+    <ImageView
+        android:id="@+id/subCheck"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="@string/done"
+        android:src="@drawable/ic_circle_outline" />
+
+    <TextView
+        android:id="@+id/subText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="@dimen/ga_yazi_orta" />
+
+    <!-- v10.44 · Madde #4: elle sıralama düğmeleri -->
+    <TextView
+        android:id="@+id/subUp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/w44_tasi_yukari"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="▲"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+
+    <TextView
+        android:id="@+id/subDown"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/w44_tasi_asagi"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="▼"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+
+    <ImageView
+        android:id="@+id/subDelete"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/delete"
+        android:padding="8dp"
+        android:src="@drawable/ic_close" />
+
+</LinearLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Krem & karamel teması -->
+    <color name="cream_bg">#FAF4E8</color>
+    <color name="cream_card">#FFFDF8</color>
+    <color name="ink">#3B332A</color>
+    <color name="ink_soft">#8A8175</color>
+
+    <color name="caramel">#B08968</color>
+    <color name="caramel_dark">#8F6D4F</color>
+    <color name="caramel_soft">#EFE2D0</color>
+
+    <color name="sage">#7C9070</color>
+    <color name="sage_soft">#E4E9DC</color>
+
+    <!-- Isı haritası yeşillikleri -->
+    <color name="heat_0">#ECEFE6</color>
+    <color name="heat_1">#C4DCB9</color>
+    <color name="heat_2">#97C98A</color>
+    <color name="heat_3">#64AE5B</color>
+    <color name="heat_4">#3F8A3A</color>
+
+    <!-- Konu vurgu renkleri -->
+    <color name="terracotta">#C97C5D</color>
+    <color name="dusty_blue">#7A8FA6</color>
+
+    <color name="white">#FFFFFF</color>
+    <!-- ══════════════════════════════════════════════════════
+         v10.0 · Görsel Grup A — ANLAMSAL DURUM RENKLERİ (öneri 2)
+         ══════════════════════════════════════════════════════
+         Kod taramasında bulunan sorun:
+
+           "Başarı yeşili"  → 5 farklı ton kullanılmış
+             4C9A5A (12 kez) · 4CAF50 (10) · 2E7D32 (5)
+             66A75B (1) · 3E8E7E (1)
+
+           "Hata kırmızısı" → 5 farklı ton
+             D9534F (25) · E57373 (4) · C62828 (4)
+             E53935 (1) · F44336 (1)
+
+         Aynı ekranda iki farklı yeşil görünebiliyordu.
+
+         Seçim kuralı: EN ÇOK KULLANILAN tonu al. Böylece en az
+         sayıda yerde görsel değişiklik oluyor ve mevcut his korunuyor.
+
+         ⚠️ Koyu tema karşılıkları values-night/colors.xml'de.
+         Bu renkler açık zemine göre seçilmiş; koyu zeminde
+         yeterince parlak değiller (kontrast düşük kalıyor).
+    -->
+    <color name="ga_basari">#4C9A5A</color>
+    <color name="ga_uyari">#E0A33A</color>
+    <color name="ga_hata">#D9534F</color>
+    <color name="ga_bilgi">#3A7BD5</color>
+    <color name="ga_notr">#7A8B99</color>
+
+    <!-- Soluk tonlar — arka plan dolgusu, rozet zemini -->
+    <color name="ga_basari_soluk">#1F4C9A5A</color>
+    <color name="ga_uyari_soluk">#1FE0A33A</color>
+    <color name="ga_hata_soluk">#1FD9534F</color>
+    <color name="ga_bilgi_soluk">#1F3A7BD5</color>
+
+    <!-- ══════════════════════════════════════════════════════
+         KATEGORİ PALETİ — çok serili grafikler
+         ══════════════════════════════════════════════════════
+         Renk körlüğü gözetildi: yalnız tona değil PARLAKLIĞA göre
+         de ayrışıyorlar. Kırmızı-yeşil ayrımı yapamayan biri için
+         bile dilimler farklı koyulukta.
+    -->
+    <color name="ga_kat_1">#3A7BD5</color>
+    <color name="ga_kat_2">#4C9A5A</color>
+    <color name="ga_kat_3">#E0A33A</color>
+    <color name="ga_kat_4">#8E5BA6</color>
+    <color name="ga_kat_5">#2FA8A0</color>
+    <color name="ga_kat_6">#D9534F</color>
+    <color name="ga_kat_7">#C2568F</color>
+    <color name="ga_kat_8">#7A8B99</color>
+    <!-- ══════════════════════════════════════════════════════
+         v10.51 · Tasarım Sistemi v2 — Nötr Zeminler & Vurgu Rengi
+         ══════════════════════════════════════════════════════ -->
+    <color name="ga_zemin_arka_plan">#0E0E13</color>
+    <color name="ga_zemin_kart">#1A1B23</color>
+    <color name="ga_zemin_ic">#22232C</color>
+    <color name="ga_kenarlik">#2A2B35</color>
+    <color name="ga_vurgu_ana">#4C7DFF</color>
+    <color name="ga_metin_birincil">#F5F5F7</color>
+    <color name="ga_metin_ikincil">#8B8D98</color>
+    <color name="ga_durum_tamamlandi">#22C55E</color>
+    <color name="ga_durum_devam_ediyor">#F59E0B</color>
+    <color name="ga_durum_gecikmis">#EF4444</color>
+</resources>

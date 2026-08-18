@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp" android:paddingTop="20dp" android:paddingBottom="32dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView android:id="@+id/greetingText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_dev" />
+                <TextView android:id="@+id/dateText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_normal" />
+            </LinearLayout>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openTimerMenu" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="⏱" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openManuelKontrol" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorTertiaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🎛️" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openOtonomMerkez" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🤖" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openTasarimAtolye" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🎨" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openKarne" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorTertiaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🏆" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openYasamModulleri" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🧭" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openGelismiAtolye" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorPrimaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🚀" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openUzmanModuller" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorTertiaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🔬" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openDersKolaylik" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🎓" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openDersIleriFaz" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorTertiaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🃏" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openDersUzmanMerkez" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🤖" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openYasamSaglikFinans" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorTertiaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🏥" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openDersUzmanFaz6" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🎮" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openYasamSaglikFinansFaz3" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorTertiaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🚨" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openEvrenselOtonomMerkez" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🌐" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openAkilliGundemMerkezi" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorTertiaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🌅" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openNamazAylikYonetim" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🕌" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openBinMaddeAtolye" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorTertiaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="📋" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openKisiselGelisimAtolye" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorPrimaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🌱" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openCanvaAtolye" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🎨" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openGorunumAtolye" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="8dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="🎨" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView android:id="@+id/openSettings" android:layout_width="52dp" android:layout_height="52dp" android:clickable="true" android:focusable="true" android:foreground="?attr/selectableItemBackgroundBorderless" app:cardBackgroundColor="?attr/colorPrimaryContainer" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center" android:text="⚙" android:textSize="@dimen/ga_yazi_dev" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- v10.73: Sokratik & Felsefi Motivasyon Manşeti (#12) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardMotivasyonManset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/txtMotivasyonSozu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📜 &quot;Zorluklar zihni güçlendirir, tıpkı çalışmanın bedeni güçlendirdiği gibi.&quot; — Seneca [Stoacı Felsefe]"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="italic" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnMotivasyonYenile"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="@string/mmn_btn_yenile"
+                        android:textSize="@dimen/ga_yazi_mini" />
+
+                    <Button
+                        android:id="@+id/btnMotivasyonSabitle"
+                        android:layout_width="0dp"
+                        android:layout_height="36dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="@string/mmn_btn_sabitle"
+                        android:textSize="@dimen/ga_yazi_mini" />
+
+                    <Button
+                        android:id="@+id/btnMotivasyonPaylas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:text="@string/mmn_btn_paylas"
+                        android:textSize="@dimen/ga_yazi_mini" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokHero" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" app:cardBackgroundColor="@android:color/transparent" app:cardCornerRadius="@dimen/ga_kose_buyuk" app:cardElevation="0dp">
+                <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                    <com.gunlukasistan.app.DegradeArka android:id="@+id/heroDegrade" android:layout_width="match_parent" android:layout_height="match_parent" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                        <!-- v10.8 · Öneri D43: Pofi (uygulama maskotu).
+                             Hero kartın en üstünde, duruma göre yüz değiştirir.
+                             Kaynak: Maskot.kt karar mantığı + MaskotView çizimi. -->
+                        <LinearLayout android:id="@+id/maskotSatir" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:gravity="center_vertical" android:orientation="horizontal" android:paddingBottom="8dp">
+                            <com.gunlukasistan.app.MaskotView android:id="@+id/maskotView" android:layout_width="46dp" android:layout_height="46dp" />
+                            <TextView android:id="@+id/maskotMesaj" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:fontFamily="@font/poppins_medium" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_kucuk" />
+                        </LinearLayout>
+                        <!-- v10.11 · ULTRA-30 A3: gün ışığı şeridi.
+                             Doğuş→batım rayı + güneş noktası; gece işaretiyle
+                             çift-kodlu. Veri yoksa blok gizlenir. -->
+                        <LinearLayout android:id="@+id/gunIsigiBlok" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingBottom="10dp" android:visibility="gone">
+                            <com.gunlukasistan.app.GunIsigiView android:id="@+id/gunIsigiView" android:layout_width="match_parent" android:layout_height="18dp" />
+                            <TextView android:id="@+id/gunIsigiMetin" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="3dp" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_mini" />
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:id="@+id/countdownNumber" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_devasa" />
+                                <TextView android:id="@+id/countdownCaption" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/cd_caption" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_kucuk" />
+                            </LinearLayout>
+                            <TextView android:id="@+id/countdownEdit" android:layout_width="44dp" android:layout_height="44dp" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="@string/cd_change" android:gravity="center" android:text="📅" android:textSize="@dimen/ga_yazi_buyuk" />
+                        </LinearLayout>
+                        <com.google.android.material.progressindicator.LinearProgressIndicator android:id="@+id/goalBar" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" app:indicatorColor="?attr/colorPrimary" app:trackColor="?attr/colorSurface" app:trackCornerRadius="4dp" app:trackThickness="8dp" />
+                        <TextView android:id="@+id/goalText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:background="?attr/selectableItemBackground" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_kucuk" />
+                        <TextView android:id="@+id/quoteText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:background="?attr/selectableItemBackground" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_kucuk" />
+                        <!-- v9.9 · Görsel öneri 7: günün tek odağı.
+                             Hero kartın en altında, tıklanabilir.
+                             Yapılacak bir şey yoksa gizleniyor. -->
+                        <LinearLayout android:id="@+id/odakSatir" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:background="?attr/selectableItemBackground" android:gravity="center_vertical" android:minHeight="48dp" android:orientation="horizontal" android:visibility="gone">
+                            <View android:id="@+id/odakSerit" android:layout_width="4dp" android:layout_height="36dp" android:layout_marginEnd="10dp" />
+                            <TextView android:id="@+id/odakEmoji" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="8dp" android:importantForAccessibility="no" android:textSize="@dimen/ga_yazi_buyuk" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:id="@+id/odakBaslik" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/od_baslik" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_mini" />
+                                <TextView android:id="@+id/odakMetin" android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_medium" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_normal" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:importantForAccessibility="no" android:text="›" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_dev" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokKurslar" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView android:id="@+id/coursesCard" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:foreground="?attr/selectableItemBackground" app:cardCornerRadius="@dimen/ga_kose_buyuk" app:cardElevation="2dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🏗" android:textSize="@dimen/ga_yazi_dev" />
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_medium" android:text="@string/co_title" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+                            <TextView android:id="@+id/coursesCardSub" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="1dp" android:text="@string/co_card_empty" android:textColor="?android:attr/textColorSecondary" android:textSize="@dimen/ga_yazi_kucuk" />
+                        </LinearLayout>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="›" android:textColor="?android:attr/textColorSecondary" android:textSize="@dimen/ga_yazi_dev" />
+                    </LinearLayout>
+                    <FrameLayout android:id="@+id/coursesCardBarBg" android:layout_width="match_parent" android:layout_height="6dp" android:layout_marginTop="12dp" android:background="@drawable/co_bar_bg">
+                        <View android:id="@+id/coursesCardBar" android:layout_width="0dp" android:layout_height="match_parent" />
+                    </FrameLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokRozet" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:scrollbars="none">
+                <LinearLayout android:id="@+id/badgesRow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" />
+            </HorizontalScrollView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokIstatistik" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:scrollbars="none">
+                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <com.google.android.material.card.MaterialCardView android:id="@+id/statCardStreak" android:layout_width="165dp" android:layout_height="wrap_content" android:layout_marginEnd="10dp" app:cardCornerRadius="@dimen/ga_kose_orta" app:cardElevation="2dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:minHeight="82dp" android:orientation="horizontal" android:padding="14dp">
+                            <com.gunlukasistan.app.StatRingView android:id="@+id/ringStreak" android:layout_width="54dp" android:layout_height="54dp" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/stat_streak" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_mini" />
+                                <TextView android:id="@+id/streakValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_buyuk" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView android:id="@+id/statCardTotal" android:layout_width="165dp" android:layout_height="wrap_content" android:layout_marginEnd="10dp" app:cardCornerRadius="@dimen/ga_kose_orta" app:cardElevation="2dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:minHeight="82dp" android:orientation="horizontal" android:padding="14dp">
+                            <com.gunlukasistan.app.StatRingView android:id="@+id/ringTotal" android:layout_width="54dp" android:layout_height="54dp" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/stat_total_name" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_mini" />
+                                <TextView android:id="@+id/totalValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_buyuk" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView android:id="@+id/statCardProgress" android:layout_width="165dp" android:layout_height="wrap_content" android:layout_marginEnd="10dp" app:cardCornerRadius="@dimen/ga_kose_orta" app:cardElevation="2dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:minHeight="82dp" android:orientation="horizontal" android:padding="14dp">
+                            <com.gunlukasistan.app.StatRingView android:id="@+id/ringProgress" android:layout_width="54dp" android:layout_height="54dp" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/stat_progress_name" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_mini" />
+                                <TextView android:id="@+id/progressValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_buyuk" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.card.MaterialCardView android:id="@+id/statCardFocus" android:layout_width="165dp" android:layout_height="wrap_content" app:cardCornerRadius="@dimen/ga_kose_orta" app:cardElevation="2dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:minHeight="82dp" android:orientation="horizontal" android:padding="14dp">
+                            <com.gunlukasistan.app.StatRingView android:id="@+id/ringFocus" android:layout_width="54dp" android:layout_height="54dp" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="10dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/stat_focus_name" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_mini" />
+                                <TextView android:id="@+id/focusValue" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_buyuk" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokGrafik" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" app:cardCornerRadius="@dimen/ga_kose_buyuk" app:cardElevation="2dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:baselineAligned="false" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:id="@+id/txtHomeGunlukIlerlemeBaslik" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:fontFamily="@font/poppins_semibold" android:text="@string/chart_daily_title" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+                        <TextView android:id="@+id/chartSummary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="?attr/colorPrimary" android:textSize="@dimen/ga_yazi_kucuk" />
+                    </LinearLayout>
+                    <com.gunlukasistan.app.SparklineView android:id="@+id/dailyChart" android:layout_width="match_parent" android:layout_height="110dp" android:layout_marginTop="12dp" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="@string/chart_daily_caption" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_mini" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokIzgara" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView android:id="@+id/gridCard" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" app:cardCornerRadius="@dimen/ga_kose_buyuk" app:cardElevation="2dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <TextView android:id="@+id/txtHomeGridBaslik" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:text="@string/grid_title" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+                    <com.gunlukasistan.app.HabitGridView android:id="@+id/habitGrid" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" />
+                    <TextView android:id="@+id/gridEmpty" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/grid_empty" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_kucuk" android:visibility="gone" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokHizli" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:id="@+id/txtHomeHizliErisimBaslik" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:fontFamily="@font/poppins_semibold" android:text="@string/section_quick" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:orientation="horizontal">
+                <com.google.android.material.card.MaterialCardView android:id="@+id/chipNotes" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:cardBackgroundColor="?attr/colorPrimaryContainer" app:cardCornerRadius="@dimen/ga_kose_orta" app:cardElevation="0dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_medium" android:gravity="center" android:padding="12dp" android:text="@string/chip_notes" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_kucuk" />
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView android:id="@+id/chipTasks" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_weight="1" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_orta" app:cardElevation="0dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_medium" android:gravity="center" android:padding="12dp" android:text="@string/chip_tasks" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_kucuk" />
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView android:id="@+id/chipAsistan" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_weight="1" app:cardBackgroundColor="?attr/colorTertiaryContainer" app:cardCornerRadius="@dimen/ga_kose_orta" app:cardElevation="0dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_medium" android:gravity="center" android:padding="12dp" android:text="@string/chip_asistan" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_kucuk" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:orientation="horizontal">
+                <com.google.android.material.card.MaterialCardView android:id="@+id/chipSoru" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" app:cardBackgroundColor="?attr/colorSecondaryContainer" app:cardCornerRadius="@dimen/ga_kose_orta" app:cardElevation="0dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_medium" android:gravity="center" android:padding="12dp" android:text="@string/chip_soru" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_kucuk" />
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView android:id="@+id/chipDeneme" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:layout_weight="1" app:cardBackgroundColor="?attr/colorPrimaryContainer" app:cardCornerRadius="@dimen/ga_kose_orta" app:cardElevation="0dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_medium" android:gravity="center" android:padding="12dp" android:text="@string/chip_deneme" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_kucuk" />
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokKonular" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:id="@+id/txtHomeKonularimBaslik" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:fontFamily="@font/poppins_semibold" android:text="@string/section_my_topics" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+            <TextView android:id="@+id/homeTopicsEmpty" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/home_topics_empty" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_normal" android:visibility="gone" />
+            <LinearLayout android:id="@+id/topicsContainer" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" />
+        </com.gunlukasistan.app.DuzenBlokLayout>
+    </LinearLayout>
+</ScrollView>

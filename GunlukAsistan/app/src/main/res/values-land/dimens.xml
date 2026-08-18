@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v8.6 · Öneri 29: yatay ekran.
+
+  Yatayda ekran yüksekliği çok azalıyor; dikey boşlukları küçültüp
+  yanları genişleterek okunabilirliği koruyoruz.
+-->
+<resources>
+    <dimen name="ga_icerik_pay">32dp</dimen>
+    <dimen name="ga_kart_bosluk">10dp</dimen>
+    <dimen name="ga_en_fazla_genislik">640dp</dimen>
+</resources>

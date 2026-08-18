@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v10.16 · Birleştirilebilir widget — 8 metin slotu + ⚙ düzenleme bandı.
+     Zemin çalışma anında bitmap olarak modulBg'ye işlenir (WidgetZemin).
+     textSize tasarım testi gereği @dimen/ga_yazi_* üzerinden verilir;
+     gerçek ölçek render'da yaziCarpan ile uygulanır. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/modulRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/modulBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:contentDescription="@string/wa_modul_desc" />
+
+    <LinearLayout
+        android:id="@+id/modulIc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="6dp">
+
+        <TextView android:id="@+id/mdS1" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/ga_yazi_kucuk" android:maxLines="1" />
+        <TextView android:id="@+id/mdS2" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/ga_yazi_kucuk" android:maxLines="1" />
+        <TextView android:id="@+id/mdS3" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/ga_yazi_kucuk" android:maxLines="1" />
+        <TextView android:id="@+id/mdS4" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/ga_yazi_kucuk" android:maxLines="1" />
+        <TextView android:id="@+id/mdS5" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/ga_yazi_kucuk" android:maxLines="1" />
+        <TextView android:id="@+id/mdS6" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/ga_yazi_kucuk" android:maxLines="1" />
+        <TextView android:id="@+id/mdS7" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/ga_yazi_kucuk" android:maxLines="1" />
+        <TextView android:id="@+id/mdS8" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="@dimen/ga_yazi_kucuk" android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/mdAyar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textSize="@dimen/ga_yazi_mini"
+            android:text="@string/wa_ayar_ac"
+            android:contentDescription="@string/wa_ayar_ac" />
+    </LinearLayout>
+</FrameLayout>

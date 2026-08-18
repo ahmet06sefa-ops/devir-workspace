@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 40 ms gecikmeli sıralı giriş -->
+<layoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:animation="@anim/ga_oge_gir"
+    android:animationOrder="normal"
+    android:delay="12%" />

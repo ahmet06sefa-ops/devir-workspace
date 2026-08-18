@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Üst Başlık ve Geri Butonu -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp">
+
+            <ImageButton
+                android:id="@+id/btnGeri"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/app_name"
+                android:src="@android:drawable/ic_menu_revert"
+                app:tint="?attr/colorOnSurface" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df5_merkez_baslik"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_buyuk"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtAltBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df5_merkez_alt"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- KART 1: Faz 2 ve Faz 3 Özet -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df5_secim_faz2"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Sanal kütüphane masası (Pofi animasyonu), 4-7-8 sınav anksiyetesi sakinleştirici nefes sayacı ve uyku öncesi zihin boşaltma notluğu hazır."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/df5_secim_faz3"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="10 yıllık ÖSYM soru sıklık haritası, 45 saniyelik ilk tur turlama sayacı ve kitap okuma hızı radarı devrede."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 2: Faz 4 Özet -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/df5_secim_faz4"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Hiyerarşik konu zihin haritası ağaçları, akrostiş kodlayıcı, zirve dağı tırmanışı ve 4-renk standart not sistemi aktif."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 3: Faz 5 Modül 1 - AI Koç Kişilik Modları (#70) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🤖 Modül 7 (#70): AI Koç Kişilik Modları"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtKocYaniti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="[Şefkatli Mentor] 'Bugün kendimizi yormadan sadece 15 dakika küçük bir adımla başlayalım mı?'"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnKocDemo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/df5_btn_koc_test"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 4: Faz 5 Modül 2 - Çalışma Masası Öncesi Ritüel Check-List (#38) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚖️ Modül 3 (#38): Çalışma Masası Öncesi Ritüeli"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtRituelDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="1. Masayı Topla -> 2. Suyunu Al -> 3. Telefonu Ters Çevir -> 4. 3 Kez Nefes Al"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnRituelBasla"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/df5_btn_rituel_basla"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 5: Faz 5 Modül 3 - Pomodoro Çengeli & Mikro-Tekrar (#7, #8) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔗 Modül 1 (#7, #8): Pomodoro İçi Mikro-Tekrar &amp; Hafıza Çengeli"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtCengelDurum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Son 3 dakika hızlı özet için ayrıldı. Seans bitmeden önce 1 kilit soru yanıtlanmalı."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnCengelSoru"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/df5_btn_cengel_soru"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 6: Bilişsel Konsolidasyon & Çeldirici Defteri (#10, #20) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🧠 Bilişsel Konsolidasyon &amp; ÖSYM Çeldiricileri (#10, #20)"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtKonsolidasyonOzeti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Haftalık konsolidasyon skoru hesaplanıyor..."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- KART 7: Akıllı PDF TOC & Yanlış Kes-Yapıştır Panosu (#44, #49) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📖 Akıllı PDF TOC &amp; Yanlış Kes-Yapıştır (#44, #49)"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtTocVeYanlisOzeti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="TOC bölüm listesi ve kes-yapıştır yanlış panosu yükleniyor..."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

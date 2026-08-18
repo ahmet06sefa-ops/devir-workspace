@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v10.13 · B8 — Ay ızgarasının tek gün hücresi.
+  Zemin rengi (bugün vurgusu), gün metni rengi ve yoğunluk noktaları
+  kodda boyanır; tıklama fillInIntent ile cellRoot'a bağlanır.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cellRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="1dp">
+
+    <TextView
+        android:id="@+id/cellGun"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+
+    <TextView
+        android:id="@+id/cellNokta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:textColor="@color/w_accent"
+        android:textSize="@dimen/ga_yazi_mini"
+        android:visibility="invisible" />
+</LinearLayout>

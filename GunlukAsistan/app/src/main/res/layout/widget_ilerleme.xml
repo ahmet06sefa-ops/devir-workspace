@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v7.83 — Program ilerleme widget'ı (4×2).
+
+  UYARI: RemoteViews yalnızca sınırlı görünüm listesini destekler.
+  LinearLayout · FrameLayout · TextView · ImageView · ProgressBar ·
+  ListView · GridView. <View>, ScrollView, ConstraintLayout ve CardView
+  widget'ı KIRAR (v7.40.1'de yaşandı). Ayırıcı çizgi için sıfır metinli
+  TextView kullanıldı.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ilBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ilRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <!-- Üst satır: program adı + yüzde -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ilIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:text="📚"
+            android:textSize="@dimen/ga_yazi_normal" />
+
+        <TextView
+            android:id="@+id/ilProgram"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_semibold"
+            android:maxLines="1"
+            android:text="@string/il_program_yok"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_normal" />
+
+        <TextView
+            android:id="@+id/ilYuzde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:includeFontPadding="false"
+            android:text="0%"
+            android:textColor="@color/w_accent"
+            android:textSize="@dimen/ga_yazi_orta" />
+    </LinearLayout>
+
+    <!-- İlerleme çubuğu -->
+    <ProgressBar
+        android:id="@+id/ilBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginTop="7dp"
+        android:max="100"
+        android:progress="0" />
+
+    <!-- Aktif ders -->
+    <TextView
+        android:id="@+id/ilSuAn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/il_su_an"
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_mini" />
+
+    <TextView
+        android:id="@+id/ilAktif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/poppins_semibold"
+        android:maxLines="2"
+        android:text="—"
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_normal" />
+
+    <!-- Alt satır: sayaç + bugünkü hedef -->
+    <LinearLayout
+        android:id="@+id/ilAltSatir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ilSayac"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="—"
+            android:textColor="@color/w_text_soft"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <TextView
+            android:id="@+id/ilHedef"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/w_accent"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+
+    <!-- v7.95: uygulamayı açmadan dersi bitir (öneri 4) -->
+    <TextView
+        android:id="@+id/ilBitir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/w_pill"
+        android:gravity="center"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:text="@string/il_bitir"
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_mini" />
+</LinearLayout>
+</FrameLayout>

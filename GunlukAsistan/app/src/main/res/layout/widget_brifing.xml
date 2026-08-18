@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v7.40: Günlük brifing widget'ı (4×3) — sabah tek bakışta her şey -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/brBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/brRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <!-- ── Üst şerit: selamlama + tarih + geri sayım ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/brGreeting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:maxLines="1"
+                android:text="@string/w_title"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_orta" />
+
+            <TextView
+                android:id="@+id/brDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <TextView
+            android:importantForAccessibility="no"
+            android:id="@+id/brCountdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/w_chip"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="9dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="9dp"
+            android:paddingBottom="4dp"
+            android:text="⏳ —"
+            android:textColor="@color/w_accent"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+
+    <!-- ── Günlük hedef çubuğu ── -->
+    <ProgressBar
+        android:id="@+id/brProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:layout_marginTop="9dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/w_progress" />
+
+    <TextView
+        android:id="@+id/brGoalText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_mini" />
+
+    <!-- ── Bekleyen işler şeridi: kart · quiz · seri ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <TextView
+            android:importantForAccessibility="no"
+            android:id="@+id/brCards"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/w_btn"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:text="🃏 —"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <TextView
+            android:importantForAccessibility="no"
+            android:id="@+id/brQuiz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/w_btn"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:text="📝 —"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <TextView
+            android:id="@+id/brStreak"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/w_btn"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:text="🔥 —"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+
+    <!-- ── v7.45: Bilgi kartı — widget üzerinde tekrar ── -->
+    <LinearLayout
+        android:id="@+id/brCardBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/w_btn"
+        android:orientation="vertical"
+        android:padding="9dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/brCardText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/brCardFlip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/w_btn_accent"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+
+            <TextView
+                android:id="@+id/brCardKnow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/w_btn"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="✓"
+                android:textColor="@color/w_green"
+                android:textSize="@dimen/ga_yazi_kucuk"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/brCardDont"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/w_btn"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="✗"
+                android:textColor="@color/w_accent"
+                android:textSize="@dimen/ga_yazi_kucuk"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── Bugünkü görevler (en fazla 3) ── -->
+    <TextView
+        android:id="@+id/brTasksLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_mini" />
+
+    <TextView
+        android:id="@+id/brTask1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+
+    <TextView
+        android:id="@+id/brTask2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+
+    <TextView
+        android:id="@+id/brTask3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+
+    <!-- ── Günün tavsiyesi ── -->
+    <TextView
+        android:id="@+id/brTip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/w_accent"
+        android:textSize="@dimen/ga_yazi_mini" />
+
+    <!-- ── Alt eylem şeridi ── -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/brResume"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/w_btn_accent"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingStart="6dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="6dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <TextView
+            android:id="@+id/brFocus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/w_btn"
+            android:gravity="center"
+            android:paddingStart="13dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="13dp"
+            android:paddingBottom="8dp"
+            android:text="⏱"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_normal" />
+
+        <TextView
+            android:id="@+id/brAsk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/w_btn"
+            android:gravity="center"
+            android:paddingStart="13dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="13dp"
+            android:paddingBottom="8dp"
+            android:text="✨"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_normal" />
+
+        <TextView
+            android:id="@+id/brRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/w_btn"
+            android:gravity="center"
+            android:paddingStart="13dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="13dp"
+            android:paddingBottom="8dp"
+            android:text="↻"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_normal" />
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>

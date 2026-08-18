@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="14dp"
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="@dimen/ga_kose_orta"
+    app:cardElevation="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="60dp"
+        android:orientation="horizontal"
+        android:paddingStart="6dp"
+        android:paddingEnd="12dp">
+
+        <!-- Sürükleme tutamağı: yalnız buradan sürüklenir -->
+        <TextView
+            android:id="@+id/adTutamac"
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/ad_tutamac"
+            android:gravity="center"
+            android:text="⠿"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_buyuk" />
+
+        <TextView
+            android:importantForAccessibility="no"
+            android:id="@+id/adSimge"
+            android:layout_width="34dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/ga_yazi_buyuk" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/adAd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="@dimen/ga_yazi_orta" />
+
+            <TextView
+                android:id="@+id/adAlt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <!-- v10.18: boyut/katlama çipleri programla doldurulur (XML'de metin yok) -->
+            <LinearLayout
+                android:id="@+id/adBoyut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal" />
+        </LinearLayout>
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/adSvic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

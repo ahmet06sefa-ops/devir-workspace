@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v10.5 · C31 — Çoklu geri sayım listesi widget'ı.
+  RemoteViews uyumu: yalnız LinearLayout/FrameLayout + TextView +
+  ImageView + ProgressBar + ListView (koleksiyon kökü zorunlu).
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/evBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/evRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/evBaslik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/ev_baslik"
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_mini" />
+
+    <ListView
+        android:id="@+id/evList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="6dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="4dp" />
+
+    <TextView
+        android:id="@+id/evEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/ev_bos"
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+</LinearLayout>
+</FrameLayout>

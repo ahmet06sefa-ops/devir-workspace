@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v7.1 — Ana ekran kısayolları.
+  Uygulama simgesine uzun basınca çıkar. En fazla 4 tanesi gösterilir.
+-->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ➕ Hızlı görev -->
+    <shortcut
+        android:shortcutId="quick_task"
+        android:enabled="true"
+        android:icon="@drawable/ic_task_alt"
+        android:shortcutShortLabel="@string/sc_task_short"
+        android:shortcutLongLabel="@string/sc_task_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.gunlukasistan.app"
+            android:targetClass="com.gunlukasistan.app.QuickAddActivity">
+            <extra
+                android:name="quick_mode"
+                android:value="task" />
+        </intent>
+    </shortcut>
+
+    <!-- 📝 Hızlı not -->
+    <shortcut
+        android:shortcutId="quick_note"
+        android:enabled="true"
+        android:icon="@drawable/ic_edit_note"
+        android:shortcutShortLabel="@string/sc_note_short"
+        android:shortcutLongLabel="@string/sc_note_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.gunlukasistan.app"
+            android:targetClass="com.gunlukasistan.app.QuickAddActivity">
+            <extra
+                android:name="quick_mode"
+                android:value="note" />
+        </intent>
+    </shortcut>
+
+    <!-- ⏱ Odaklan -->
+    <shortcut
+        android:shortcutId="quick_focus"
+        android:enabled="true"
+        android:icon="@drawable/ic_timer"
+        android:shortcutShortLabel="@string/sc_focus_short"
+        android:shortcutLongLabel="@string/sc_focus_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.gunlukasistan.app"
+            android:targetClass="com.gunlukasistan.app.MainActivity">
+            <extra
+                android:name="open_screen"
+                android:value="4" />
+        </intent>
+    </shortcut>
+
+    <!-- 🗓 Bugün -->
+    <shortcut
+        android:shortcutId="quick_today"
+        android:enabled="true"
+        android:icon="@drawable/ic_today"
+        android:shortcutShortLabel="@string/sc_today_short"
+        android:shortcutLongLabel="@string/sc_today_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.gunlukasistan.app"
+            android:targetClass="com.gunlukasistan.app.MainActivity">
+            <extra
+                android:name="open_screen"
+                android:value="2" />
+        </intent>
+    </shortcut>
+</shortcuts>

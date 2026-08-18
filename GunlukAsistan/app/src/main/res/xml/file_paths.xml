@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- v6.7: bölünmüş PDF bölümleri -->
+    <files-path name="kitaplik" path="kitaplik/" />
+    <!-- v7.10: ders PDF paylaşımı -->
+    <cache-path name="dersler" path="." />
+    <!-- v7.78: görev kanıt fotoğrafları -->
+    <files-path name="kanit" path="kanit/" />
+    <!-- v7.78: kamera geçici kareleri -->
+    <cache-path name="fotograf" path="fotograf/" />
+    <!-- v7.81: üretilen konu anlatım PDF'leri -->
+    <files-path name="konu_pdf" path="konu_pdf/" />
+    <!-- v7.96: şifreli yedek paylaşımı -->
+    <cache-path name="yedek" path="yedek/" />
+    <!-- v10.14 · E29/E30: paylaşım kartları (PNG) -->
+    <cache-path name="kartlar" path="kartlar/" />
+    <!-- v10.28 · Katalog #30: not .txt paylaşımı -->
+    <cache-path name="notlar" path="notlar/" />
+</paths>

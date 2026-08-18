@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      v7.67 — Widget'lar HER ZAMAN koyu tema.
+
+      Kullanicinin istegi: "Widgetlarda karanlik tema kullan hepsinde"
+
+      Eskiden bu dosya ACIK paleti tutuyordu ve telefon aydinlik moddayken
+      widget'lar krem zeminli cikiyordu. Artik acik/koyu ayrimi yapilmiyor —
+      bu dosya da values-night ile ayni koyu paleti veriyor.
+
+      Not: Vurgu rengi calisma aninda WidgetTema tarafindan kullanicinin
+      sectigi temaya gore uzerine yaziliyor; buradakiler yedek degerler.
+    -->
+    <color name="w_bg">#1C1814</color>
+    <color name="w_bg_alt">#241E18</color>
+    <color name="w_stroke">#33D9B892</color>
+    <color name="w_text">#F5EDE3</color>
+    <color name="w_text_soft">#A99C8C</color>
+    <color name="w_accent">#E0B183</color>
+    <color name="w_accent_soft">#3A2E23</color>
+    <color name="w_green">#A3BE96</color>
+    <color name="w_track">#332A22</color>
+    <color name="w_btn">#2E251D</color>
+    <color name="w_ripple">#33E0B183</color>
+</resources>

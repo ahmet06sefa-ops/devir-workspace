@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fsRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:keepScreenOn="true">
+
+    <!-- Arka plan atmosfer efekti (ateş, yağmur, orman…) -->
+    <com.gunlukasistan.app.AmbientFxView
+        android:id="@+id/fsFx"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Fliqlo tarzı saat, ekranın ortasında -->
+    <com.gunlukasistan.app.FlipClockView
+        android:id="@+id/fsClock"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="86dp" />
+
+    <!-- Ön plan alevleri: saatin ÖNÜNE geçer (referanstaki gibi) -->
+    <com.gunlukasistan.app.AmbientFxView
+        android:id="@+id/fsFxFront"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Üst bilgi şeridi -->
+    <TextView
+        android:id="@+id/fsStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="16dp"
+        android:alpha="0.55"
+        android:letterSpacing="0.14"
+        android:textColor="#9A9A9A"
+        android:textSize="@dimen/ga_yazi_mini" />
+
+    <!-- Alt kontrol şeridi (dokununca görünür/gizlenir) -->
+    <LinearLayout
+        android:id="@+id/fsControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="22dp">
+
+        <!-- Ses seçim şeridi -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/fsSoundRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fsReset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/fs_btn"
+                android:paddingStart="22dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="12dp"
+                android:text="@string/fs_reset"
+                android:textColor="#CFCFCF"
+                android:textSize="@dimen/ga_yazi_normal" />
+
+            <TextView
+                android:id="@+id/fsPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/fs_btn_accent"
+                android:paddingStart="34dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="34dp"
+                android:paddingBottom="12dp"
+                android:text="@string/fs_start"
+                android:textColor="#101010"
+                android:textSize="@dimen/ga_yazi_normal"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fsClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/fs_btn"
+                android:paddingStart="22dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="12dp"
+                android:text="@string/fs_exit"
+                android:textColor="#CFCFCF"
+                android:textSize="@dimen/ga_yazi_normal" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

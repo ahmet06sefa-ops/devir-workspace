@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v8.3 · Öneri 12 — API 24-25 için yedek simge.
+  Bu sürümler adaptive-icon desteklemiyor; aynı görünümü
+  layer-list ile veriyoruz.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/ga_simge_yesil" />
+    <item android:drawable="@drawable/ic_launcher_foreground" />
+</layer-list>

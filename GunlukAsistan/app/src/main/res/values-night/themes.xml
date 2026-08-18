@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════════
+  v8.3 · Öneri 9 — GERÇEK KOYU TEMA
+  ══════════════════════════════════════════════════════════════════════
+
+  ── Sorun (ölçüldü) ──
+  v8.2'ye kadar `res/values-night/` klasöründe YALNIZCA `widget_colors.xml`
+  vardı. Yani telefon gece moduna geçtiğinde ana ekran widget'ları
+  koyuluyor, uygulamanın kendisi gündüz kalıyordu. Karanlıkta uygulamayı
+  açmak gözü yakıyordu. Bu bir eksik değil, hata sayılır.
+
+  ── Neden şimdiye kadar fark edilmedi ──
+  Uygulamada 3 koyu tema zaten vardı (Gün Batımı, Aurora, Ember, Zincir)
+  ama bunlar KULLANICI SEÇİMİ. Sistem gece moduna geçince Krem teması
+  seçili olan biri için hiçbir şey değişmiyordu.
+
+  ── Yaklaşım ──
+  Her açık temanın koyu karşılığı burada tanımlı. Dosya adı aynı
+  (`themes.xml`), stil adları aynı — Android otomatik olarak gece
+  modunda buradakini kullanır. Kod tarafında HİÇBİR DEĞİŞİKLİK
+  gerekmiyor; `ThemeManager.styleFor()` aynı stil kimliğini döndürüyor,
+  sistem hangi klasörden okuyacağına kendisi karar veriyor.
+
+  ── Renk seçimi ──
+  Açık temanın vurgu rengi koyu zeminde okunmaz (kontrast düşük), bu
+  yüzden her vurgu ~%25 açıldı ve doygunluğu biraz düşürüldü. Material 3
+  yönergesi koyu temada zemin için #121212 civarını, yüzey için biraz
+  daha açığını öneriyor; her temanın kendi renginden hafif bir ton
+  kattık ki tema kimliği kaybolmasın.
+
+  ── Zaten koyu olan temalar ──
+  Gün Batımı, Aurora, Ember ve Zincir burada TEKRAR TANIMLANMADI.
+  Onlar açık modda da koyu; gece modunda değişmelerine gerek yok.
+  Android bulamadığı stili values/ klasöründen alır.
+-->
+<resources>
+
+    <!-- ══════════ Krem → koyu (varsayılan) ══════════ -->
+    <style name="Theme.GunlukAsistan" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#D9B48F</item>
+        <item name="colorOnPrimary">#3A2A1B</item>
+        <item name="colorPrimaryContainer">#4A3728</item>
+        <item name="colorOnPrimaryContainer">#F0DCC5</item>
+        <item name="colorSecondary">#A3BC96</item>
+        <item name="colorOnSecondary">#1E2A18</item>
+        <item name="colorSecondaryContainer">#33402C</item>
+        <item name="colorOnSecondaryContainer">#DCE8D4</item>
+        <item name="android:colorBackground">#16120E</item>
+        <item name="colorSurface">#1F1A15</item>
+        <item name="colorSurfaceVariant">#2A231C</item>
+        <item name="colorOnSurface">#EDE4D8</item>
+        <item name="colorOnSurfaceVariant">#A79B8B</item>
+        <item name="colorOutline">#4A4137</item>
+        <item name="colorOutlineVariant">#332C24</item>
+        <item name="colorError">#F2B8B5</item>
+        <item name="android:statusBarColor">#16120E</item>
+        <item name="android:navigationBarColor">#16120E</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!-- ══════════ Violet → koyu ══════════ -->
+    <style name="Theme.GunlukAsistan.Violet" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#B49CF0</item>
+        <item name="colorOnPrimary">#2A1D51</item>
+        <item name="colorPrimaryContainer">#3D2F6E</item>
+        <item name="colorOnPrimaryContainer">#E5DBFA</item>
+        <item name="colorSecondary">#B2A4DD</item>
+        <item name="colorSecondaryContainer">#3A3159</item>
+        <item name="colorOnSecondaryContainer">#E4DDF6</item>
+        <item name="android:colorBackground">#131020</item>
+        <item name="colorSurface">#1C1830</item>
+        <item name="colorSurfaceVariant">#26203E</item>
+        <item name="colorOnSurface">#E9E4F5</item>
+        <item name="colorOnSurfaceVariant">#A29BB8</item>
+        <item name="colorOutline">#494169</item>
+        <item name="colorOutlineVariant">#2E2848</item>
+        <item name="android:statusBarColor">#131020</item>
+        <item name="android:navigationBarColor">#131020</item>
+    </style>
+
+    <!-- ══════════ Okyanus → koyu ══════════ -->
+    <style name="Theme.GunlukAsistan.Okyanus" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#66C7DE</item>
+        <item name="colorOnPrimary">#00323F</item>
+        <item name="colorPrimaryContainer">#12475A</item>
+        <item name="colorOnPrimaryContainer">#CDEBF4</item>
+        <item name="colorSecondary">#82C3D0</item>
+        <item name="colorSecondaryContainer">#1B4450</item>
+        <item name="colorOnSecondaryContainer">#D3EDF3</item>
+        <item name="android:colorBackground">#0C1519</item>
+        <item name="colorSurface">#132026</item>
+        <item name="colorSurfaceVariant">#1B2C33</item>
+        <item name="colorOnSurface">#E0EDF1</item>
+        <item name="colorOnSurfaceVariant">#93A8B0</item>
+        <item name="colorOutline">#3A5058</item>
+        <item name="colorOutlineVariant">#24373E</item>
+        <item name="android:statusBarColor">#0C1519</item>
+        <item name="android:navigationBarColor">#0C1519</item>
+    </style>
+
+    <!-- ══════════ Orman → koyu ══════════ -->
+    <style name="Theme.GunlukAsistan.Orman" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#8DC79A</item>
+        <item name="colorOnPrimary">#123320</item>
+        <item name="colorPrimaryContainer">#254A32</item>
+        <item name="colorOnPrimaryContainer">#D6EBDB</item>
+        <item name="colorSecondary">#A5C79E</item>
+        <item name="colorSecondaryContainer">#2C4630</item>
+        <item name="colorOnSecondaryContainer">#DDEBDA</item>
+        <item name="android:colorBackground">#0E150F</item>
+        <item name="colorSurface">#16211A</item>
+        <item name="colorSurfaceVariant">#1F2D22</item>
+        <item name="colorOnSurface">#E2EDE3</item>
+        <item name="colorOnSurfaceVariant">#9AAC9D</item>
+        <item name="colorOutline">#3E5243</item>
+        <item name="colorOutlineVariant">#27352A</item>
+        <item name="android:statusBarColor">#0E150F</item>
+        <item name="android:navigationBarColor">#0E150F</item>
+    </style>
+
+    <!-- ══════════ Gül → koyu ══════════ -->
+    <style name="Theme.GunlukAsistan.Gul" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#EDA6C2</item>
+        <item name="colorOnPrimary">#4A1B31</item>
+        <item name="colorPrimaryContainer">#63304A</item>
+        <item name="colorOnPrimaryContainer">#F9DFE9</item>
+        <item name="colorSecondary">#DDAFC0</item>
+        <item name="colorSecondaryContainer">#523141</item>
+        <item name="colorOnSecondaryContainer">#F6E2EA</item>
+        <item name="android:colorBackground">#191115</item>
+        <item name="colorSurface">#241A1F</item>
+        <item name="colorSurfaceVariant">#31232A</item>
+        <item name="colorOnSurface">#F2E3E9</item>
+        <item name="colorOnSurfaceVariant">#B39BA5</item>
+        <item name="colorOutline">#56424B</item>
+        <item name="colorOutlineVariant">#3A2C33</item>
+        <item name="android:statusBarColor">#191115</item>
+        <item name="android:navigationBarColor">#191115</item>
+    </style>
+
+    <!-- ══════════ Altın → koyu ══════════ -->
+    <style name="Theme.GunlukAsistan.Altin" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#DDC168</item>
+        <item name="colorOnPrimary">#3A2F00</item>
+        <item name="colorPrimaryContainer">#524311</item>
+        <item name="colorOnPrimaryContainer">#F5E8B8</item>
+        <item name="colorSecondary">#CFC28C</item>
+        <item name="colorSecondaryContainer">#453D22</item>
+        <item name="colorOnSecondaryContainer">#EFE7CC</item>
+        <item name="android:colorBackground">#16140C</item>
+        <item name="colorSurface">#201D13</item>
+        <item name="colorSurfaceVariant">#2C2819</item>
+        <item name="colorOnSurface">#EFE9D6</item>
+        <item name="colorOnSurfaceVariant">#A9A187</item>
+        <item name="colorOutline">#4D4732</item>
+        <item name="colorOutlineVariant">#333020</item>
+        <item name="android:statusBarColor">#16140C</item>
+        <item name="android:navigationBarColor">#16140C</item>
+    </style>
+
+    <!--
+      Gün Batımı · Aurora · Ember · Zincir burada YOK.
+      Bunlar zaten koyu temalar; gece modunda değişmemeleri doğru.
+      Android eksik stili values/themes.xml'den alır.
+    -->
+</resources>

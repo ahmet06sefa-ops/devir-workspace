@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v10.13 · ULTRA-30 / B10 — 1×1 "Şimdi odak" düğmesi.
+
+  Boştayken ▶ halkası + "25 dk"; koşarken dolan halka + kalan süre.
+  Dokunma (odakKok): boştayken TimerActionReceiver'a başlatma yayını,
+  koşarken sayaç ekranı. Halka bitmap'i kodda üretilir.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/odakKok"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/odakBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <ImageView
+            android:id="@+id/odakHalka"
+            android:layout_width="46dp"
+            android:layout_height="46dp" />
+
+        <TextView
+            android:id="@+id/odakEtiket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/wg_odak_baslat"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="32dp">
+
+        <!-- Üst Başlık ve Kurumsal Dışa Aktarım (Export) Butonu -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/progress_header"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="@dimen/ga_yazi_dev" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGunlukTabloAc"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginEnd="6dp"
+                android:text="@string/gdt_btn_tablo_ac"
+                android:textSize="@dimen/ga_yazi_mini"
+                app:cornerRadius="10dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExecutiveExport"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="@string/epr_btn_export"
+                android:textSize="@dimen/ga_yazi_mini"
+                app:cornerRadius="10dp" />
+        </LinearLayout>
+
+        <!-- v10.74: Executive 4-Kadrantlı KPI Kokpiti (#1) -->
+        <LinearLayout
+            android:id="@+id/layoutExecutiveKokpit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="vertical">
+
+            <!-- Satır 1: Odak Verimliliği & Kırılmaz Seri -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardKpiOdakVerim"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                    app:cardCornerRadius="@dimen/ga_kose_orta"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Odak Verimliliği"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <TextView
+                            android:id="@+id/txtKpiOdakVerim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="%90"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_buyuk"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="▲ +14% bu hafta"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="@dimen/ga_yazi_mini" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardKpiSeriGun"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                    app:cardCornerRadius="@dimen/ga_kose_orta"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kırılmaz Seri"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <TextView
+                            android:id="@+id/txtKpiSeriGun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="4 Gün"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_buyuk"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="🔥 Aktif Seri Güvende"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="@dimen/ga_yazi_mini" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Satır 2: Ustalık Rütbesi & Yaşam-Ders Denge -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardKpiRutbe"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                    app:cardCornerRadius="@dimen/ga_kose_orta"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ustalık Rütbesi"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <TextView
+                            android:id="@+id/txtKpiRutbe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Gümüş Usta"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_buyuk"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="👑 +250 XP"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="@dimen/ga_yazi_mini" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardKpiDenge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+                    app:cardCornerRadius="@dimen/ga_kose_orta"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yaşam-Ders Denge"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="@dimen/ga_yazi_kucuk" />
+
+                        <TextView
+                            android:id="@+id/txtKpiDenge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="90/100"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="@dimen/ga_yazi_buyuk"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="⚖️ Mükemmel Uyum"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="@dimen/ga_yazi_mini" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- v10.75: Gün Gün Açıklamalı Çalışma & Yaşam Tablosu -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardGunGunTablo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/txtGunlukIlerlemeBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gdt_tablo_baslik"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/gdt_altbaslik"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <!-- 7 günlük satırlar bu kapta oluşturulur -->
+                <LinearLayout
+                    android:id="@+id/layoutGunGunTablo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- v10.74: Sınav Net & Puan Projeksiyonu Barometresi (#5) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPuanProjeksiyon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/epr_projeksiyon_baslik"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtPuanProjeksiyon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="🎯 Tahmini Net / Performans: 84.5 Net (Hedef: 90.0 Net) · Kalan Fark: 5.5 Net"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <Button
+                    android:id="@+id/btnProjeksiyonEkle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="@string/epr_btn_projeksiyon_ekle"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- v8.5 · Öneri 21: konu dağılımı + haftalık çubuk grafik -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:cardCornerRadius="@dimen/ga_kose_buyuk"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/txtKonuDagilimiBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/dg_baslik"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_orta" />
+
+                <TextView
+                    android:id="@+id/dagilimAlt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/dg_alt"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <com.gunlukasistan.app.DagilimHalkasi
+                    android:id="@+id/dagilimHalka"
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:layout_marginTop="10dp" />
+
+                <TextView
+                    android:id="@+id/dagilimBos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="24dp"
+                    android:text="@string/dg_bos"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_normal"
+                    android:visibility="gone" />
+
+                <!-- v10.85: Konu Dağılımı ve Çalışma Analizi Etkileşimli Özet Listesi -->
+                <LinearLayout
+                    android:id="@+id/layoutKonuDagilimListesi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="14dp"
+                    android:background="?attr/colorOutlineVariant" />
+
+                <TextView
+                    android:id="@+id/txtHaftalikGrafikBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/dg_hafta"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal" />
+
+                <com.gunlukasistan.app.BarChartView
+                    android:id="@+id/haftaGrafik"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ==============================================================
+             v8.4 · Öneri 17: yıllık ısı haritası.
+             Aylık ızgara aşağıda duruyor; bu kart bir yılın tamamını
+             tek bakışta gösteriyor (53 hafta × 7 gün).
+             ============================================================== -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:cardCornerRadius="@dimen/ga_kose_buyuk"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txtAylikIsiBaslik"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/yi_baslik"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_orta" />
+
+                    <TextView
+                        android:id="@+id/yilSeri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_chip_sage"
+                        android:paddingStart="10dp"
+                        android:paddingTop="3dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="3dp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_kucuk" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/yilOzet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="none">
+
+                    <com.gunlukasistan.app.YilIsiView
+                        android:id="@+id/yilIsi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minWidth="340dp" />
+                </HorizontalScrollView>
+
+                <TextView
+                    android:id="@+id/yilGunDetay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Isı haritası kartı -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:cardCornerRadius="@dimen/ga_kose_buyuk"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Ay gezinimi -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+            android:contentDescription="@string/cd_onceki_ay"
+                        android:id="@+id/prevMonth"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
+                        android:text="‹"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_dev" />
+
+                    <TextView
+                        android:id="@+id/monthTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_orta" />
+
+                    <TextView
+            android:contentDescription="@string/cd_sonraki_ay"
+                        android:id="@+id/nextMonth"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:gravity="center"
+                        android:text="›"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/ga_yazi_dev" />
+                </LinearLayout>
+
+                <!-- Haftanın günleri -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal">
+
+                    <TextView style="@style/WeekdayLabel" android:text="Pzt" />
+                    <TextView style="@style/WeekdayLabel" android:text="Sal" />
+                    <TextView style="@style/WeekdayLabel" android:text="Çar" />
+                    <TextView style="@style/WeekdayLabel" android:text="Per" />
+                    <TextView style="@style/WeekdayLabel" android:text="Cum" />
+                    <TextView style="@style/WeekdayLabel" android:text="Cmt" />
+                    <TextView style="@style/WeekdayLabel" android:text="Paz" />
+                </LinearLayout>
+
+                <!-- Ay ızgarası (kod ile doldurulur) -->
+                <LinearLayout
+                    android:id="@+id/heatGrid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="vertical" />
+
+                <!-- Lejant -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/legend_less"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="@dimen/ga_yazi_mini" />
+
+                    <LinearLayout
+                        android:id="@+id/legendRow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/legend_more"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="@dimen/ga_yazi_mini" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Ay özeti kartı -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="?attr/colorSecondaryContainer"
+            app:cardCornerRadius="@dimen/ga_kose_buyuk"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/monthSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal" />
+
+                <TextView
+                    android:id="@+id/streakSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal" />
+
+                <!-- v7.38: detaylı analiz ekranına geçiş -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/openAnalytics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/an_menu"
+                    app:cornerRadius="14dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

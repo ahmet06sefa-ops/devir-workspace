@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v10.0 · Görsel Grup A — TASARIM ÖLÇEĞİ (öneri 1)
+
+  ══════════════════════════════════════════════════════════════════
+  NEDEN GEREKLİ — ÖLÇÜLEN TUTARSIZLIK
+  ══════════════════════════════════════════════════════════════════
+  v9.9'da kodu taradım. 74 layout dosyasında bulduklarım:
+
+    Köşe yarıçapı : 8 çeşit  (8, 14, 16, 18, 20, 22, 24, 26 dp)
+    Yazı boyutu   : 22 çeşit (9, 10, 10.5, 11, 11.5, 12, 12.5, 13,
+                              14, 15, 16, 17, 18, 19, 20, 21, 22,
+                              24, 26, 30, 74 sp)
+    Yükselti      : 5 çeşit  (0, 1, 2, 3, 12 dp)
+    Kenar boşluğu : 8 çeşit  (6, 8, 10, 12, 14, 16, 20, 32 dp)
+
+  Yan yana duran iki kartın köşesi farklı yuvarlaklıkta olabiliyor.
+  Aynı önemdeki iki başlık 15sp ve 16sp olabiliyor. Tek tek kimse
+  fark etmiyor ama toplamı "derme çatma" hissi veriyor.
+
+  ══════════════════════════════════════════════════════════════════
+  ÖLÇEK — VE NEDEN BU DEĞERLER
+  ══════════════════════════════════════════════════════════════════
+  Rastgele seçmedim. İki kural:
+
+   1. **Mevcut kullanımın çoğunluğunu koru.** 20dp köşe 24 yerde,
+      16dp 11 yerde kullanılmış. Bunları ölçeğe aldım; 22 ve 26 gibi
+      tek tük değerleri en yakın komşuya yuvarlıyorum. Böylece en az
+      sayıda ekran görsel olarak değişiyor.
+
+   2. **Kademeler ayırt edilebilir olsun.** 12sp ile 12.5sp arasında
+      göz fark görmüyor — ikisi de aynı kademe olmalı. 4sp'lik
+      atlamalar (11 → 15 → 19) net hiyerarşi kuruyor.
+
+  Bu dosya TEK KAYNAK. Yeni bir değer gerekirse önce buraya eklenir,
+  sonra kullanılır. `16.5sp` gibi ara değerler yazılmaz.
+-->
+<resources>
+
+    <!-- ══════════════════════════════════════════════════════
+         Mevcut (v8.6 · öneri 29) — telefon/tablet uyarlaması
+         ══════════════════════════════════════════════════════ -->
+    <dimen name="ga_icerik_pay">20dp</dimen>
+    <dimen name="ga_kart_bosluk">12dp</dimen>
+    <dimen name="ga_en_fazla_genislik">0dp</dimen>
+
+    <!-- ══════════════════════════════════════════════════════
+         KÖŞE YARIÇAPI — 4 kademe
+         ══════════════════════════════════════════════════════
+         Eski 8 çeşit → 4. Eşleme:
+           8dp        → kucuk (12dp)
+           14, 16dp   → orta (16dp)
+           18, 20dp   → buyuk (20dp)
+           22, 24, 26 → dev (24dp)
+    -->
+    <dimen name="ga_kose_kucuk">12dp</dimen>
+    <dimen name="ga_kose_orta">16dp</dimen>
+    <dimen name="ga_kose_buyuk">20dp</dimen>
+    <dimen name="ga_kose_dev">24dp</dimen>
+    <!-- Tam yuvarlak (hap/daire düğmeler) -->
+    <dimen name="ga_kose_tam">999dp</dimen>
+
+    <!-- ══════════════════════════════════════════════════════
+         YAZI BOYUTU — 7 kademe
+         ══════════════════════════════════════════════════════
+         Eski 22 çeşit → 7. Eşleme:
+           9, 10, 10.5    → mini (11sp)
+           11, 11.5, 12,
+           12.5           → kucuk (12sp)   ← en çok kullanılan (131)
+           13, 14         → normal (14sp)
+           15, 16, 17     → orta (16sp)
+           18, 19, 20, 21 → buyuk (20sp)
+           22, 24, 26     → dev (24sp)
+           30, 74         → devasa (30sp)  ← sayaç ekranı istisna
+
+         NOT: 74sp tek bir yerde (tam ekran sayaç). Onu ölçeğe
+         zorlamıyorum — orada amaç odadan okunabilmek, farklı bir
+         tasarım problemi.
+    -->
+    <dimen name="ga_yazi_mini">11sp</dimen>
+    <dimen name="ga_yazi_kucuk">13sp</dimen>
+    <dimen name="ga_yazi_widget_madde">14sp</dimen>
+    <dimen name="ga_yazi_normal">15sp</dimen>
+    <dimen name="ga_yazi_orta">16sp</dimen>
+    <dimen name="ga_yazi_buyuk">18sp</dimen>
+    <dimen name="ga_yazi_dev">28sp</dimen>
+    <dimen name="ga_yazi_devasa">32sp</dimen>
+
+    <!-- ══════════════════════════════════════════════════════
+         BOŞLUK — 6 kademe (4'ün katları)
+         ══════════════════════════════════════════════════════
+         4'ün katları Material Design'ın temel ızgarası. Göz
+         hizalamayı fark etmese de düzensizliği fark ediyor.
+    -->
+    <dimen name="ga_bosluk_xs">4dp</dimen>
+    <dimen name="ga_bosluk_s">8dp</dimen>
+    <dimen name="ga_bosluk_m">12dp</dimen>
+    <dimen name="ga_bosluk_l">16dp</dimen>
+    <dimen name="ga_bosluk_xl">24dp</dimen>
+    <dimen name="ga_bosluk_xxl">32dp</dimen>
+
+    <!-- ══════════════════════════════════════════════════════
+         YÜKSELTİ (gölge) — 3 kademe
+         ══════════════════════════════════════════════════════
+         Material 3 gölgeyi azaltıp kenarlığa geçiyor. Kartların
+         36'sı zaten 0dp; 21'i 2dp. Karışık kullanım "bazı kartlar
+         yüzüyor" hissi veriyor.
+
+         Karar: VARSAYILAN 0 (kenarlıklı). Yükselti yalnızca
+         gerçekten üstte duran şeyler için (alt sayfa, FAB).
+    -->
+    <dimen name="ga_yukselti_yok">0dp</dimen>
+    <dimen name="ga_yukselti_hafif">2dp</dimen>
+    <dimen name="ga_yukselti_yuzen">8dp</dimen>
+
+    <!-- ══════════════════════════════════════════════════════
+         BİLEŞEN ÖLÇÜLERİ
+         ══════════════════════════════════════════════════════ -->
+    <!-- Dokunma hedefi alt sınırı — erişilebilirlik kuralı -->
+    <dimen name="ga_dokunma_min">48dp</dimen>
+    <!-- Üst bardaki geri/kapat düğmesi -->
+    <dimen name="ga_ustbar_dugme">44dp</dimen>
+    <dimen name="ga_ustbar_yukseklik">56dp</dimen>
+    <!-- Kart sol kenarındaki durum şeridi -->
+    <dimen name="ga_serit_kalinlik">4dp</dimen>
+    <!-- Liste öğesi minimum yüksekliği -->
+    <dimen name="ga_satir_min">64dp</dimen>
+    <!-- Ayırıcı çizgi -->
+    <dimen name="ga_ayirici">1dp</dimen>
+    <dimen name="ga_ayirici_girinti">52dp</dimen>
+
+</resources>

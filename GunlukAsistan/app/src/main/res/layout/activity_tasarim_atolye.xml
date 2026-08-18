@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Başlık -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/taBaslik"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ta_baslik"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/taKapat"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:icon="@android:drawable/ic_menu_close_clear_cancel" />
+        </LinearLayout>
+
+        <!-- #31 CANLI ARAYÜZ ÖNİZLEME AYNASI -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/taOnizlemeKart"
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/taOnizlemeBaslik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="🎛️ #31 Canlı Arayüz Önizleme Aynası"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/ga_yazi_orta" />
+
+                <TextView
+                    android:id="@+id/taOnizlemeMetin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="🎛️ ÖNİZLEME: 'Varsayılan v2' · Vurgu: #4C7DFF · Köşe: 16dp · Saydamlık: %100"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- #30 & #32 PROFİL KAYDET / SIFIRLA -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/taBtnProfilPaylas"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:text="@string/ta_btn_paylas"
+                app:icon="@android:drawable/ic_menu_share" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/taBtnFabrikaSifirla"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:text="@string/ta_btn_sifirla"
+                app:icon="@android:drawable/ic_menu_revert" />
+        </LinearLayout>
+
+        <!-- GRUP 1: RENK, VURGU VE PALET ATÖLYESİ (#1-#5) -->
+        <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="🎨 Grup 1: Renk, Vurgu ve Palet (#1–#5)"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/ga_yazi_orta" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnHexPalet"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="#1 Serbest Hex Ana Vurgu Rengi Seç (#RRGGBB)" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnKartAlfa"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="#2 Kart İç Zemin Saydamlığı (Alpha %0..%100)" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- GRUP 2: KART, KÖŞE VE KENARLIK GEOMETRİSİ (#6-#10) -->
+        <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="📐 Grup 2: Kart &amp; Köşe Geometrisi (#6–#10)"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/ga_yazi_orta" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnKoseYaricap"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="#6 Serbest Köşe Yuvarlaklığı (0dp / 12dp / 16dp / 24dp)" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnIlerlemeBicim"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="#10 İlerleme Göstergesi Biçimi (Yatay/Kalın/Mini/Metin)" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- GRUP 3: TİPOGRAFİ VE METİN ÖLÇEĞİ (#11-#15) -->
+        <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="🔠 Grup 3: Tipografi &amp; Hiyerarşi (#11–#15)"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/ga_yazi_orta" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnFontSec"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="#11 Başlık / Gövde Fontu (Poppins / Atkinson / Lora)" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnMaxLines"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="#13 Görev &amp; Not Satır Uzunluğu Sınırı (1..10 Satır)" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- GRUP 4: ANA SAYFA, BUGÜN VE LİSTE YERLEŞİMİ (#16-#20) -->
+        <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="🧩 Grup 4: Ana Sayfa &amp; Yerleşim (#16–#20)"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/ga_yazi_orta" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnBlokSira"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="#16 Ana Ekran &amp; Bugün Blok Sıralama &amp; Gizleme" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnAkordiyonDurum"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="#18 Akordiyon Varsayılan Durumu (Her Zaman Açık/Kapalı)" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- GRUP 5 & 6: ZAMANLAYICI, ÜST BAR, ALT MENÜ VE FAB (#21-#30) -->
+        <com.google.android.material.card.MaterialCardView
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardCornerRadius="@dimen/ga_kose_orta"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="🎛️ Grup 5 &amp; 6: Sayaç, Bar &amp; FAB (#21–#30)"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/ga_yazi_orta" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnSaniyeEfekt"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="#22 Saniye Akış Efekti (Rulo / Düz / Gizli Zen Odak)" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/taBtnFabIslev"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="#29 Akıllı Artı (+) Butonu Konum &amp; İşlev Ataması" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/sumBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sumRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/w_kart_pay">
+
+    <!-- Üst: başlık + geri sayım rozeti -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/sumGreeting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_semibold"
+            android:maxLines="1"
+            android:text="@string/w_title"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_normal" />
+
+        <TextView
+            android:id="@+id/sumCountdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/w_chip"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="4dp"
+            android:text="⏳ —"
+            android:textColor="@color/w_accent"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+
+    <!-- Hedef ilerleme -->
+    <ProgressBar
+        android:id="@+id/sumProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:layout_marginTop="12dp"
+        android:max="100"
+        android:progress="0"
+        android:progressDrawable="@drawable/w_progress" />
+
+    <TextView
+        android:id="@+id/sumGoalText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="🎯 0/100 dk"
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_mini" />
+
+    <!-- Üç istatistik kutusu -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/sumBoxFocus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/w_chip"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp">
+
+            <TextView
+                android:id="@+id/sumFocus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="0"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_orta" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/w_lbl_focus"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sumBoxQuestions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/w_chip"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp">
+
+            <TextView
+                android:id="@+id/sumQuestions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="0"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_orta" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/w_lbl_questions"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/w_chip"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp">
+
+            <TextView
+                android:id="@+id/sumStreak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="0"
+                android:textColor="@color/w_green"
+                android:textSize="@dimen/ga_yazi_orta" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/w_lbl_streak"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/g_card"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtRetroAyAd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Eylül 2025"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/ga_yazi_normal" />
+
+        <TextView
+            android:id="@+id/txtRetroPuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorSurfaceVariant"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            android:text="🌟 8 / 10"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="💡 Bu ay bana neler kattı?"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="@dimen/ga_yazi_mini"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtRetroKatti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="?attr/colorSurfaceVariant"
+        android:hint="Bu ay hangi becerileri ve tecrübeyi kazandın?"
+        android:padding="8dp"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="🔄 Bende neler değişti?"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="@dimen/ga_yazi_mini"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtRetroDegisti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="?attr/colorSurfaceVariant"
+        android:hint="Alışkanlıklarında ve zihninde ne değişti?"
+        android:padding="8dp"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+</LinearLayout>

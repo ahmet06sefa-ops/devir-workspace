@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v7.47: Minimalist namaz widget'ı (2×1).
+  Sadece sıradaki vakit ve kalan süre. Gereksiz hiçbir öğe yok.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/nwBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nwRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <!-- Vakit simgesi -->
+    <TextView
+        android:id="@+id/nwEmoji"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="🕌"
+        android:textSize="@dimen/ga_yazi_buyuk" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Vakit adı -->
+        <TextView
+            android:id="@+id/nwName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/w_text_soft"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <!-- Saat — en belirgin öğe -->
+        <TextView
+            android:id="@+id/nwTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_semibold"
+            android:maxLines="1"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_buyuk" />
+
+        <!-- Kalan süre -->
+        <TextView
+            android:id="@+id/nwLeft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/w_accent"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>

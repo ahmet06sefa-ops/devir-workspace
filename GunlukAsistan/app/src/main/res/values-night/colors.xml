@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v10.0 · Görsel Grup A — KOYU TEMA DURUM RENKLERİ (öneri 2)
+
+  ══════════════════════════════════════════════════════════════════
+  BU DOSYA NEDEN YOKTU — VE NEDEN SORUNDU
+  ══════════════════════════════════════════════════════════════════
+  v8.3'te koyu tema eklendi (`values-night/themes.xml`, 6 tema).
+  Ama `values-night/colors.xml` **hiç oluşturulmadı**.
+
+  Sonuç: durum renkleri her iki temada da AYNI kalıyordu. Açık
+  zemine göre seçilmiş renkler koyu zeminde iki sorun yaratıyor:
+
+   1. **Kontrast düşüyor.** `#4C9A5A` yeşili beyaz üzerinde net
+      okunuyor (kontrast oranı ~3.4:1). Koyu gri üzerinde (#1C1B1F)
+      oran ~2.9:1'e düşüyor — WCAG AA sınırının (3:1) altında.
+
+   2. **Renk "kirli" görünüyor.** Koyu zeminde orta-koyu tonlar
+      soluk ve çamurlu algılanıyor. Göz koyu ortamda daha parlak
+      renk bekliyor.
+
+  ══════════════════════════════════════════════════════════════════
+  DÜZELTME YÖNTEMİ
+  ══════════════════════════════════════════════════════════════════
+  Her rengi **açtım ve doygunluğunu bir miktar düşürdüm**:
+
+    · Açmak    → kontrastı geri kazandırıyor
+    · Doygunluk↓ → koyu zeminde neon/rahatsız edici görünmesini
+                    engelliyor
+
+  Material Design'ın koyu tema kılavuzu da bunu öneriyor: koyu
+  temada "200 tonu", açık temada "500-700 tonu" kullan.
+
+  Hedef kontrast: koyu yüzey (#1C1B1F) üzerinde en az 4.5:1.
+-->
+<resources>
+
+    <!-- Açık tema: #4C9A5A → koyu temada açılmış -->
+    <color name="ga_basari">#7BC48A</color>
+    <!-- Açık tema: #E0A33A → koyu temada açılmış -->
+    <color name="ga_uyari">#F0C066</color>
+    <!-- Açık tema: #D9534F → koyu temada açılmış -->
+    <color name="ga_hata">#F08078</color>
+    <!-- Açık tema: #3A7BD5 → koyu temada açılmış -->
+    <color name="ga_bilgi">#7FAEEC</color>
+    <!-- Açık tema: #7A8B99 → koyu temada açılmış -->
+    <color name="ga_notr">#A3B0BC</color>
+
+    <!--
+      Soluk tonlar: koyu temada alfa ARTIYOR.
+
+      Açık zeminde %12 alfa yeterince görünüyor. Koyu zeminde aynı
+      alfa neredeyse kayboluyor — arka planla arasındaki parlaklık
+      farkı çok az. %22'ye çıkardım.
+    -->
+    <color name="ga_basari_soluk">#387BC48A</color>
+    <color name="ga_uyari_soluk">#38F0C066</color>
+    <color name="ga_hata_soluk">#38F08078</color>
+    <color name="ga_bilgi_soluk">#387FAEEC</color>
+
+    <!--
+      Kategori paleti — koyu tema sürümü.
+
+      Grafik dilimleri için. Açık temadakiyle aynı SIRA (kat_1
+      hep mavi) ama koyu zemine uygun parlaklıkta. Sıranın
+      korunması şart: bir kategori tema değişince renk
+      değiştirmemeli.
+    -->
+    <color name="ga_kat_1">#7FAEEC</color>
+    <color name="ga_kat_2">#7BC48A</color>
+    <color name="ga_kat_3">#F0C066</color>
+    <color name="ga_kat_4">#B98FCC</color>
+    <color name="ga_kat_5">#6FCFC8</color>
+    <color name="ga_kat_6">#F08078</color>
+    <color name="ga_kat_7">#DE8FB6</color>
+    <color name="ga_kat_8">#A3B0BC</color>
+
+    <!-- ══════════════════════════════════════════════════════
+         v10.51 · Tasarım Sistemi v2 — Nötr Zeminler & Vurgu Rengi (Koyu)
+         ══════════════════════════════════════════════════════ -->
+    <color name="ga_zemin_arka_plan">#0E0E13</color>
+    <color name="ga_zemin_kart">#1A1B23</color>
+    <color name="ga_zemin_ic">#22232C</color>
+    <color name="ga_kenarlik">#2A2B35</color>
+    <color name="ga_vurgu_ana">#4C7DFF</color>
+    <color name="ga_metin_birincil">#F5F5F7</color>
+    <color name="ga_metin_ikincil">#8B8D98</color>
+    <color name="ga_durum_tamamlandi">#22C55E</color>
+    <color name="ga_durum_devam_ediyor">#F59E0B</color>
+    <color name="ga_durum_gecikmis">#EF4444</color>
+</resources>

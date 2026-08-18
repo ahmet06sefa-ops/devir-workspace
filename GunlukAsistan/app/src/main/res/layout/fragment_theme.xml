@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/themes_title"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/ga_yazi_dev" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/themes_caption"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_normal" />
+
+        <!-- v10.11 · ULTRA-30 A2: bağlam profilleri — tema seti +
+             sessiz pencere + odak hedefi + uyku kapıları tek dokunuşla.
+             Paketin "tema seti" hâlinin üst katmanıdır, en üstte durur. -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/ax_baglam_baslik"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/ax_baglam_alt"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/baglamRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <!-- v10.8 · Öneri D40: tema paketleri (stüdyo)—altı ayarın
+             tek dokunuşluk kombinasyonları. En üstte durur; günlük
+             kullanımın en hızlı kapısı bu satırdır. -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/ts_baslik"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/ts_alt"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/paketRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <!-- v8.3 · Öneri 9: gece modu seçici -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/gm_section"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/geceGrup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/geceSistem"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gm_sistem"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/geceKapali"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gm_acik"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/geceAcik"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/gm_koyu"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <!-- v10.11 · ULTRA-30 A1: güneşe göre (gündüz açık/gece koyu) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/geceGunes"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ax_gunas"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <!-- A1 alt paneli: kaynak + saat çifti (yalnız Güneş seçiliyken) -->
+        <LinearLayout
+            android:id="@+id/geceGunesAlt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
+        <!-- v8.3 · Öneri 10: Material You -->
+        <LinearLayout
+            android:id="@+id/dinamikSatir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_baslik"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_normal" />
+
+                <TextView
+                    android:id="@+id/dinamikAlt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/my_alt"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/dinamikSvic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- v8.3 · Öneri 12: uygulama simgesi -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/sm_section"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/sm_hint"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <!-- v10.11 · ULTRA-30 A4: yazı karakteri vitrini -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/ax_font_baslik"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/ax_font_alt"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <LinearLayout
+            android:id="@+id/fontRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:id="@+id/simgeGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" />
+
+        <!-- v11.16 · Görünüm seçimi: 1. Görünüm (Klasik temalar) vs 2. Görünüm (Habit Genius) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/gorunum_section"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/gorunum_caption"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <LinearLayout
+            android:id="@+id/gorunumRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/themes_section"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <LinearLayout
+            android:id="@+id/themesGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/accent_section"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/accent_hint"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <LinearLayout
+            android:id="@+id/accentGrid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@string/themes_hint"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+    </LinearLayout>
+</ScrollView>

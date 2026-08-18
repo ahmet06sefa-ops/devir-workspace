@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <!-- Ana içerik -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- v7.28: Dikey yapı — araç çubuğu içeriğin ÜSTÜNDE ayrı yer kaplar.
+             Artık hiçbir ekranla iç içe geçmiyor, yüzmüyor. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="72dp"
+            android:orientation="vertical">
+
+            <!-- Sabit üst araç çubuğu: üç nokta + yapay zekâ -->
+            <LinearLayout
+                android:id="@+id/topBar"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="?attr/colorSurface"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp">
+
+                <TextView
+                    android:id="@+id/menuButton"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/lib_menu"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="⋮"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_dev" />
+
+                <!-- v10.87: Detaylı Analiz butonu 3 noktanın (⋮) hemen yanında -->
+                <TextView
+                    android:id="@+id/btnTopBarAnaliz"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Detaylı Analiz"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="📊"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_buyuk" />
+
+                <!-- v7.49: yapay zekâ düğmesi üst bara geri getirildi -->
+                <TextView
+                    android:id="@+id/aiButton"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/asistan_title"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="@string/ai_button_icon"
+                    android:textSize="@dimen/ga_yazi_buyuk" />
+
+                <!-- v7.49: günlük dizi/film önerisi -->
+                <TextView
+                    android:id="@+id/filmButton"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/fl_title"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="🎬"
+                    android:textSize="@dimen/ga_yazi_buyuk"
+                    android:visibility="gone" />
+
+                <!-- v7.51: iki kişilik online paylaşım -->
+                <TextView
+                    android:id="@+id/onlineButton"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/on_title"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="👥"
+                    android:textSize="@dimen/ga_yazi_buyuk"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/namazButton"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/nm_title"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="🕌"
+                    android:textSize="@dimen/ga_yazi_buyuk"
+                    android:visibility="gone" />
+
+                <!-- v10.6 · D39: komut paleti (⌘K hissi) -->
+                <TextView
+                    android:id="@+id/komutButton"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/kp_baslik"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="⌘"
+                    android:textSize="@dimen/ga_yazi_buyuk"
+                    android:visibility="gone" />
+
+                <!-- Namaz açıkken sıradaki vakit üst barda görünür -->
+                <TextView
+                    android:id="@+id/namazVakit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:paddingStart="6dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="4dp"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/ga_yazi_kucuk"
+                    android:visibility="gone" />
+
+                <!-- v10.51 #7: Taşma (overflow) menüsü (⋮) -->
+                <TextView
+                    android:id="@+id/overflowMenuButton"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Diğer Araçlar"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="⋮"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_dev" />
+
+                <!-- Boşluk: sağdaki öğeleri en sağa iter -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- Ekran içeriği araç çubuğunun ALTINDA başlar -->
+            <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <!-- v10.49 · #10: Yüzen Canlı Durum Şeridi (Mini Status Bar) -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/yuzenSeritKart"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="76dp"
+            android:layout_marginHorizontal="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:visibility="gone"
+            app:cardBackgroundColor="?attr/colorSecondaryContainer"
+            app:cardCornerRadius="@dimen/ga_kose_kucuk"
+            app:cardElevation="4dp">
+            <TextView
+                android:id="@+id/yuzenSeritMetin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="?attr/colorOnSecondaryContainer"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="?attr/colorSurface"
+            app:itemIconSize="22dp"
+            app:itemIconTint="@color/tab_item_color"
+            app:itemRippleColor="#22000000"
+            app:itemTextColor="@color/tab_item_color"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_nav" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="88dp"
+            android:contentDescription="@string/add"
+            app:srcCompat="@drawable/ic_add" />
+    </FrameLayout>
+
+    <!-- Yan panel: kitaplık -->
+    <LinearLayout
+        android:id="@+id/drawerPanel"
+        android:layout_width="304dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="?attr/colorSurface"
+        android:orientation="vertical"
+        android:paddingTop="18dp">
+
+        <!-- Başlık -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/lib_title"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="@dimen/ga_yazi_buyuk" />
+
+            <TextView
+                android:id="@+id/libCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@string/lib_caption"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <!-- v11.11: Canva Çalışma Ekranı (10 Uygulama) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawerCanvaBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="🎨 Canva Çalışma Ekranı (10 Uygulama)" />
+
+        <!-- v11.04: Kişisel Gelişim ve Farkındalık Merkezi -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawerKisiselGelisimBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="🌱 Kişisel Gelişim ve Farkındalık" />
+
+        <!-- v10.93: YouTube Çevrimdışı Oynatma Listesi Sıralayıcı -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawerYoutubePlaylistBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/ytp_drawer_btn" />
+
+        <!-- v7.4: Mühendislik kursları -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawerCoursesBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/drawer_courses" />
+
+        <!-- v7.30: Mühendislik araçları -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawerAraclarBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/drawer_tools" />
+
+        <!-- v7.73: global arama -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawerAramaBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/ar_drawer" />
+
+        <!-- v7.59: kayıtlı AI sohbetleri — tıklayınca kaldığın yerden devam -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawerSohbetBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/sg_drawer" />
+
+        <!-- v7.55: Sayaç — alt menüden buraya taşındı (yeri Plan sekmesine verildi) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawerTimerBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/drawer_timer" />
+
+        <!-- v7.20: Kaynak Merkezi (yapay zekâ ile PDF/video bulma) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/drawerKaynakBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/drawer_sources" />
+
+        <!-- PDF ekle butonu -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/libAddBtn"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/lib_add" />
+
+        <!-- Kitap listesi -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/libRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="16dp" />
+
+            <TextView
+                android:id="@+id/libEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.35"
+                android:padding="28dp"
+                android:text="@string/lib_empty"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="@dimen/ga_yazi_normal"
+                android:visibility="gone" />
+        </FrameLayout>
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

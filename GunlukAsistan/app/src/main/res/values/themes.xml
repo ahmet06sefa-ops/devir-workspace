@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Krem (varsayılan, açık) -->
+    <style name="Theme.GunlukAsistan" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">#B08968</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#EFE2D0</item>
+        <item name="colorOnPrimaryContainer">#8F6D4F</item>
+        <item name="colorSecondary">#7C9070</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorSecondaryContainer">#E4E9DC</item>
+        <item name="android:colorBackground">#FAF4E8</item>
+        <item name="colorSurface">#FFFDF8</item>
+        <item name="colorOnSurface">#3B332A</item>
+        <item name="colorOnSurfaceVariant">#8A8175</item>
+        <item name="android:statusBarColor">#FAF4E8</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!-- Violet (açık, mor) -->
+    <style name="Theme.GunlukAsistan.Violet" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#7C5CBF</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#E4DBF8</item>
+        <item name="colorOnPrimaryContainer">#40317E</item>
+        <item name="colorSecondary">#8E7CC3</item>
+        <item name="colorSecondaryContainer">#E9E2F9</item>
+        <item name="android:colorBackground">#F4F1FA</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#342E45</item>
+        <item name="colorOnSurfaceVariant">#7A728F</item>
+        <item name="android:statusBarColor">#F4F1FA</item>
+    </style>
+
+    <!-- Okyanus (açık, mavi-yeşil) -->
+    <style name="Theme.GunlukAsistan.Okyanus" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#1489A6</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#D6ECF3</item>
+        <item name="colorOnPrimaryContainer">#0E5470</item>
+        <item name="colorSecondary">#3FA3B8</item>
+        <item name="colorSecondaryContainer">#D9EEF2</item>
+        <item name="android:colorBackground">#EEF5F8</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#22333C</item>
+        <item name="colorOnSurfaceVariant">#6C818C</item>
+        <item name="android:statusBarColor">#EEF5F8</item>
+    </style>
+
+    <!-- Orman (açık, yeşil) -->
+    <style name="Theme.GunlukAsistan.Orman" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#3E7A4E</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#DEEBDD</item>
+        <item name="colorOnPrimaryContainer">#25492F</item>
+        <item name="colorSecondary">#6B9464</item>
+        <item name="colorSecondaryContainer">#E2EDDF</item>
+        <item name="android:colorBackground">#F0F5EE</item>
+        <item name="colorSurface">#FCFEFB</item>
+        <item name="colorOnSurface">#2A3A2E</item>
+        <item name="colorOnSurfaceVariant">#75877A</item>
+        <item name="android:statusBarColor">#F0F5EE</item>
+    </style>
+
+    <!-- Gül (açık, pembe) -->
+    <style name="Theme.GunlukAsistan.Gul" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#D4789C</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#F7E0E9</item>
+        <item name="colorOnPrimaryContainer">#7D3A58</item>
+        <item name="colorSecondary">#E0A0B8</item>
+        <item name="colorSecondaryContainer">#F9E6EC</item>
+        <item name="android:colorBackground">#FBF1F4</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#3F2A33</item>
+        <item name="colorOnSurfaceVariant">#8E7480</item>
+        <item name="android:statusBarColor">#FBF1F4</item>
+    </style>
+
+    <!-- Altın (açık, altın) -->
+    <style name="Theme.GunlukAsistan.Altin" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#A8862A</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#F3E7C0</item>
+        <item name="colorOnPrimaryContainer">#5E4C12</item>
+        <item name="colorSecondary">#B89B4A</item>
+        <item name="colorSecondaryContainer">#F4EACB</item>
+        <item name="android:colorBackground">#FBF6E9</item>
+        <item name="colorSurface">#FFFDF7</item>
+        <item name="colorOnSurface">#403820</item>
+        <item name="colorOnSurfaceVariant">#8B7F5C</item>
+        <item name="android:statusBarColor">#FBF6E9</item>
+    </style>
+
+    <!-- Gün Batımı (KOYU) -->
+    <style name="Theme.GunlukAsistan.GunBatimi" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#E8916D</item>
+        <item name="colorOnPrimary">#3A1D10</item>
+        <item name="colorPrimaryContainer">#463040</item>
+        <item name="colorOnPrimaryContainer">#F6C4AC</item>
+        <item name="colorSecondary">#D57BA5</item>
+        <item name="colorSecondaryContainer">#3E2C36</item>
+        <item name="android:colorBackground">#241B27</item>
+        <item name="colorSurface">#302535</item>
+        <item name="colorOnSurface">#F2E9E6</item>
+        <item name="colorOnSurfaceVariant">#B9A5B2</item>
+        <item name="android:statusBarColor">#241B27</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Aurora (KOYU, turkuaz) -->
+    <style name="Theme.GunlukAsistan.Aurora" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#2EC4A6</item>
+        <item name="colorOnPrimary">#06231C</item>
+        <item name="colorPrimaryContainer">#143E38</item>
+        <item name="colorOnPrimaryContainer">#A9EBDD</item>
+        <item name="colorSecondary">#57B8CE</item>
+        <item name="colorSecondaryContainer">#17323C</item>
+        <item name="android:colorBackground">#0F1A24</item>
+        <item name="colorSurface">#182634</item>
+        <item name="colorOnSurface">#E9F2F0</item>
+        <item name="colorOnSurfaceVariant">#96AFA9</item>
+        <item name="android:statusBarColor">#0F1A24</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- Ember (KOYU, ateş) -->
+    <style name="Theme.GunlukAsistan.Ember" parent="Theme.GunlukAsistan">
+        <item name="colorPrimary">#E2603C</item>
+        <item name="colorOnPrimary">#311207</item>
+        <item name="colorPrimaryContainer">#43261B</item>
+        <item name="colorOnPrimaryContainer">#F9C2A8</item>
+        <item name="colorSecondary">#E3A15A</item>
+        <item name="colorSecondaryContainer">#3A2A1E</item>
+        <item name="android:colorBackground">#1D1512</item>
+        <item name="colorSurface">#291E18</item>
+        <item name="colorOnSurface">#F5ECE5</item>
+        <item name="colorOnSurfaceVariant">#BCA79A</item>
+        <item name="android:statusBarColor">#1D1512</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <style name="Theme.GunlukAsistan.AccentKaramel">
+        <item name="colorPrimary">#B08968</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#EFE2D0</item>
+        <item name="colorOnPrimaryContainer">#4E3B28</item>
+        <item name="colorSecondary">#B08968</item>
+        <item name="colorSecondaryContainer">#EFE2D0</item>
+        <item name="colorOnSecondaryContainer">#4E3B28</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentVisne">
+        <item name="colorPrimary">#A4283F</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#F4D7DD</item>
+        <item name="colorOnPrimaryContainer">#4A0F1C</item>
+        <item name="colorSecondary">#A4283F</item>
+        <item name="colorSecondaryContainer">#F4D7DD</item>
+        <item name="colorOnSecondaryContainer">#4A0F1C</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentGulKurusu">
+        <item name="colorPrimary">#C26A8D</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#F5DFE8</item>
+        <item name="colorOnPrimaryContainer">#4E2437</item>
+        <item name="colorSecondary">#C26A8D</item>
+        <item name="colorSecondaryContainer">#F5DFE8</item>
+        <item name="colorOnSecondaryContainer">#4E2437</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentLavanta">
+        <item name="colorPrimary">#8A7BD8</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#E6E1F7</item>
+        <item name="colorOnPrimaryContainer">#2F2A55</item>
+        <item name="colorSecondary">#8A7BD8</item>
+        <item name="colorSecondaryContainer">#E6E1F7</item>
+        <item name="colorOnSecondaryContainer">#2F2A55</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentIndigo">
+        <item name="colorPrimary">#4C5FCE</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#DDE2F5</item>
+        <item name="colorOnPrimaryContainer">#141C4C</item>
+        <item name="colorSecondary">#4C5FCE</item>
+        <item name="colorSecondaryContainer">#DDE2F5</item>
+        <item name="colorOnSecondaryContainer">#141C4C</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentDeniz">
+        <item name="colorPrimary">#1E86B0</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#D7ECF4</item>
+        <item name="colorOnPrimaryContainer">#0E3546</item>
+        <item name="colorSecondary">#1E86B0</item>
+        <item name="colorSecondaryContainer">#D7ECF4</item>
+        <item name="colorOnSecondaryContainer">#0E3546</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentNane">
+        <item name="colorPrimary">#1F9E8A</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#D3EFE9</item>
+        <item name="colorOnPrimaryContainer">#0B3C34</item>
+        <item name="colorSecondary">#1F9E8A</item>
+        <item name="colorSecondaryContainer">#D3EFE9</item>
+        <item name="colorOnSecondaryContainer">#0B3C34</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentZumrut">
+        <item name="colorPrimary">#2F7D46</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#D8EDD9</item>
+        <item name="colorOnPrimaryContainer">#14371D</item>
+        <item name="colorSecondary">#2F7D46</item>
+        <item name="colorSecondaryContainer">#D8EDD9</item>
+        <item name="colorOnSecondaryContainer">#14371D</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentLimon">
+        <item name="colorPrimary">#97A822</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#EDF2CB</item>
+        <item name="colorOnPrimaryContainer">#3A420F</item>
+        <item name="colorSecondary">#97A822</item>
+        <item name="colorSecondaryContainer">#EDF2CB</item>
+        <item name="colorOnSecondaryContainer">#3A420F</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentMango">
+        <item name="colorPrimary">#D98A1F</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#F7E6C9</item>
+        <item name="colorOnPrimaryContainer">#57380A</item>
+        <item name="colorSecondary">#D98A1F</item>
+        <item name="colorSecondaryContainer">#F7E6C9</item>
+        <item name="colorOnSecondaryContainer">#57380A</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentMercan">
+        <item name="colorPrimary">#E0674F</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#F9DDD7</item>
+        <item name="colorOnPrimaryContainer">#5A1F13</item>
+        <item name="colorSecondary">#E0674F</item>
+        <item name="colorSecondaryContainer">#F9DDD7</item>
+        <item name="colorOnSecondaryContainer">#5A1F13</item>
+    </style>
+    <style name="Theme.GunlukAsistan.AccentGece">
+        <item name="colorPrimary">#7FA6E8</item>
+        <item name="colorOnPrimary">#0E2447</item>
+        <item name="colorPrimaryContainer">#22365A</item>
+        <item name="colorOnPrimaryContainer">#D4E4FA</item>
+        <item name="colorSecondary">#7FA6E8</item>
+        <item name="colorSecondaryContainer">#22365A</item>
+        <item name="colorOnSecondaryContainer">#D4E4FA</item>
+    </style>
+
+    <!-- v10.11 · ULTRA-30 A6: erişilebilir vurgu (Okabe-Ito çifti:
+         mavi #0072B2 + turuncu #E69F00 — renk körlüğü türlerinde de
+         birbirinden ayrılır; A4'teki Atkinson fontuyla aynı hikâye) -->
+    <style name="Theme.GunlukAsistan.AccentErisim">
+        <item name="colorPrimary">#0072B2</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#173E5C</item>
+        <item name="colorOnPrimaryContainer">#CDE6F6</item>
+        <item name="colorSecondary">#E69F00</item>
+        <item name="colorSecondaryContainer">#4A3300</item>
+        <item name="colorOnSecondaryContainer">#FFE8B8</item>
+    </style>
+
+    <!-- v10.11 · ULTRA-30 A4: yazı karakteri katmanları.
+         applyStyle(force=true) ile temanın üstüne basılır; XML'de
+         @font/poppins ile AÇIKÇA istenen başlıklar marka fontunda kalır. -->
+    <style name="FontKaplamasiAtkinson">
+        <item name="android:fontFamily">@font/atkinson_regular</item>
+        <item name="fontFamily">@font/atkinson_regular</item>
+    </style>
+    <style name="FontKaplamasiLora">
+        <item name="android:fontFamily">@font/lora_regular</item>
+        <item name="fontFamily">@font/lora_regular</item>
+    </style>
+
+    <style name="ToolbarTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="WeekdayLabel">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <!-- v5.7: yatay tam ekran zamanlayıcı (siyah, çubuksuz) -->
+    <!-- v7.1: hızlı kaydet ekranı diyalog gibi görünsün -->
+    <style name="Theme.QuickAdd" parent="Theme.GunlukAsistan">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.55</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.FullscreenTimer" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowBackground">#000000</item>
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:navigationBarColor">#000000</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+    <!-- v6.0: Zincir — neon koyu tema (referans tasarımdan) -->
+    <style name="Theme.GunlukAsistan.Zincir" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#2BCFD0</item>
+        <item name="colorOnPrimary">#00201F</item>
+        <item name="colorPrimaryContainer">#0E3540</item>
+        <item name="colorOnPrimaryContainer">#7FE9EA</item>
+        <item name="colorSecondary">#54CA5A</item>
+        <item name="colorOnSecondary">#00210A</item>
+        <item name="colorSecondaryContainer">#12341C</item>
+        <item name="android:colorBackground">#010413</item>
+        <item name="colorSurface">#0A1420</item>
+        <item name="colorSurfaceVariant">#111E2C</item>
+        <item name="colorOnSurface">#E8EEF6</item>
+        <item name="colorOnSurfaceVariant">#8A97A8</item>
+        <item name="colorOutline">#1E2C3C</item>
+        <item name="android:statusBarColor">#010413</item>
+        <item name="android:navigationBarColor">#010413</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!-- Yeni Görünüm (v11.15 · KOYU, mavi-mor modern) -->
+    <style name="Theme.GunlukAsistan.YeniGorunum" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">#7C6BFF</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#2A2450</item>
+        <item name="colorOnPrimaryContainer">#C9BFFF</item>
+        <item name="colorSecondary">#6FA8FF</item>
+        <item name="colorOnSecondary">#00295E</item>
+        <item name="colorSecondaryContainer">#12335E</item>
+        <item name="colorOnSecondaryContainer">#C8DFFF</item>
+        <item name="android:colorBackground">#0F1526</item>
+        <item name="colorSurface">#151C33</item>
+        <item name="colorSurfaceVariant">#1C2540</item>
+        <item name="colorOnSurface">#E9EDF7</item>
+        <item name="colorOnSurfaceVariant">#97A0BD</item>
+        <item name="colorOutline">#2A3555</item>
+        <item name="android:statusBarColor">#0F1526</item>
+        <item name="android:navigationBarColor">#0F1526</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!-- 2. Görünüm — Habit Genius tarzı (v11.16 · AÇIK, mor-mavi gradyan + beyaz zemin) -->
+    <style name="Theme.GunlukAsistan.HabitGenius" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">#6C5CE7</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorPrimaryContainer">#E7E2FB</item>
+        <item name="colorOnPrimaryContainer">#3D2E8A</item>
+        <item name="colorSecondary">#1E9E5A</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorSecondaryContainer">#DDF2E5</item>
+        <item name="colorOnSecondaryContainer">#0E4A2A</item>
+        <item name="colorTertiary">#4E8BE8</item>
+        <item name="android:colorBackground">#F6F5FB</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorSurfaceVariant">#EDEBF6</item>
+        <item name="colorOnSurface">#1B1B2B</item>
+        <item name="colorOnSurfaceVariant">#6B6B80</item>
+        <item name="colorOutline">#D6D3E8</item>
+        <item name="android:statusBarColor">#6C5CE7</item>
+        <item name="android:navigationBarColor">#FFFFFF</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!-- ==================================================================
+         v8.2 · Öneri 6: Açılış ekranı (Splash Screen API)
+
+         Önce ne vardı: uygulama açılırken beyaz bir kare görünüyor,
+         sonra ana ekran zıplayarak geliyordu. Android 12+ zaten bir
+         splash gösteriyor ama tema tanımlanmadığı için varsayılan
+         beyaz/launcher ikonu çıkıyordu.
+
+         core-splashscreen kütüphanesi bu temayı Android 6'ya kadar
+         geriye taşıyor, yani tüm cihazlarda aynı açılış.
+         ================================================================== -->
+    <style name="Theme.GunlukAsistan.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#B08968</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ga_splash_ikon</item>
+        <item name="windowSplashScreenAnimationDuration">400</item>
+        <item name="postSplashScreenTheme">@style/Theme.GunlukAsistan</item>
+    </style>
+
+    <!-- ==================================================================
+         v8.2 · Öneri 7: basılan kart içeri çöker.
+
+         Tek tek 71 layout'a dokunmak yerine kart stilleri buradan
+         türetiliyor; layout'larda yalnız style="@style/GaKart" yazmak
+         yeterli oluyor.
+         ================================================================== -->
+    <style name="GaKart" parent="Widget.Material3.CardView.Filled">
+        <item name="android:stateListAnimator">@animator/ga_kart_basma</item>
+    </style>
+
+    <style name="GaKartTiklanabilir" parent="GaKart">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="GaDugme" parent="Widget.Material3.Button">
+        <item name="android:stateListAnimator">@animator/ga_dugme_basma</item>
+    </style>
+</resources>

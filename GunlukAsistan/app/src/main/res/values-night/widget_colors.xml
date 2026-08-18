@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Widget renkleri: KOYU tema -->
+    <color name="w_bg">#1C1814</color>
+    <color name="w_bg_alt">#241E18</color>
+    <color name="w_stroke">#33D9B892</color>
+    <color name="w_text">#F5EDE3</color>
+    <color name="w_text_soft">#A99C8C</color>
+    <color name="w_accent">#E0B183</color>
+    <color name="w_accent_soft">#3A2E23</color>
+    <color name="w_green">#A3BE96</color>
+    <color name="w_track">#332A22</color>
+    <color name="w_btn">#2E251D</color>
+    <color name="w_ripple">#33E0B183</color>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v8.6 · Öneri 30: Android 12+ widget iç boşluğu.
+
+  Android 12'den itibaren launcher widget'ın etrafına kendi payını
+  ekliyor. Bizim 16dp padding'imiz onun üstüne binince içerik
+  gereksiz yere sıkışıyordu. v31'de 12dp'ye düşürüldü.
+-->
+<resources>
+    <dimen name="w_kart_pay">12dp</dimen>
+</resources>

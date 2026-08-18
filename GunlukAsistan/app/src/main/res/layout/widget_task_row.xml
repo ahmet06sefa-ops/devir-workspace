@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rowRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/rowBox"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="○"
+        android:textColor="@color/w_accent"
+        android:textSize="@dimen/ga_yazi_widget_madde" />
+
+    <TextView
+        android:id="@+id/rowTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-light"
+        android:lineSpacingExtra="6dp"
+        android:maxLines="1"
+        android:minHeight="25dp"
+        android:text=""
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_widget_madde"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/rowTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text=""
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_mini" />
+</LinearLayout>

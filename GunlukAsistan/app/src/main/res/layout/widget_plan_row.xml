@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v7.65: Vakit Planı widget satırı.
+  Sol: onay kutusu · Orta: iş metni (öncelik simgesiyle) · Sağ: süre rozeti
+  Satıra dokunmak işi tamamlar/geri alır.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/prRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp">
+
+    <TextView
+        android:id="@+id/prBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="○"
+        android:textColor="@color/w_accent"
+        android:textSize="@dimen/ga_yazi_orta" />
+
+    <TextView
+        android:id="@+id/prTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+
+    <TextView
+        android:id="@+id/prTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_mini" />
+</LinearLayout>

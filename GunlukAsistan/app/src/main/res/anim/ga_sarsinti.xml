@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v8.2 · Öneri 20 hazırlığı: yanlış cevapta yatay sarsıntı -->
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="420"
+    android:fromXDelta="0"
+    android:interpolator="@anim/ga_sarsinti_egri"
+    android:toXDelta="0" />

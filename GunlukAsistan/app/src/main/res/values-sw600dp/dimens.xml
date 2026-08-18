@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v8.6 · Öneri 29: tablet ölçüleri.
+
+  Tablette telefon düzeni "büyütülmüş telefon" gibi duruyordu: 10 inç
+  ekranda tek sütun kart, kenarlarda kocaman boşluk. Burada içerik
+  genişliği sınırlanıyor ve kenar boşlukları artıyor.
+-->
+<resources>
+    <dimen name="ga_icerik_pay">48dp</dimen>
+    <dimen name="ga_kart_bosluk">16dp</dimen>
+    <dimen name="ga_en_fazla_genislik">720dp</dimen>
+</resources>

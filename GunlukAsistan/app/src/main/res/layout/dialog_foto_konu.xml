@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v7.19: Fotoğraftan okunan konunun düzeltme ekranı -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="6dp">
+
+        <!-- Okunan fotoğrafın önizlemesi -->
+        <ImageView
+            android:id="@+id/fkOnizleme"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginBottom="4dp"
+            android:adjustViewBounds="true"
+            android:background="#11000000"
+            android:contentDescription="@string/ocr_preview_desc"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/fkUyari"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/ocr_check_hint"
+            android:textSize="@dimen/ga_yazi_mini"
+            android:textStyle="bold" />
+
+        <!-- Konu başlığı -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ocr_title_hint"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fkBaslik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:maxLines="2"
+                android:textSize="@dimen/ga_yazi_orta"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="2dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fkMaddeBaslik"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ocr_items_header"
+                android:textSize="@dimen/ga_yazi_kucuk"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fkMaddeEkle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="4dp"
+                android:paddingBottom="4dp"
+                android:text="@string/ocr_add_item"
+                android:textSize="@dimen/ga_yazi_kucuk"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Maddeler buraya kod ile eklenir -->
+        <LinearLayout
+            android:id="@+id/fkMaddeler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <TextView
+            android:id="@+id/fkBos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/ocr_no_items"
+            android:textSize="@dimen/ga_yazi_kucuk"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>

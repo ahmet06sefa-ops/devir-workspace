@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v7.85 — Sayaç widget'ı (2×2).
+
+  UYARI: RemoteViews yalnızca sınırlı görünüm listesini destekler:
+  LinearLayout · FrameLayout · TextView · ImageView · ProgressBar ·
+  ListView · GridView. <View>, ScrollView, ConstraintLayout ve CardView
+  widget'ı KIRAR (v7.40.1'de yaşandı).
+
+  Halka kadran özel View olduğu için widget'ta ÇİZİLEMEZ; onun yerine
+  Chronometer... da desteklenmiyor sayılabilir riskli olduğu için
+  ProgressBar + TextView ile aynı his verildi.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/syBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/syRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/syUst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/sy_w_hazir"
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_mini" />
+
+    <!--
+      Chronometer RemoteViews'ta desteklenen bir görünümdür ve sistem
+      kendisi saydığı için widget'ı saniye saniye güncellememize gerek
+      kalmaz (pil dostu). Duraklatıldığında gizlenip yerine sabit metin
+      gösterilir.
+    -->
+    <Chronometer
+        android:id="@+id/sySayac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:fontFamily="@font/poppins_bold"
+        android:includeFontPadding="false"
+        android:textColor="@color/w_accent"
+        android:textSize="@dimen/ga_yazi_dev" />
+
+    <TextView
+        android:id="@+id/sySabit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:fontFamily="@font/poppins_bold"
+        android:includeFontPadding="false"
+        android:text="25:00"
+        android:textColor="@color/w_accent"
+        android:textSize="@dimen/ga_yazi_dev"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/syBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="6dp"
+        android:max="100"
+        android:progress="0" />
+
+    <!-- Kontroller -->
+    <LinearLayout
+        android:id="@+id/syDugmeler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/syBasla"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/w_pill"
+            android:gravity="center"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:text="@string/sy_w_basla"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <TextView
+            android:id="@+id/sySifirla"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/w_pill"
+            android:gravity="center"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
+            android:text="@string/sy_w_sifirla"
+            android:textColor="@color/w_text_soft"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+
+    <!--
+      v10.5 · C27: hazır ayar çipleri (5·15·25 dk).
+      Yalnız geri sayım boştayken görünür (SayacWidget.doldur);
+      çalışan oturumu bölmemek için gizlenir.
+    -->
+    <LinearLayout
+        android:id="@+id/syPresetler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/syPreset1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/w_pill"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <TextView
+            android:id="@+id/syPreset2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/w_pill"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+
+        <TextView
+            android:id="@+id/syPreset3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/w_pill"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>

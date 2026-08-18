@@ -1,0 +1,1264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- v10.12 · Grup D (D21): odak kalkanı "önde hangi uygulama var"
+         bilgisini ancak bu izinle okur. Veri cihazdan çıkmaz; kullanıcı
+         sistem ayarından elle verir, istediğinde geri alır. -->
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- v7.56: "Rahatsız Etmeyin" modunda da uyarı sesi çıkarabilmek için.
+         Kullanıcı elle vermeli; verilmezse sessiz/titreşim modunda yine çalar. -->
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- v10.2 · Öneri A1: kilit üstünde tam ekran bitiş (uyanık bitiş) -->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- v5.5: yalnızca kullanıcı çevrimiçi AI modunu açtığında kullanılır -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- v11.13: yüklü başlatılabilir uygulamaları listeleyebilmek (Android 11+) -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+    <!-- v7.32: sesli ders anlatımı arka planda çalsın diye -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <!-- v7.88: sayaç ön plan servisi (Android 14+ tür zorunluluğu) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <!-- v7.19: el yazısı notu fotoğraflamak için (isteğe bağlı, çalışma zamanında istenir) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!--
+      v9.4 · Öneri 9-11: takvim entegrasyonu.
+      Tehlikeli izin — çalışma anında isteniyor. Reddedilirse
+      TakvimKopru tüm fonksiyonlarda boş dönüyor, uygulama
+      etkilenmiyor.
+    -->
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+
+    <!--
+      v9.7 · Öneri 45: konuma bağlı hatırlatma.
+
+      ÖNEMLİ: ACCESS_BACKGROUND_LOCATION BİLİNÇLİ OLARAK YOK.
+      Arka planda sürekli konum takibi yapmıyoruz; yalnızca uygulama
+      açıkken ve günlük özet alarmında `getLastKnownLocation` okunuyor.
+      Bu izin olmadan Play Store'un ek gerekçe formu da gerekmiyor.
+
+      İkisi de required=false: konum izni verilmeyen cihazda uygulamanın
+      kalan 200+ özelliği sorunsuz çalışmalı.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <!-- v7.18: Android 9 ve öncesinde İndirilenler klasörüne kalıcı yedek yazmak için.
+         Android 10+ MediaStore kullanır, izin gerekmez. -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:backupInForeground="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GunlukAsistan">
+
+        <!-- v7.32: sesli ders okuma servisi -->
+        <service
+            android:name=".SesliDersServisi"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!--
+          v7.88: sayaç ön plan servisi.
+          Sayaç çalışırken bildirimin sistem tarafından kaldırılmasını ve
+          sürecin öldürülmesini engeller. Android 14+ tür zorunlu kıldığı
+          için specialUse: shortService 3 dk ile sınırlı (30 dk sayaç için
+          olmaz), diğer türler yapılan işi tanımlamıyor.
+        -->
+        <service
+            android:name=".SayacServisi"
+            android:exported="false"
+            android:foregroundServiceType="specialUse"
+            android:stopWithTask="false">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Kullanicinin baslattigi geri sayim zamanlayicisi" />
+        </service>
+
+        <!-- v7.33: bilgi kartı ekranı -->
+        <activity
+            android:name=".KartActivity"
+            android:exported="false"
+            android:label="@string/card_title"
+            android:theme="@style/Theme.GunlukAsistan" />
+
+        <!-- v7.29: quiz ekranı -->
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false"
+            android:label="@string/quiz_title"
+            android:theme="@style/Theme.GunlukAsistan" />
+
+        <!-- v7.47: minimalist namaz widget'ı -->
+        <receiver
+            android:name=".NamazWidget"
+            android:exported="true"
+            android:label="@string/nw_desc">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_namaz_info" />
+        </receiver>
+
+        <!-- v10.42 · Madde #5: günün ilk kilit açılışı = uyandın -->
+        <receiver
+            android:name=".SabahReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v10.42 · Madde #6: akşam planı alarmı -->
+        <receiver
+            android:name=".AksamReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.AKSAM_PLAN" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v10.41: ileri sayım bildirim aksiyonları (bekle/devam, bitir) -->
+        <receiver
+            android:name=".IleriSayimReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.ILERI_BEKLET" />
+                <action android:name="com.gunlukasistan.app.ILERI_BITIR" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v7.65: Vakit Planı widget'ı (4x3) -->
+        <receiver
+            android:name=".PlanWidget"
+            android:exported="true"
+            android:label="@string/pw_desc">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.gunlukasistan.app.PLAN_W_TAMAMLA" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_plan_info" />
+        </receiver>
+
+        <!-- v10.10 · C34: Hafta görünümü widget'ı (4x2) -->
+        <!-- v10.88: Sadeleştirildi — HaftaWidget & IlerlemeWidget gizlendi -->
+        <!--
+        <receiver
+            android:name=".HaftaWidget"
+            android:exported="true"
+            android:label="@string/hw_desc">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_hafta_info" />
+        </receiver>
+
+        <receiver
+            android:name=".IlerlemeWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_ilerleme_info" />
+        </receiver>
+        -->
+
+        <!-- v7.85: sayaç widget'ı (mini ekran eklentisi) -->
+        <receiver
+            android:name=".SayacWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_sayac_info" />
+        </receiver>
+
+        <!-- v10.88: Sadeleştirildi — Kokpit, Takvim, Uyku, OdakKutusu gizlendi -->
+        <!--
+        <receiver
+            android:name=".KokpitWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_kokpit_info" />
+        </receiver>
+
+        <receiver
+            android:name=".TakvimWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_ay_info" />
+        </receiver>
+
+        <receiver
+            android:name=".UykuWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_uyku_info" />
+        </receiver>
+
+        <receiver
+            android:name=".OdakKutusuWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_odak_info" />
+        </receiver>
+        -->
+
+        <!-- v7.65: Vakit Planı widget liste servisi -->
+        <service
+            android:name=".PlanWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <!-- v10.88: Sadeleştirildi — EventsListWidget & HedefWidget gizlendi -->
+        <!--
+        <receiver
+            android:name=".EventsListWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_events_info" />
+        </receiver>
+
+        <service
+            android:name=".EventsListService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <receiver
+            android:name=".HedefWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_hedef_info" />
+        </receiver>
+        -->
+
+        <!-- v7.47: namaz vakti bildirimleri -->
+        <receiver
+            android:name=".NamazBildirim"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.NAMAZ_VAKIT" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v7.51: iki kişilik online paylaşım -->
+        <activity
+            android:name=".OnlineActivity"
+            android:exported="false"
+            android:label="@string/on_title"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- v7.49: günlük dizi/film önerisi -->
+        <activity
+            android:name=".FilmActivity"
+            android:exported="false"
+            android:label="@string/fl_title"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- v7.48: tüm namaz ayarları tek ekranda -->
+        <activity
+            android:name=".NamazAyarActivity"
+            android:exported="false"
+            android:label="@string/na_title"
+            android:theme="@style/Theme.GunlukAsistan" />
+
+        <!-- v7.46: namaz vakitleri ve vakit arası planlama -->
+        <activity
+            android:name=".NamazActivity"
+            android:exported="false"
+            android:label="@string/nm_title"
+            android:theme="@style/Theme.GunlukAsistan" />
+
+        <!-- v7.43: bildirim ayarları -->
+        <!-- v7.73: global arama -->
+        <activity
+            android:name=".AramaActivity"
+            android:exported="false"
+            android:label="@string/ar_baslik"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- v7.97: haftalık plan -->
+        <activity
+            android:name=".HaftaPlanActivity"
+            android:exported="false"
+            android:label="@string/hp_baslik" />
+
+        <!-- v7.86: zamanlayıcı ayarları -->
+        <activity
+            android:name=".SayacAyarActivity"
+            android:exported="false"
+            android:label="@string/sa_baslik" />
+
+        <!-- v10.9: gün çerçevesi (uyku düzeni) ayarları -->
+        <activity
+            android:name=".UykuAyarActivity"
+            android:exported="false"
+            android:label="@string/uy_baslik" />
+
+        <!-- v10.47: Manuel Kontrol Merkezi (uyku/uyanma, odak, seri ve rutin yönetimi) -->
+        <activity
+            android:name=".ManuelKontrolActivity"
+            android:exported="false"
+            android:label="@string/mk_baslik" />
+
+        <!-- v10.48: Otonom AI Ajanı ve Otopilot Merkezi -->
+        <activity
+            android:name=".OtonomMerkezActivity"
+            android:exported="false"
+            android:label="@string/ot_baslik" />
+
+        <!-- v10.53: 32 Maddelik Tasarım ve Yerleşim Atölyesi -->
+        <activity
+            android:name=".TasarimAtolyeActivity"
+            android:exported="false"
+            android:label="@string/ta_baslik" />
+
+        <!-- v10.54: Sesli Brifing ve Haftalık Verimlilik Karnesi -->
+        <activity
+            android:name=".KarneActivity"
+            android:exported="false"
+            android:label="@string/vk_baslik" />
+
+        <!-- v10.55: 10 Özel Yaşam Modülü ve Manuel Kontrol Merkezi (#1..#10 + 100 Öneri) -->
+        <activity
+            android:name=".YasamModulleriActivity"
+            android:exported="false"
+            android:label="@string/ym_baslik" />
+
+        <!-- v10.56: C-D-E-G-H-I-J Gelişmiş Hayat Atölyesi (#21..#50 ve #61..#100) -->
+        <activity
+            android:name=".GelismiAtolyeActivity"
+            android:exported="false"
+            android:label="@string/cdej_baslik" />
+
+        <!-- v10.57: Faz 2: C-D-E-G-H-I-J Uzman Modülleri & Özel Ekranlar (#25, #39, #49, #65, #72, #82, #98 vb.) -->
+        <activity
+            android:name=".UzmanModullerActivity"
+            android:exported="false"
+            android:label="@string/uz_baslik" />
+
+        <!-- v10.58: Ders Çalışma & Kolaylık Atölyesi (10 Uzman Modül + 100 Öneri) -->
+        <activity
+            android:name=".DersKolaylikActivity"
+            android:exported="false"
+            android:label="@string/dk_baslik" />
+
+        <!-- v10.60: Ders Çalışma İleri Fazı (#1, #41, #11 - Leitner & PDF Flaş Kart) -->
+        <activity
+            android:name=".DersIleriFazActivity"
+            android:exported="false"
+            android:label="@string/df_baslik" />
+
+        <!-- v10.64: Ders Çalışma Uzman Merkezi — Faz 2..5 (#7..#89) -->
+        <activity
+            android:name=".DersUzmanMerkezActivity"
+            android:exported="false"
+            android:label="@string/df5_merkez_baslik" />
+
+        <!-- v10.65: Yaşam Sağlığı & Finans — Uzman Faz 2 (#4..#54) -->
+        <activity
+            android:name=".YasamSaglikFinansActivity"
+            android:exported="false"
+            android:label="@string/ysf2_baslik" />
+
+        <!-- v10.66: Ders Çalışma Uzman Faz 6 (#64..#99) -->
+        <activity
+            android:name=".DersUzmanFaz6Activity"
+            android:exported="false"
+            android:label="@string/df6_baslik" />
+
+        <!-- v10.67: Yaşam Sağlığı & Finans — Uzman Faz 3 (#51..#100) -->
+        <activity
+            android:name=".YasamSaglikFinansFaz3Activity"
+            android:exported="false"
+            android:label="@string/ysf3_baslik" />
+
+        <!-- v10.68: Evrensel Otonom Yönetim & 200-Madde Kontrol Merkezi -->
+        <activity
+            android:name=".EvrenselOtonomMerkezActivity"
+            android:exported="false"
+            android:label="@string/eom_baslik" />
+
+        <!-- v10.69: Akıllı Gündem & Otonom Asistan Merkezi -->
+        <activity
+            android:name=".AkilliGundemVeAsistanMerkeziActivity"
+            android:exported="false"
+            android:label="@string/agm_baslik" />
+
+        <!-- v10.70: Aylık Namaz Saatleri & Titreşim Yönetimi -->
+        <activity
+            android:name=".NamazAylikYonetimActivity"
+            android:exported="false"
+            android:label="@string/nay_baslik" />
+
+        <!-- v10.75: Günlük Açıklamalı Çalışma & Yaşam Tablosu -->
+        <activity
+            android:name=".GunlukDetayTabloActivity"
+            android:exported="false"
+            android:label="@string/gdt_baslik" />
+
+        <!-- v10.77: KPSS / YKS Merkezi Yönetim & Ayarlar Atölyesi -->
+        <activity
+            android:name=".KpssMerkeziYonetimActivity"
+            android:exported="false"
+            android:label="@string/kmy_baslik" />
+
+        <!-- v10.78: KPSS Sayaç İstatistikler & Manuel Süre Ekleme Ekranı -->
+        <activity
+            android:name=".KpssSayacIstatistikActivity"
+            android:exported="false"
+            android:label="@string/ksa_istatistik_baslik" />
+
+        <!-- v7.84: terim sözlüğü -->
+        <activity
+            android:name=".SozlukActivity"
+            android:exported="false"
+            android:label="@string/sz_baslik" />
+
+        <!-- v7.83: hata defteri -->
+        <activity
+            android:name=".HatalarimActivity"
+            android:exported="false"
+            android:label="@string/ht_baslik" />
+
+        <!-- v7.81: derinlemesine konu anlatımı -->
+        <activity
+            android:name=".KonuAnlatimActivity"
+            android:exported="false"
+            android:label="@string/ku_anlat" />
+
+        <!-- v7.78: zorlayıcı öğretmen koçu -->
+        <!-- v9.6: öğrenme merkezi (zayıf nokta, ön/son test, Feynman, sınav) -->
+        <activity
+            android:name=".OgrenmeActivity"
+            android:exported="false"
+            android:label="@string/og_baslik" />
+
+        <!-- v9.7 · Grup F: ilaç, fatura, belge, araç, bütçe, konum -->
+        <activity
+            android:name=".TakipActivity"
+            android:exported="false"
+            android:label="@string/gh_baslik" />
+
+        <!-- v9.8 · Grup G: kullanım istatistiği, güncelleme, hata kayıtları -->
+        <activity
+            android:name=".SistemActivity"
+            android:exported="false"
+            android:label="@string/sy_baslik" />
+
+        <!--
+          v9.7: takip hatırlatıcıları.
+          Günde tek alarm + ilaç saatleri. Bildirim düğmeleri de
+          (Aldım / Yapıldı) buraya geliyor.
+        -->
+        <receiver
+            android:name=".TakipReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.TAKIP_DOZ" />
+                <action android:name="com.gunlukasistan.app.TAKIP_TAMAM" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v9.5: fotoğraftan soru çözme -->
+        <activity
+            android:name=".SoruCozActivity"
+            android:exported="false"
+            android:label="@string/sc_baslik" />
+
+        <!-- v9.4: takvim ve süre analizi -->
+        <activity
+            android:name=".TakvimAyarActivity"
+            android:exported="false"
+            android:label="@string/tkv_baslik" />
+
+        <!-- v9.0: aralıklı tekrar oturumu -->
+        <activity
+            android:name=".TekrarActivity"
+            android:exported="false"
+            android:label="@string/kt_oturum" />
+
+        <!-- v8.8: depolama yönetimi ve hata bildirimi -->
+        <activity
+            android:name=".DepolamaActivity"
+            android:exported="false"
+            android:label="@string/dp_row" />
+
+        <!-- v10.37: A'dan Z'ye sistem sağlık kontrolü -->
+        <activity
+            android:name=".SaglikActivity"
+            android:exported="false"
+            android:label="@string/w37_satir" />
+
+        <!-- v10.22: gizlilik kilidi (PIN) ekranı -->
+        <activity
+            android:name=".KilitActivity"
+            android:exported="false"
+            android:label="@string/w22_baslik" />
+
+        <!-- v8.5: ana ekran düzenleyici -->
+        <activity
+            android:name=".AnaEkranDuzenActivity"
+            android:exported="false"
+            android:label="@string/ad_row" />
+
+        <!-- v8.2: görünüm ve hareket ayarları -->
+        <activity
+            android:name=".GorunumAyarActivity"
+            android:exported="false"
+            android:label="@string/gr_row" />
+
+        <activity
+            android:name=".KocActivity"
+            android:exported="false"
+            android:label="@string/koc_baslik" />
+
+        <!-- v7.78: resimli kanıt ayarları -->
+        <activity
+            android:name=".KanitActivity"
+            android:exported="false"
+            android:label="@string/kn_baslik" />
+
+        <!-- v7.78: koç alarmları (çalışma çağrısı + gün sonu hesabı) -->
+        <receiver
+            android:name=".KocZamanlayici"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.KOC_CALIS" />
+                <action android:name="com.gunlukasistan.app.KOC_HESAP" />
+                <action android:name="com.gunlukasistan.app.KOC_ERTELE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v7.78: koç bildirimi düğmeleri -->
+        <receiver
+            android:name=".KocEylemAlici"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.KOC_E_ERTELE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v7.75: arşiv -->
+        <activity
+            android:name=".ArsivActivity"
+            android:exported="false"
+            android:label="@string/ars_baslik" />
+
+        <!-- v7.71: bas-konuş hızlı not -->
+        <activity
+            android:name=".SesliNotActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:theme="@style/Theme.QuickAdd"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- v7.69: widget hızlı işlem paneli (şeffaf, alttan panel) -->
+        <activity
+            android:name=".PlanHizliActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:theme="@style/Theme.QuickAdd"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- v7.68: widget tema ayarları -->
+        <activity
+            android:name=".WidgetTemaActivity"
+            android:exported="false"
+            android:label="@string/wt_baslik" />
+
+        <!-- v10.13 · B12: görev widget'ı etiket filtresi -->
+        <activity
+            android:name=".WidgetFiltreActivity"
+            android:exported="false"
+            android:label="@string/wg_filtre_baslik" />
+
+        <!-- v10.14 · E27: akşam mikro günlüğü -->
+        <activity
+            android:name=".MikroGunlukActivity"
+            android:exported="false"
+            android:label="@string/ge_gunluk_baslik" />
+
+        <!-- v10.14 · E28: sesli gelen kutusu -->
+        <activity
+            android:name=".SesliKutuActivity"
+            android:exported="false"
+            android:label="@string/ge_kutu_baslik" />
+
+        <!-- v10.14 · E30: senenin filmi -->
+        <activity
+            android:name=".SeneFilmiActivity"
+            android:exported="false"
+            android:label="@string/ge_film_baslik" />
+
+        <!-- v7.63: bildirim tanılama -->
+        <activity
+            android:name=".BildirimTaniActivity"
+            android:exported="false"
+            android:label="@string/bt_baslik" />
+
+        <!-- v7.59: kayıtlı AI sohbetleri -->
+        <activity
+            android:name=".SohbetGecmisiActivity"
+            android:exported="false"
+            android:label="@string/sg_baslik" />
+
+        <!-- v7.57: online arka plan kontrol ayarları -->
+        <activity
+            android:name=".OnlineBekciActivity"
+            android:exported="false"
+            android:label="@string/ob_baslik" />
+
+        <!-- v7.57: arka planda oda kontrolü -->
+        <receiver
+            android:name=".OnlineBekci"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.ONLINE_KONTROL" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v7.56: ısrarlı uyarı ayarları -->
+        <activity
+            android:name=".ZorunluUyariActivity"
+            android:exported="false"
+            android:label="@string/zu_title" />
+
+        <activity
+            android:name=".BildirimAyarActivity"
+            android:exported="false"
+            android:label="@string/nset_title"
+            android:theme="@style/Theme.GunlukAsistan" />
+
+        <!-- v7.45: widget hızlı eylemleri (uygulama açılmadan iş yapar) -->
+        <receiver
+            android:name=".WidgetEylem"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.WIDGET_EYLEM" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v7.43: günlük bildirim kontrolleri -->
+        <receiver
+            android:name=".BildirimZamanlayici"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.BILDIRIM_SABAH" />
+                <action android:name="com.gunlukasistan.app.BILDIRIM_AKSAM" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v7.39: PDF tam metin arama -->
+        <activity
+            android:name=".PdfAramaActivity"
+            android:exported="false"
+            android:label="@string/ps_title"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- v7.38: detaylı ilerleme analitiği -->
+        <activity
+            android:name=".AnalitikActivity"
+            android:exported="false"
+            android:label="@string/an_title"
+            android:theme="@style/Theme.GunlukAsistan" />
+
+        <!-- v7.37: özel öğretmen modu -->
+        <activity
+            android:name=".OgretmenActivity"
+            android:exported="false"
+            android:label="@string/tut_title"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:supportsPictureInPicture="true"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden"
+            android:theme="@style/Theme.GunlukAsistan.Splash">
+            <!--
+              🔴 v9.3: LAUNCHER filtresi buradan KALDIRILDI.
+
+              ── Sebep ──
+              v8.3'te alternatif simge özelliği eklendi. Varsayılan
+              dışında bir simge seçilince kod MainActivity'yi
+              DISABLED yapıyordu (launcher'da çift giriş görünmesin
+              diye). Ama MainActivity yalnız launcher girişi değil —
+              uygulamanın ana ekranı ve kod içinde 22 yerden
+              `Intent(ctx, MainActivity::class.java)` ile açılıyor.
+
+              Sonuç: alternatif simge seçen kullanıcıda bildirime
+              dokunmak, widget'a basmak, ekranlar arası geçiş
+              ActivityNotFoundException ile ÇÖKÜYORDU.
+
+              ── Çözüm ──
+              Launcher girişi artık `.SimgeVarsayilan` alias'ında.
+              MainActivity hiçbir zaman devre dışı bırakılmıyor,
+              yalnız alias'lar açılıp kapanıyor.
+            -->
+        </activity>
+
+        <!-- v11.23 · HabitGenius 2. Görünümü — tek APK içinde (Jetpack Compose) -->
+        <activity
+            android:name=".HabitGeniusComposeActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboardHidden"
+            android:theme="@style/Theme.GunlukAsistan" />
+
+        <!--
+          v9.3: Varsayılan launcher girişi.
+          Diğer simge alias'larıyla aynı mantıkta ama enabled="true"
+          başlıyor — hiç simge seçmemiş kullanıcı için.
+        -->
+        <activity-alias
+            android:name=".SimgeVarsayilan"
+            android:enabled="true"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
+
+        <!-- ==============================================================
+             v8.3 · Öneri 12: alternatif uygulama simgeleri.
+
+             Android'de simge çalışma anında değiştirilemez. Tek yol:
+             aynı Activity'yi işaret eden birden çok activity-alias
+             tanımlayıp PackageManager ile yalnız birini etkin bırakmak.
+             Hepsi android:enabled="false" başlıyor; varsayılan olarak
+             MainActivity'nin kendi LAUNCHER girişi kullanılıyor.
+             ============================================================== -->
+        <activity-alias
+            android:name=".SimgeKaramel"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ga_simge_karamel"
+            android:roundIcon="@mipmap/ga_simge_karamel"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
+        <activity-alias
+            android:name=".SimgeMor"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ga_simge_mor"
+            android:roundIcon="@mipmap/ga_simge_mor"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
+        <activity-alias
+            android:name=".SimgeGece"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ga_simge_gece"
+            android:roundIcon="@mipmap/ga_simge_gece"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
+        <activity-alias
+            android:name=".SimgeYesil"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ga_simge_yesil"
+            android:roundIcon="@mipmap/ga_simge_yesil"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
+        <activity-alias
+            android:name=".SimgeMinimal"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ga_simge_minimal"
+            android:roundIcon="@mipmap/ga_simge_minimal"
+            android:label="@string/app_name"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity-alias>
+
+
+        <!-- v7.1: hızlı kaydet — kısayol ve paylaş menüsünden açılır -->
+        <activity
+            android:name=".QuickAddActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="@string/qa_label"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:theme="@style/Theme.QuickAdd">
+            <!-- Kısayollardan doğrudan açma -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- Başka uygulamalardan "Paylaş" ile metin gönderme -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <!-- Seçili metin için "işlem" menüsü -->
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
+        <!-- v7.1: bildirim panelindeki odaklan kutucuğu -->
+        <service
+            android:name=".FocusTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_timer"
+            android:label="@string/tile_focus"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="false" />
+        </service>
+
+        <!-- v6.9: elle bölme noktası seçme -->
+        <activity
+            android:name=".ManualSplitActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false"
+            android:theme="@style/Theme.GunlukAsistan" />
+
+        <!-- v5.7: yatay tam ekran flip saat -->
+        <activity
+            android:name=".FullscreenTimerActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Theme.FullscreenTimer" />
+
+        <!-- v10.2 · Öneri A1: kilit üstünde tam ekran bitiş ekranı -->
+        <activity
+            android:name=".SayacBittiActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true" />
+
+        <receiver
+            android:name=".ReminderReceiver"
+            android:exported="false" />
+
+        <!-- v10.38 · Katalog #25: not hatırlatıcıları -->
+        <receiver
+            android:name=".NotHatirlaticiReceiver"
+            android:exported="false" />
+
+        <!-- v7.9: günlük ders hatırlatıcısı -->
+        <receiver
+            android:name=".CourseReminderReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".WeeklyReportReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".TaskActionReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.TASK_DONE" />
+                <action android:name="com.gunlukasistan.app.TASK_SNOOZE" />
+                <!-- v7.74: bildirimden hizli yanit -->
+                <action android:name="com.gunlukasistan.app.TASK_YAZ" />
+                <action android:name="com.gunlukasistan.app.TASK_YARIN" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v5.3: dört ayrı widget -->
+        <!-- v10.88: Sadeleştirildi — CountdownWidget gizlendi -->
+        <!--
+        <receiver
+            android:name=".CountdownWidget"
+            android:exported="true"
+            android:label="@string/w_desc_countdown">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_countdown_info" />
+        </receiver>
+        -->
+
+        <receiver
+            android:name=".SummaryWidget"
+            android:exported="true"
+            android:label="@string/w_desc_summary">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_summary_info" />
+        </receiver>
+
+        <receiver
+            android:name=".TasksWidget"
+            android:exported="true"
+            android:label="@string/w_desc_tasks">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.gunlukasistan.app.WIDGET_TASK_TOGGLE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_tasks_info" />
+        </receiver>
+
+        <!-- v7.40: günlük brifing widget'ı -->
+        <receiver
+            android:name=".BrifingWidget"
+            android:exported="true"
+            android:label="@string/w_desc_brifing">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.gunlukasistan.app.BRIEF_REFRESH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_brifing_info" />
+        </receiver>
+
+        <!-- v10.88: Sadeleştirildi — ActionsWidget gizlendi -->
+        <!--
+        <receiver
+            android:name=".ActionsWidget"
+            android:exported="true"
+            android:label="@string/w_desc_actions">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_actions_info" />
+        </receiver>
+        -->
+
+        <!-- Görev listesi widget'ının satırlarını üreten servis -->
+        <!-- v6.3: Cam görünümlü liste widget'leri -->
+        <receiver
+            android:name=".GlassTasksWidget"
+            android:exported="true"
+            android:label="@string/gl_desc_tasks">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.gunlukasistan.app.GLASS_TOGGLE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/g_tasks_info" />
+        </receiver>
+
+        <receiver
+            android:name=".GlassHabitsWidget"
+            android:exported="true"
+            android:label="@string/gl_desc_habits">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.gunlukasistan.app.GLASS_TOGGLE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/g_habits_info" />
+        </receiver>
+
+        <!-- v10.88: Sadeleştirildi — GlassTodayWidget gizlendi -->
+        <!--
+        <receiver
+            android:name=".GlassTodayWidget"
+            android:exported="true"
+            android:label="@string/gl_desc_today">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.gunlukasistan.app.GLASS_TOGGLE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/g_today_info" />
+        </receiver>
+        -->
+
+        <!-- v6.4: canlı zamanlayıcı bildirimi -->
+        <receiver
+            android:name=".TimerActionReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.TIMER_TOGGLE" />
+                <action android:name="com.gunlukasistan.app.TIMER_RESET" />
+                <action android:name="com.gunlukasistan.app.TIMER_STOP" />
+                <action android:name="com.gunlukasistan.app.TIMER_FINISHED" />
+                <!-- v7.93: periyodik bildirim tazeleme -->
+                <action android:name="com.gunlukasistan.app.TIMER_TAZELE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v6.7: bölünmüş PDF bölümlerini paylaşmak için -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <service
+            android:name=".GlassListService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".TasksWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <!-- v10.13 · B8: ay ızgarası liste servisi -->
+        <service
+            android:name=".TakvimWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <!-- v9.1 · Öneri 41: bildirim testi alıcısı -->
+        <receiver
+            android:name=".BildirimTestReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.gunlukasistan.app.BILDIRIM_TESTI" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v10.9: gün çerçevesi kapıları ve bildirim eylemleri.
+             Yalnız uygulama içi açık (explicit) yayınları dinler. -->
+        <receiver
+            android:name=".UykuAksiyonReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver
+            android:name=".BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.DATE_CHANGED" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <!-- v7.42: saat/kullanıcı değişiminde de widget'ları tazele -->
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <!-- v7.5: ders PDF okuyucu -->
+        <activity
+            android:name=".LessonPdfActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:exported="false" />
+
+        <!-- v10.12 · Grup D (D19): nefes stüdyosu -->
+        <activity
+            android:name=".NefesActivity"
+            android:exported="false"
+            android:label="@string/fo_nefes_baslik" />
+
+        <!-- v10.88: Sadeleştirildi — ModulWidget gizlendi -->
+        <!--
+        <receiver
+            android:name=".ModulWidget"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_modul_info" />
+        </receiver>
+        -->
+        <!-- v10.16: Birleştirici modül düzenleyicisi -->
+        <activity
+            android:name=".ModulAyarActivity"
+            android:exported="false" />
+        <!-- v10.89: 1000-Madde Eksik & Gelişim Kontrol Atölyesi (#1..#1000) -->
+        <activity
+            android:name=".BinMaddeKontrolActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EvrenselGorunumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".YoutubePlaylistActivity"
+            android:exported="false" />
+        <activity
+            android:name=".KisiselGelisimActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CanvaCalismaAtolyeActivity"
+            android:exported="false" />
+        <!-- v11.12: Tüm Verileri Yedekle & Geri Yükle -->
+        <activity
+            android:name=".VeriYedekActivity"
+            android:exported="false" />
+        <!-- v11.13: Telefondaki diğer uygulamalara erişim -->
+        <activity
+            android:name=".UygulamalarActivity"
+            android:exported="false" />
+        <!-- v10.15 · C13: kritik görevin tam ekran alarmı (kilit üstü) -->
+        <activity
+            android:name=".GorevAlarmActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:launchMode="singleTask"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true" />
+        <!-- v10.15 · C15: gün paneli "Kapat" aksiyonu -->
+        <receiver
+            android:name=".GunPaneliReceiver"
+            android:exported="false" />
+        <!-- v11.13: AI ekrana dokunma yetkisi (erişilebilirlik servisi) -->
+        <service
+            android:name=".EkranDokunmaServisi"
+            android:exported="false"
+            android:label="@string/erisim_servis_adi"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice.AccessibilityService"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+    </application>
+
+</manifest>

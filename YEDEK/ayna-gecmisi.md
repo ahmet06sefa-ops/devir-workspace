@@ -1,0 +1,5 @@
+- 2026-08-08 20:00 · ilk ayna: filebin bin=ortam-gunluk-20260808 (çatı md5=7c3f1f2535b70dae665868aef110fb7e, önbellek md5=280bcb8f80988eb7afdcfcb38c1581a4) — uçtan uca indirme+md5 ile kanıtlı
+- 2026-08-08 20:05 · HATA YAKALANDI: ayna-tazele dosya-URL 302'sini 'ölü' sayıp yeniden üretti (düzeltildi) → yeni filebin bin=ortam-gunluk-20260808-2003, md5'ler aynı, kurtar.sh güncel ✓
+- 2026-08-08 20:10 · kurtar.sh UÇTAN UCA kanıtlı (çatı+önbellek 55 sn, md5'ler uyumlu, ORTAM_HAZIR); swapon PATH kusuru düzeltildi (/proc/swaps)
+- 2026-08-09 19:00 · kaynak aynası: `kaynak-gunluk-20260809-1900`
+- 2026-08-09 19:04 · kaynak aynası: `kaynak-gunluk-20260809-1904`

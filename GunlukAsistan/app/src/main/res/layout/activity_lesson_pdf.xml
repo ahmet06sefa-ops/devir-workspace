@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v7.5: ders PDF okuyucu -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/colorBackground">
+
+    <!-- Üst çubuk -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lpTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/ga_yazi_orta"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lpSub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="#CCFFFFFF"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lpShare"
+            android:layout_width="34dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="\u21AA"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/ga_yazi_buyuk" />
+
+        <TextView
+            android:id="@+id/lpFav"
+            android:layout_width="36dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="@string/co_fav_filter_off"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:id="@+id/lpNote"
+            android:layout_width="36dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/lp_note_title"
+            android:gravity="center"
+            android:text="@string/lp_note_icon_empty"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:id="@+id/lpAsk"
+            android:layout_width="36dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/rag_title"
+            android:gravity="center"
+            android:text="@string/rag_icon"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:id="@+id/lpListen"
+            android:layout_width="36dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/tts_title"
+            android:gravity="center"
+            android:text="@string/tts_icon"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:id="@+id/lpZoomOut"
+            android:layout_width="34dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="\u2212"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/ga_yazi_buyuk" />
+
+        <TextView
+            android:id="@+id/lpZoomIn"
+            android:layout_width="34dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/ga_yazi_buyuk" />
+
+        <TextView
+            android:id="@+id/lpNight"
+            android:layout_width="36dp"
+            android:layout_height="38dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="\u263E"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:contentDescription="@string/cd_kapat"
+            android:id="@+id/lpClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:gravity="center"
+            android:text="✕"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/ga_yazi_buyuk" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lpRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
+
+    <!-- Tamamlandı düğmesi -->
+    <LinearLayout
+        android:id="@+id/lpDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp">
+
+        <TextView
+            android:id="@+id/lpProgress"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <TextView
+            android:id="@+id/lpDoneText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:text="@string/lp_done"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_normal"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

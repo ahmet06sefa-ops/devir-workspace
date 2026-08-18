@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v7.65: Vakit Planı widget'ı — Plan sekmesinin ana ekran karşılığı.
+
+  Üç bölüm:
+    1. Sıradaki vakit + geri sayım + ilerleme (2/5)
+    2. Aktif dilim şeridi — hangi aralıktayız, ne kadar kaldı
+    3. O dilimin işleri — kaydırılabilir, dokununca tamamlanır
+
+  RemoteViews kısıtı: yalnızca LinearLayout/FrameLayout/TextView/
+  ImageView/ProgressBar/ListView kullanılabilir. <View> ve ConstraintLayout
+  widget'ı kırıyor (v7.40.1'de yaşandı).
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/pwBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pwRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="14dp">
+
+    <!-- ── Üst şerit: sıradaki vakit ── -->
+    <LinearLayout
+        android:id="@+id/pwHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/pwEmoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="🕌"
+            android:textSize="@dimen/ga_yazi_buyuk" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/pwNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:maxLines="1"
+                android:text="@string/pw_baslik"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_normal" />
+
+            <TextView
+                android:id="@+id/pwLeft"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <!-- Bugünkü ilerleme: 2/5 -->
+        <TextView
+            android:id="@+id/pwProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/w_accent"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <!-- Yeni iş ekle -->
+        <TextView
+            android:id="@+id/pwAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/w_btn_accent"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp"
+            android:text="@string/pw_ekle"
+            android:textColor="@color/w_accent"
+            android:textSize="@dimen/ga_yazi_mini" />
+    </LinearLayout>
+
+    <!-- ── Aktif dilim şeridi ── -->
+    <TextView
+        android:id="@+id/pwSlot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/w_chip"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="5dp"
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_kucuk" />
+
+    <!-- Dilim doluluk çubuğu -->
+    <ProgressBar
+        android:id="@+id/pwBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="6dp"
+        android:max="100"
+        android:progressDrawable="@drawable/w_progress" />
+
+    <!-- ── İş listesi ── -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/pwList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:scrollbars="none" />
+
+        <TextView
+            android:id="@+id/pwEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/pw_bos"
+            android:textColor="@color/w_text_soft"
+            android:textSize="@dimen/ga_yazi_kucuk"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <!-- ── Alt: bugünün vakitleri (tek satır özet) ── -->
+    <TextView
+        android:id="@+id/pwTimes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/w_text_soft"
+        android:textSize="@dimen/ga_yazi_mini" />
+</LinearLayout>
+</FrameLayout>

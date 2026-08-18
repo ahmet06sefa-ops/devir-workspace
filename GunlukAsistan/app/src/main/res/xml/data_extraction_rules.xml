@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ══════════════════════════════════════════════════════════════════
+  v8.8 · Öneri 3 — Android 12+ yedekleme ve cihaz aktarımı
+  ══════════════════════════════════════════════════════════════════
+
+  cloud-backup    : Google hesabına otomatik yedek (internetten geçer)
+  device-transfer : yeni telefona doğrudan aktarım (kablo/yerel ağ)
+
+  🔴 Aynı lint hatası buradaydı: dahil edilmemiş alanlardan
+  <exclude> yazılmıştı.
+
+  ── İki mod arasındaki fark neden önemli ──
+  `device-transfer` cihazdan cihaza doğrudan gidiyor, buluta
+  uğramıyor. Bu yüzden orada API anahtarlarını da aktarabilirdik...
+  ama v8.8'de anahtarlar Android Keystore ile şifreleniyor ve
+  şifre çözme anahtarı yeni cihaza GEÇMİYOR. Aktarılsalar bile
+  çözülemezler; kullanıcı yeniden girmek zorunda. Bu bilinçli bir
+  güvenlik ödünleşimi: kolaylık yerine güvenlik.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <include
+            domain="sharedpref"
+            path="." />
+        <include
+            domain="database"
+            path="gunluk_asistan.db" />
+
+        <!-- Hassas: API anahtarları ve çökme kayıtları buluta gitmesin -->
+        <exclude
+            domain="sharedpref"
+            path="ai_settings.xml" />
+        <exclude
+            domain="sharedpref"
+            path="crash_log.xml" />
+        <!-- Gereksiz: yeniden üretilebilir, megabaytlarca yer kaplar -->
+        <exclude
+            domain="sharedpref"
+            path="ai_onbellek_v1.xml" />
+        <exclude
+            domain="sharedpref"
+            path="ai_model_cache.xml" />
+        <exclude
+            domain="sharedpref"
+            path="konu_anlatim_v1.xml" />
+    </cloud-backup>
+
+    <device-transfer>
+        <include
+            domain="sharedpref"
+            path="." />
+        <include
+            domain="database"
+            path="gunluk_asistan.db" />
+
+        <!-- Anahtarlar Keystore'a bağlı; yeni cihazda çözülemezler.
+             Taşımak yerine kullanıcıdan yeniden istemek daha dürüst. -->
+        <exclude
+            domain="sharedpref"
+            path="ai_settings.xml" />
+        <exclude
+            domain="sharedpref"
+            path="crash_log.xml" />
+        <exclude
+            domain="sharedpref"
+            path="ai_onbellek_v1.xml" />
+    </device-transfer>
+</data-extraction-rules>

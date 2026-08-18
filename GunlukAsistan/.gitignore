@@ -1,0 +1,101 @@
+# ═══════════════════════════════════════════════════════════════════
+# Güvenli Workspace .gitignore — Günlük Asistan Devir Workspace
+# ═══════════════════════════════════════════════════════════════════
+
+# 1. Gizli anahtarlar, tokenlar, şifreler ve kimlik bilgileri
+.env
+.env.*
+*.keystore
+debug.keystore
+*.jks
+*.pem
+*.key
+*.p12
+*.token
+*secret*
+*.credentials
+.netrc
+.git-credentials
+*.pem.txt
+*.key.txt
+id_rsa*
+id_ed25519*
+
+# 2. Bağımlılıklar, önbellekler ve sanal ortamlar
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.cache/
+.next/
+.vite/
+.turbo/
+.nox/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.svelte-kit/
+.tox/
+target/
+.gradle/
+.gradle-home/
+.android/
+.arena/
+
+# 3. Derleme çıktıları ve dizinleri
+build/
+dist/
+out/
+coverage/
+app/build/
+GunlukAsistan/app/build/
+GunlukAsistan/build/
+GunlukAsistan/.gradle/
+*.class
+*.dex
+*.o
+*.so
+*.obj
+
+# 4. Loglar, geçici dosyalar ve test çıktıları
+*.log
+derle.log
+test.log
+derle-rel.log
+*.tmp
+*.temp
+*~
+*.bak
+*.swp
+*.swo
+test-results/
+reports/
+yukle-sonuc.txt
+workspace_drive_file*
+
+# 5. Büyük gereksiz arşivler, videolar ve binary veriler
+*.zip
+*.apk
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wmv
+*.flv
+*.iso
+*.bin
+uploads/
+
+# 6. IDE ve sistem yapılandırma dosyaları
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db

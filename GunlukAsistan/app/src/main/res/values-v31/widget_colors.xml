@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      v7.67 — Android 12+ dinamik renkler, ama HER ZAMAN koyu.
+
+      Eskiden bu dosya aydinlik moddaki duvar kagidi tonlarini
+      (neutral1_50 zemin, neutral1_900 yazi) kullaniyordu. Kullanici
+      "widgetlarda karanlik tema kullan" dedigi icin artik telefon
+      aydinlik moddayken de koyu uctan ton seciliyor:
+        zemin = neutral1_900 (koyu)  ·  yazi = neutral1_50 (acik)
+      Boylece Material You uyumu korunuyor ama widget koyu kaliyor.
+    -->
+    <color name="w_bg">@android:color/system_neutral1_900</color>
+    <color name="w_bg_alt">@android:color/system_neutral1_800</color>
+    <color name="w_stroke">#33FFFFFF</color>
+    <color name="w_text">@android:color/system_neutral1_50</color>
+    <color name="w_text_soft">@android:color/system_neutral2_200</color>
+    <color name="w_accent">@android:color/system_accent1_200</color>
+    <color name="w_accent_soft">@android:color/system_accent1_800</color>
+    <color name="w_green">@android:color/system_accent3_200</color>
+    <color name="w_track">@android:color/system_neutral1_700</color>
+    <color name="w_btn">@android:color/system_neutral1_800</color>
+    <color name="w_ripple">#33FFFFFF</color>
+</resources>

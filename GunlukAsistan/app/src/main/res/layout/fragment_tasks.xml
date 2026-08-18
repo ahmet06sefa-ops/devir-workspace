@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/headerText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="20dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/ink"
+            android:textSize="@dimen/ga_yazi_dev" />
+
+        <!-- v10.38 · Katalog #13: bugün bitecekler üstte -->
+        <TextView
+            android:id="@+id/tiBugunUstte"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingStart="12dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="4dp"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <!-- v10.36 · Katalog #19: kompakt ⇄ kart geçişi -->
+        <TextView
+            android:id="@+id/gorunumToggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingStart="12dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="4dp"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+    </LinearLayout>
+
+    <!-- v10.38 · Katalog #13/#18: bilgi şeritleri -->
+    <TextView
+        android:id="@+id/tiBugunSerit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryContainer"
+        android:paddingStart="20dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="8dp"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="@dimen/ga_yazi_kucuk"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tiErtelemeSerit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurfaceVariant"
+        android:paddingStart="20dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="8dp"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="@dimen/ga_yazi_kucuk"
+        android:visibility="gone" />
+
+    <!-- v7.72: Toplu secim seridi (secim modunda gorunur) -->
+    <LinearLayout
+        android:id="@+id/tiBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryContainer"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tiSayac"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/ga_yazi_normal" />
+
+        <TextView
+            android:id="@+id/tiTumu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:text="@string/ti_tumunu_sec"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <TextView
+            android:contentDescription="@string/cd_kapat"
+            android:id="@+id/tiKapat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            android:text="✕"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/ga_yazi_orta" />
+    
+    <!-- v7.72: Toplu islem dugmeleri -->
+    <HorizontalScrollView
+        android:id="@+id/tiIslemler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        android:paddingStart="12dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp"
+        android:scrollbars="none"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/tiTamamla"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="@string/ti_tamamla"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <Button
+                android:id="@+id/tiBugune"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="@string/ti_bugune"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <Button
+                android:id="@+id/tiYarina"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="@string/ti_yarina"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <!-- v10.26 (öneri #20): seçilenleri ileri bir tarihe toplu taşı -->
+            <Button
+                android:id="@+id/tiTarihSec"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="@string/w24_toplu_tarih"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <Button
+                android:id="@+id/tiTarihKaldir"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:text="@string/ti_tarih_kaldir"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <Button
+                android:id="@+id/tiSil"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ti_sil"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <Button
+                android:id="@+id/tiPaylas"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/w33_paylas"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <Button
+                android:id="@+id/tiBekliyor"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/w36_bekliyor"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>
+
+    <!-- v7.75: Arsiv seridi — bitmis gorev varsa gorunur -->
+    <LinearLayout
+        android:id="@+id/arsivBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="4dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/arsivTasi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+
+        <TextView
+            android:id="@+id/arsivAc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"
+            android:text="@string/ars_ac"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+    </LinearLayout>
+
+    <!-- v7.72: Filtre cipleri -->
+    <HorizontalScrollView
+        android:id="@+id/filtreKaydirma"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingTop="2dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="6dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/filtreCipler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+    </HorizontalScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp" />
+
+        <TextView
+            android:id="@+id/emptyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.4"
+            android:padding="32dp"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>

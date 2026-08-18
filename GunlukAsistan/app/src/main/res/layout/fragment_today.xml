@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='utf-8'?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:clipToPadding="false" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp" android:paddingBottom="28dp">
+        <!-- Selamlama -->
+        <TextView android:id="@+id/todayGreeting" android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_dev" />
+        <TextView android:id="@+id/todayDate" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_kucuk" />
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokBugunSimdi" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView android:id="@+id/simdiNeCard" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:clickable="true" android:foreground="?attr/selectableItemBackground" android:focusable="true" app:cardBackgroundColor="?attr/colorPrimaryContainer" app:cardCornerRadius="@dimen/ga_kose_buyuk" app:cardElevation="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:alpha="0.75" android:text="@string/sn_kart_baslik" android:textColor="?attr/colorOnPrimaryContainer" android:textSize="@dimen/ga_yazi_mini" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:importantForAccessibility="no" android:id="@+id/simdiNeSimge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="10dp" android:text="📚" android:textSize="@dimen/ga_yazi_dev" />
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView android:id="@+id/simdiNeBaslik" android:layout_width="match_parent" android:layout_height="wrap_content" android:ellipsize="end" android:fontFamily="@font/poppins_semibold" android:maxLines="2" android:textColor="?attr/colorOnPrimaryContainer" android:textSize="@dimen/ga_yazi_orta" />
+                            <TextView android:id="@+id/simdiNeAciklama" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:alpha="0.85" android:ellipsize="end" android:maxLines="1" android:textColor="?attr/colorOnPrimaryContainer" android:textSize="@dimen/ga_yazi_kucuk" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <TextView android:id="@+id/simdiNeNeden" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:alpha="0.7" android:textColor="?attr/colorOnPrimaryContainer" android:textSize="@dimen/ga_yazi_kucuk" />
+                    <LinearLayout android:id="@+id/simdiNeDigerler" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:orientation="vertical" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokBugunNamaz" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView android:id="@+id/todayNamazCard" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:visibility="gone" app:cardCornerRadius="@dimen/ga_kose_buyuk" app:cardElevation="0dp" app:strokeWidth="1dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="14dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:baselineAligned="false" android:gravity="center_vertical" android:orientation="horizontal">
+                        <TextView android:id="@+id/todayNamazNext" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textSize="@dimen/ga_yazi_normal" android:textStyle="bold" />
+                        <TextView android:id="@+id/todayNamazTime" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="?attr/colorPrimary" android:textSize="@dimen/ga_yazi_orta" android:textStyle="bold" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/todayNamazSuggest" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:lineSpacingExtra="2dp" android:textSize="@dimen/ga_yazi_kucuk" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <!-- v7.95: "Şimdi ne yapmalıyım?" — tek karar kartı -->
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokBugunDurum" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="2dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="18dp">
+                    <!-- ==============================================================
+                     v8.5 · Öneri 23: günün zaman çizelgesi.
+                     Görev listesi kaldırılmadı; bu kart günü saat bazlı
+                     gösteriyor — hangi saatte ne var, nerede boşluk var.
+                     ============================================================== -->
+                    <com.google.android.material.card.MaterialCardView android:id="@+id/cizelgeKart" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" app:cardCornerRadius="@dimen/ga_kose_buyuk" app:cardElevation="2dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="14dp">
+                            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:fontFamily="@font/poppins_semibold" android:text="@string/zc_baslik" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+                                <TextView android:id="@+id/cizelgeOzet" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_kucuk" />
+                            </LinearLayout>
+                            <com.gunlukasistan.app.ZamanCizelgesiView android:id="@+id/cizelge" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                    <TextView android:id="@+id/todayStatusTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+                    <com.google.android.material.progressindicator.LinearProgressIndicator android:id="@+id/todayGoalBar" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" app:trackCornerRadius="8dp" app:trackThickness="10dp" />
+                    <TextView android:id="@+id/todayGoalText" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_kucuk" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:orientation="horizontal">
+                        <TextView android:id="@+id/todayChipFocus" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:background="?attr/selectableItemBackground" android:gravity="center" android:paddingTop="8dp" android:paddingBottom="8dp" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_normal" />
+                        <TextView android:id="@+id/todayChipQuestions" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:background="?attr/selectableItemBackground" android:gravity="center" android:paddingTop="8dp" android:paddingBottom="8dp" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_normal" />
+                        <TextView android:id="@+id/todayChipStreak" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:paddingTop="8dp" android:paddingBottom="8dp" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_normal" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokBugunGorevler" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="22dp" android:gravity="center_vertical" android:orientation="horizontal">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:fontFamily="@font/poppins_semibold" android:text="@string/today_tasks_head" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+                <TextView android:id="@+id/todayTasksAll" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:padding="6dp" android:text="@string/today_see_all" android:textColor="?attr/colorPrimary" android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/todayTasksBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:orientation="vertical" />
+            <TextView android:id="@+id/todayTasksEmpty" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:lineSpacingMultiplier="1.3" android:text="@string/today_tasks_empty" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_normal" android:visibility="gone" />
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <!-- v7.46: namaz vakti kartı (yalnızca modül açıkken görünür) -->
+        <!-- Günün durumu: odak + soru + seri -->
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokBugunAliskanlik" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="22dp" android:gravity="center_vertical" android:orientation="horizontal">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:fontFamily="@font/poppins_semibold" android:text="@string/today_habits_head" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+                <TextView android:id="@+id/todayHabitsAll" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:padding="6dp" android:text="@string/today_see_all" android:textColor="?attr/colorPrimary" android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/todayHabitsBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:orientation="vertical" />
+            <TextView android:id="@+id/todayHabitsEmpty" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="@string/today_habits_empty" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_normal" android:visibility="gone" />
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <!-- Bugünün görevleri -->
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokBugunEtkinlik" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="22dp" android:gravity="center_vertical" android:orientation="horizontal">
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:fontFamily="@font/poppins_semibold" android:text="@string/today_events_head" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+                <TextView android:id="@+id/todayEventsAll" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:padding="6dp" android:text="@string/today_see_all" android:textColor="?attr/colorPrimary" android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/todayEventsBox" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:orientation="vertical" />
+            <TextView android:id="@+id/todayEventsEmpty" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:text="@string/today_events_empty" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_normal" android:visibility="gone" />
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <!-- Alışkanlıklar -->
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokBugunIpucu" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="22dp" app:cardCornerRadius="@dimen/ga_kose_dev" app:cardElevation="0dp" app:strokeWidth="0dp">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="18dp">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:fontFamily="@font/poppins_semibold" android:text="@string/today_tip_head" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+                    <TextView android:id="@+id/todayTip" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:lineSpacingMultiplier="1.35" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="@dimen/ga_yazi_normal" />
+                    <com.google.android.material.button.MaterialButton android:id="@+id/todayTipAction" style="@style/Widget.Material3.Button.TonalButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:fontFamily="@font/poppins_medium" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <com.gunlukasistan.app.DuzenBlokLayout android:id="@+id/blokBugunHizli" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="22dp" android:fontFamily="@font/poppins_semibold" android:text="@string/today_quick_head" android:textColor="?attr/colorOnSurface" android:textSize="@dimen/ga_yazi_orta" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:orientation="horizontal">
+                <com.google.android.material.button.MaterialButton android:id="@+id/todayQuickTimer" style="@style/Widget.Material3.Button.TonalButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginEnd="6dp" android:layout_weight="1" android:text="@string/today_quick_timer" android:textSize="@dimen/ga_yazi_kucuk" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/todayQuickQuestions" style="@style/Widget.Material3.Button.TonalButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="6dp" android:layout_weight="1" android:text="@string/today_quick_questions" android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:orientation="horizontal">
+                <com.google.android.material.button.MaterialButton android:id="@+id/todayQuickTask" style="@style/Widget.Material3.Button.TonalButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginEnd="6dp" android:layout_weight="1" android:text="@string/today_quick_task" android:textSize="@dimen/ga_yazi_kucuk" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/todayQuickAsistan" style="@style/Widget.Material3.Button.TonalButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="6dp" android:layout_weight="1" android:text="@string/today_quick_asistan" android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+        </com.gunlukasistan.app.DuzenBlokLayout>
+        <!-- Yaklaşan geri sayımlar -->
+        <!-- Asistan önerisi -->
+        <!-- Hızlı eylemler -->
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

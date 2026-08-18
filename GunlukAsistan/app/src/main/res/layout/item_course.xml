@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v7.4: kurs kartı -->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/ga_kose_buyuk"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+            android:importantForAccessibility="no"
+                android:id="@+id/icEmoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📐"
+                android:textSize="@dimen/ga_yazi_devasa" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/icTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/ga_yazi_orta"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/icDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:textSize="@dimen/ga_yazi_kucuk" />
+            </LinearLayout>
+
+            <TextView
+            android:importantForAccessibility="no"
+                android:id="@+id/icChevron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="›"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/ga_yazi_dev" />
+        </LinearLayout>
+
+        <!-- İlerleme çubuğu -->
+        <FrameLayout
+            android:id="@+id/icBarBg"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/co_bar_bg">
+
+            <View
+                android:id="@+id/icBar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/icMeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

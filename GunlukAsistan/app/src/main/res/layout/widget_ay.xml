@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v10.13 · ULTRA-30 / B8 — Ay görünümü takvim widget'ı (4×4).
+
+  Başlıkta ay/yıl ve ±1 ay gezinme okları; 7 sütunlu ızgarada her gün
+  hücresi kodda üretilir (widget_ay_cell). Arka plan B11 kaydırıcılarına
+  bağlı bitmap (ayBg).
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ayBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/w_kart_pay">
+
+        <!-- Başlık: ‹ Ağustos 2026 › -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ayOnceki"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/w_btn_accent"
+                android:paddingStart="12dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="4dp"
+                android:text="@string/wg_ay_onceki"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+
+            <TextView
+                android:id="@+id/ayBaslik"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_normal" />
+
+            <TextView
+                android:id="@+id/aySonraki"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/w_btn_accent"
+                android:paddingStart="12dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="4dp"
+                android:text="@string/wg_ay_sonraki"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_kucuk" />
+        </LinearLayout>
+
+        <!-- Hafta başı etiketleri (Pzt → Paz), metinler kodda yazılır -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ayH1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/ayH2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/ayH3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/ayH4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/ayH5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/ayH6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/ayH7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/w_text_soft"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <!-- 42 hücrelik ay ızgarası (satırlar TakvimWidgetService'ten) -->
+        <GridView
+            android:id="@+id/ayGrid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:horizontalSpacing="0dp"
+            android:numColumns="7"
+            android:scrollbars="none"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="0dp" />
+    </LinearLayout>
+</FrameLayout>

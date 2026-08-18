@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v10.10 · ULTRA-50 C34: Hafta görünümü widget'ı.
+  Üst şerit (hafta aralığı) + 7 günlük şerit:
+  her hücrede gün adı, tarih, plan işareti (doluluk), kalan görev rozeti.
+  RemoteViews kısıtı: yalnız LinearLayout/TextView — dokunuşlar
+  çalışma anında setOnClickPendingIntent ile bağlanır; renkler
+  çalışma anında WidgetTema ile basılır (XML'deki renk ilk kare içindir).
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/hwBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hwRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <!-- Üst şerit: başlık + hafta aralığı -->
+    <LinearLayout
+        android:id="@+id/hwHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/hwTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_semibold"
+            android:maxLines="1"
+            android:text="@string/hw_baslik"
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_orta" />
+
+        <TextView
+            android:id="@+id/hwRange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text=""
+            android:textColor="@color/w_text"
+            android:textSize="@dimen/ga_yazi_kucuk" />
+    </LinearLayout>
+
+    <!-- Plan kapalıysa görünen ipucu satırı -->
+    <TextView
+        android:id="@+id/hwNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingBottom="6dp"
+        android:text=""
+        android:textColor="@color/w_text"
+        android:textSize="@dimen/ga_yazi_kucuk"
+        android:visibility="gone" />
+
+    <!-- 7 günlük şerit -->
+    <LinearLayout
+        android:id="@+id/hwGrid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <!-- ── Hücre 0 (Pzt) ── -->
+        <LinearLayout
+            android:id="@+id/hw_cell_0"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/hw_day_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_date_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_buyuk" />
+            <TextView
+                android:id="@+id/hw_plan_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_task_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <!-- ── Hücre 1 (Sal) ── -->
+        <LinearLayout
+            android:id="@+id/hw_cell_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/hw_day_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_date_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_buyuk" />
+            <TextView
+                android:id="@+id/hw_plan_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_task_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <!-- ── Hücre 2 (Çar) ── -->
+        <LinearLayout
+            android:id="@+id/hw_cell_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/hw_day_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_date_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_buyuk" />
+            <TextView
+                android:id="@+id/hw_plan_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_task_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <!-- ── Hücre 3 (Per) ── -->
+        <LinearLayout
+            android:id="@+id/hw_cell_3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/hw_day_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_date_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_buyuk" />
+            <TextView
+                android:id="@+id/hw_plan_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_task_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <!-- ── Hücre 4 (Cum) ── -->
+        <LinearLayout
+            android:id="@+id/hw_cell_4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/hw_day_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_date_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_buyuk" />
+            <TextView
+                android:id="@+id/hw_plan_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_task_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <!-- ── Hücre 5 (Cmt) ── -->
+        <LinearLayout
+            android:id="@+id/hw_cell_5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/hw_day_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_date_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_buyuk" />
+            <TextView
+                android:id="@+id/hw_plan_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_task_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+
+        <!-- ── Hücre 6 (Paz) ── -->
+        <LinearLayout
+            android:id="@+id/hw_cell_6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/hw_day_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_date_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_buyuk" />
+            <TextView
+                android:id="@+id/hw_plan_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+            <TextView
+                android:id="@+id/hw_task_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/w_text"
+                android:textSize="@dimen/ga_yazi_mini" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+</FrameLayout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v10.2 · Öneri A1 — Uyanık bitiş ekranı. Kilit üstünde tam ekran açılır. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/ga_bosluk_xl">
+
+    <!-- İstisna 74sp: tam ekran alarm ekranı — sayaç ile aynı gerekçe (odadan okunabilirlik) -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔔"
+        android:textSize="74sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ga_bosluk_m"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/sb_baslik"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="@dimen/ga_yazi_devasa" />
+
+    <TextView
+        android:id="@+id/sbMesaj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ga_bosluk_s"
+        android:gravity="center"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="@dimen/ga_yazi_orta" />
+
+    <!-- v10.2 · Öneri A12: tek dokunuş değerlendirme -->
+    <TextView
+        android:id="@+id/sbDegerlendirBaslik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ga_bosluk_xxl"
+        android:text="@string/sb_degerlendir"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="@dimen/ga_yazi_normal" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ga_bosluk_s"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sbK1"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/ga_bosluk_s"
+            android:text="@string/sb_k1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sbK2"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/ga_bosluk_s"
+            android:text="@string/sb_k2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/sbK3"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sb_k3" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sbTesekkur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ga_bosluk_s"
+        android:text="@string/sb_tesekkur"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="@dimen/ga_yazi_kucuk"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sbYeniden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ga_bosluk_xl"
+        android:text="@string/sb_yeniden" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sbUzat"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ga_bosluk_s"
+        android:text="@string/sb_uzat" />
+
+    <TextView
+        android:id="@+id/sbKapat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ga_bosluk_l"
+        android:background="?attr/selectableItemBackground"
+        android:padding="@dimen/ga_bosluk_s"
+        android:text="@string/sb_kapat"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="@dimen/ga_yazi_orta" />
+</LinearLayout>
