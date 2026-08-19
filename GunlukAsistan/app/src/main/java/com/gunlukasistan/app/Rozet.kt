@@ -49,11 +49,13 @@ object Rozet {
             val simdi = System.currentTimeMillis()
             if (zorla || simdi - sonHesap > ONBELLEK_MS) {
                 sonBugun = bugunBekleyen(context)
-                sonKonu = tekrariGelen(context)
                 sonHesap = simdi
             }
             uygula(nav, R.id.nav_today, sonBugun)
-            uygula(nav, R.id.nav_topics, sonKonu)
+            // v11.35: Konular artık alt sekme olmadığından rozeti de alt barda
+            // gösterilmiyor (Konular sol üst menü/çekmece üzerinden açılıyor).
+            // SonKonu/tekrariGelen korundu; gerekirse gelecekte yeni bir
+            // sekme rozetine bağlanabilir.
         }.onFailure { android.util.Log.w(TAG, "tazele", it) }
     }
 

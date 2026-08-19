@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- v11.35: HabitGenius tarzı alt sekmeler.
+     Bugün / Alışkanlıklar / Görevler / İstatistikler.
+     Diğer ekranlar (Ana Sayfa, Konular, Plan, Sayaç…) sol üst menü ve çekmecede kalır. -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/nav_home"
-        android:icon="@drawable/ic_home"
-        android:title="@string/nav_home" />
     <item
         android:id="@+id/nav_today"
         android:icon="@drawable/ic_today"
         android:title="@string/nav_today" />
     <item
-        android:id="@+id/nav_topics"
-        android:icon="@drawable/ic_menu_book"
-        android:title="@string/nav_topics" />
-    <!-- v11.13: İlerleme yerine Plan sekmesi -->
+        android:id="@+id/nav_habits"
+        android:icon="@drawable/ic_habit"
+        android:title="@string/nav_habits" />
     <item
-        android:id="@+id/nav_plan"
-        android:icon="@drawable/ic_plan"
-        android:title="@string/nav_plan" />
-    <!-- v11.13: Plan yerine Sayaç sekmesi -->
+        android:id="@+id/nav_tasks"
+        android:icon="@drawable/ic_task_alt"
+        android:title="@string/nav_tasks" />
     <item
-        android:id="@+id/nav_timer"
-        android:icon="@drawable/ic_timer"
-        android:title="@string/nav_timer" />
+        android:id="@+id/nav_stats"
+        android:icon="@drawable/ic_stats"
+        android:title="@string/nav_stats" />
 </menu>

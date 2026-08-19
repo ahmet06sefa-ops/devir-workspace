@@ -21,7 +21,6 @@ class ThemeFragment : Fragment(R.layout.fragment_theme) {
         Duzen.uygula(view)
         baglamSatiriKur(view) // v10.11 · ULTRA-30 A2
         paketSatiriKur(view)  // v10.8 · D40
-        gorunumSatiriKur(view) // v11.16 · 1. Görünüm (Klasik) / 2. Görünüm (Habit Genius)
         buildGrid(view.findViewById(R.id.themesGrid))
         buildAccentGrid(view.findViewById(R.id.accentGrid))
         // v8.3
@@ -546,104 +545,6 @@ class ThemeFragment : Fragment(R.layout.fragment_theme) {
             }
             grid.addView(row)
         }
-    }
-
-    // ══════════════════════════════════════════════════════════════
-    // v11.16 · GÖRÜNÜM MODU — 1. Görünüm (Klasik) vs 2. Görünüm (Habit Genius)
-    // ══════════════════════════════════════════════════════════════
-
-    private fun gorunumSatiriKur(view: View) {
-        val row = view.findViewById<LinearLayout>(R.id.gorunumRow) ?: return
-        val ctx = requireContext()
-        row.removeAllViews()
-        val secili = ThemeManager.gorunumModu(ctx)
-        row.addView(gorunumKarti(ThemeManager.GORUNUM_KLASIK, getString(R.string.gorunum_klasik), secili))
-        row.addView(gorunumKarti(ThemeManager.GORUNUM_HABITGENIUS, getString(R.string.gorunum_habit), secili))
-    }
-
-    private fun gorunumKarti(mod: Int, ad: String, secili: Int): View {
-        val ctx = requireContext()
-        val d = resources.displayMetrics.density
-        fun dp(v: Int) = (v * d).toInt()
-        val kart = MaterialCardView(ctx).apply {
-            layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
-                setMargins(dp(4), dp(2), dp(4), dp(2))
-            }
-            radius = dp(18).toFloat()
-            cardElevation = 0f
-            isClickable = true
-            isFocusable = true
-            if (secili == mod) {
-                strokeWidth = dp(3)
-                strokeColor = com.google.android.material.color.MaterialColors.getColor(
-                    ctx, com.google.android.material.R.attr.colorPrimary, 0xFF6C5CE7.toInt()
-                )
-                setCardBackgroundColor(
-                    com.google.android.material.color.MaterialColors.getColor(
-                        ctx, com.google.android.material.R.attr.colorPrimaryContainer, 0xFFE7E2FB.toInt()
-                    )
-                )
-            } else {
-                setCardBackgroundColor(
-                    com.google.android.material.color.MaterialColors.getColor(
-                        ctx, com.google.android.material.R.attr.colorSecondaryContainer, 0
-                    )
-                )
-            }
-        }
-        val ic = LinearLayout(ctx).apply {
-            orientation = LinearLayout.VERTICAL
-            gravity = Gravity.CENTER
-            setPadding(dp(10), dp(14), dp(10), dp(14))
-            addView(TextView(ctx).apply {
-                text = if (secili == mod) "✓ $ad" else ad
-                textSize = 14f
-                gravity = Gravity.CENTER
-                typeface = Typeface.DEFAULT_BOLD
-                setTextColor(
-                    com.google.android.material.color.MaterialColors.getColor(
-                        ctx, com.google.android.material.R.attr.colorOnSurface, 0
-                    )
-                )
-            })
-            if (mod == ThemeManager.GORUNUM_HABITGENIUS) {
-                addView(TextView(ctx).apply {
-                    text = "🌐 alışkanlık-takip görünümü"
-                    textSize = 11f
-                    alpha = 0.7f
-                    gravity = Gravity.CENTER
-                    setPadding(0, dp(4), 0, 0)
-                })
-            } else {
-                addView(TextView(ctx).apply {
-                    text = "🎨 mevcut tüm temalar"
-                    textSize = 11f
-                    alpha = 0.7f
-                    gravity = Gravity.CENTER
-                    setPadding(0, dp(4), 0, 0)
-                })
-            }
-        }
-        kart.addView(ic)
-        kart.dalgaEkle()
-        kart.setOnClickListener {
-            if (secili == mod) return@setOnClickListener
-            Titresim.dokunus(kart)
-            ThemeManager.gorunumModu(ctx, mod)
-            Toast.makeText(
-                ctx,
-                getString(R.string.gorunum_secildi, if (mod == ThemeManager.GORUNUM_HABITGENIUS) "2. Görünüm (Habit Genius)" else "1. Görünüm (Klasik)"),
-                Toast.LENGTH_SHORT
-            ).show()
-            runCatching { WidgetCommon.refreshAll(ctx, true) }
-            // v11.23: "2. Görünüm (Habit Genius)" Günlük Asistan içinde açılır.
-            if (mod == ThemeManager.GORUNUM_HABITGENIUS) {
-                runCatching { HabitGeniusComposeActivity.ac(ctx) }
-                    .onFailure { android.util.Log.w("ThemeFragment", "HabitGenius açılamadı", it) }
-            }
-            requireActivity().recreate()
-        }
-        return kart
     }
 
     private fun buildGrid(grid: LinearLayout) {

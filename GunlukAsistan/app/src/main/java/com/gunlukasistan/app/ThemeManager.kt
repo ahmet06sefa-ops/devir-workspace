@@ -58,42 +58,6 @@ object ThemeManager {
     private const val PREF = "gunluk_asistan_store"
 
     // ═══════════════════════════════════════════════════════════════
-    // v11.16 · GÖRÜNÜM MODU — "1. Görünüm (Klasik)" vs "2. Görünüm (Habit Genius)"
-    // ═══════════════════════════════════════════════════════════════
-    //
-    // Kullanıcı isteği: Habit Genius'ın görünümünü "2. Tema" olarak ekle,
-    // mevcut tüm özellikler/temalar "1. Tema" olarak kalsın, aralarında seçim
-    // yapılabilsin. Bu katman, mevcut tema_index seçiminin ÜSTÜNDE bir ana
-    // görünüm anahtarıdır:
-    //   · GORUNUM_KLASIK → mevcut specs[selected] davranışı birebir korunur.
-    //   · GORUNUM_HABITGENIUS → Habit Genius tarzı sabit tema uygulanır
-    //     (seçili klasik tema görmezden gelinir).
-    private const val KEY_GORUNUM = "gorunum_modu_v1"
-
-    /** 1. Görünüm: klasik temalar (varsayılan, mevcut davranış). */
-    const val GORUNUM_KLASIK = 1
-    /** 2. Görünüm: Habit Genius tarzı tema. */
-    const val GORUNUM_HABITGENIUS = 2
-
-    fun gorunumModu(context: Context): Int =
-        prefs(context).getInt(KEY_GORUNUM, GORUNUM_KLASIK).coerceIn(GORUNUM_KLASIK, GORUNUM_HABITGENIUS)
-
-    fun gorunumModu(context: Context, deger: Int) {
-        prefs(context).edit().putInt(KEY_GORUNUM, deger.coerceIn(GORUNUM_KLASIK, GORUNUM_HABITGENIUS)).apply()
-    }
-
-    /** 2. Görünüm (Habit Genius) seçili mi? */
-    fun habitGeniusMu(context: Context): Boolean =
-        gorunumModu(context) == GORUNUM_HABITGENIUS
-
-    /** Saf test fonksiyonu: bozuk/taşan görünüm modu değerini 1..2 aralığına çeker. */
-    fun gorunumModuSaf(deger: Int): Int =
-        deger.coerceIn(GORUNUM_KLASIK, GORUNUM_HABITGENIUS)
-
-    /** Saf test fonksiyonu: 2. Görünüm (Habit Genius) sabit açık temadır. */
-    fun habitGeniusKoyuMu(): Boolean = false
-
-    // ═══════════════════════════════════════════════════════════════
     // v8.3 · Öneri 9 — GECE MODU
     // ═══════════════════════════════════════════════════════════════
     //
@@ -153,10 +117,7 @@ object ThemeManager {
      */
     fun geceModunuUygula(context: Context) {
         runCatching {
-            val kip = if (habitGeniusMu(context)) {
-                // 2. Görünüm (Habit Genius) sabit AÇIK temadır.
-                androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
-            } else when (geceModu(context)) {
+            val kip = when (geceModu(context)) {
                 GECE_KAPALI -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
                 GECE_ACIK -> androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
                 // A1: güneş ayarı delegate'e "anlık fotoğraf" olarak basılır.
@@ -175,8 +136,6 @@ object ThemeManager {
 
     /** Şu an koyu görünümde miyiz? (grafik renkleri buna bakar) */
     fun koyuMu(context: Context): Boolean {
-        // 2. Görünüm (Habit Genius) sabit açık temadır.
-        if (habitGeniusMu(context)) return false
         // Kullanıcı zaten koyu bir tema seçtiyse mod ne olursa olsun koyu
         if (specs.getOrNull(selected(context))?.dark == true) return true
         return when (geceModu(context)) {
@@ -381,9 +340,7 @@ object ThemeManager {
     fun selected(context: Context): Int =
         prefs(context).getInt(KEY, 0).coerceIn(specs.indices)
 
-    fun styleFor(context: Context): Int =
-        if (habitGeniusMu(context)) R.style.Theme_GunlukAsistan_HabitGenius
-        else specs[selected(context)].styleRes
+    fun styleFor(context: Context): Int = specs[selected(context)].styleRes
 
     fun select(context: Context, index: Int) {
         prefs(context).edit().putInt(KEY, index.coerceIn(specs.indices)).apply()

@@ -26,8 +26,8 @@ android {
         applicationId = "com.gunlukasistan.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 288
-        versionName = "11.33"
+        versionCode = 290
+        versionName = "11.35"
     }
 
     buildTypes {
@@ -109,12 +109,6 @@ android {
         // v8.8 · Öneri 18 hazırlığı: ViewBinding. Faz 2'de kullanılacak;
         // şimdiden açıp derlemenin bozulmadığını doğruluyoruz.
         viewBinding = true
-        // v11.23 · HabitGenius 2. Görünümü (tek APK içinde) — Jetpack Compose.
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
     }
 
     compileOptions {
@@ -134,14 +128,6 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.drawerlayout:drawerlayout:1.2.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
-    // v11.23 · HabitGenius 2. Görünümü — Jetpack Compose + Material 3
-    implementation(platform("androidx.compose:compose-bom:2024.06.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.activity:activity-compose:1.9.0")
-    debugImplementation("androidx.compose.ui:ui-tooling")
     // v7.58: üstten aşağı çekince yenileme (pull-to-refresh)
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     // v8.2: açılış ekranı (öneri 6). Android 12 öncesinde de aynı

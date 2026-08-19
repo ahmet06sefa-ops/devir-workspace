@@ -415,11 +415,13 @@ class MainActivity : AppCompatActivity() {
                 // v8.2 · Öneri 2: sekme değişiminde hafif dokunuş
                 Titresim.dokunus(bottomNav)
                 when (item.itemId) {
-                    R.id.nav_home -> open(0)
-                    R.id.nav_today -> open(2)
-                    R.id.nav_topics -> open(3)
-                    R.id.nav_plan -> open(16)
-                    R.id.nav_timer -> open(4)
+                    // v11.35: HabitGenius tarzı alt sekmeler
+                    R.id.nav_today -> open(2)          // Bugün
+                    R.id.nav_habits -> open(12)        // Alışkanlıklar
+                    R.id.nav_tasks -> open(6)          // Görevler
+                    R.id.nav_stats -> AnalitikActivity.ac(this) // İstatistikler
+                    // Eski sekmeler artık sol üst menü/çekmece üzerinden:
+                    // nav_home→0, nav_topics→3, nav_plan→16, nav_timer→4
                 }
             }
             true
@@ -437,7 +439,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 2 -> hizliKomutPenceresi()
                 3 -> OtonomMerkezActivity.ac(this)
-                else -> showAddChooser()
+                // v11.35: varsayılan → HabitGenius tarzı Hızlı Ekle alt paneli
+                else -> habitusHizliEkle()
             }
         }
         // v9.5 · Öneri 29: FAB'a uzun basınca tek satır hızlı komut.
@@ -494,11 +497,6 @@ class MainActivity : AppCompatActivity() {
         showCrashReportIfNeeded()
         // v7.3: kısayolları kod ile kaydet (statik XML bazı başlatıcılarda görünmüyordu)
         Shortcuts.install(this)
-        // v11.23: "2. Görünüm (Habit Genius)" seçiliyse Günlük Asistan içinde açılır.
-        if (savedInstanceState == null && ThemeManager.habitGeniusMu(this)) {
-            runCatching { HabitGeniusComposeActivity.ac(this) }
-                .onFailure { android.util.Log.w("MainActivity", "HabitGenius açılamadı", it) }
-        }
     }
 
     /** Widget'a dokunulduğunda uygulama zaten açıksa doğru ekrana geç. */
@@ -560,11 +558,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navItemFor(index: Int): Int? = when (index) {
-        0 -> R.id.nav_home
-        2 -> R.id.nav_today
-        3 -> R.id.nav_topics
-        16 -> R.id.nav_plan
-        4 -> R.id.nav_timer
+        // v11.35: HabitGenius alt sekmeleri; diğer ekranlar menü/çekmecede.
+        2 -> R.id.nav_today        // Bugün
+        12 -> R.id.nav_habits      // Alışkanlıklar
+        6 -> R.id.nav_tasks        // Görevler
         else -> null
     }
 
@@ -968,6 +965,124 @@ class MainActivity : AppCompatActivity() {
         }
         pencere.show()
         giris.requestFocus()
+    }
+
+    /**
+     * v11.35 — HabitGenius tarzı "Hızlı Ekle" alt paneli.
+     * Alt ortadaki + butonundan açılır; Görev, Alışkanlık, Plan ve
+     * diğer hızlı ekleme işlemlerini tek yerden sunar.
+     */
+    private fun habitusHizliEkle() {
+        val yogunluk = resources.displayMetrics.density
+        fun dp(v: Int) = (v * yogunluk).toInt()
+
+        val liste = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(dp(20), dp(18), dp(20), dp(28))
+        }
+
+        // Başlık
+        liste.addView(
+            android.widget.TextView(this).apply {
+                text = getString(R.string.quickadd_title)
+                setTextColor(
+                    com.google.android.material.color.MaterialColors.getColor(
+                        this@MainActivity,
+                        com.google.android.material.R.attr.colorPrimary,
+                        0xFFB08968.toInt()
+                    )
+                )
+                setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD)
+                setPadding(dp(8), dp(0), dp(8), dp(4))
+            },
+            android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT)
+        )
+
+        // Her eylem satırı için ortak oluşturucu (ripple'lı).
+        fun satirEkle(metin: String, onTikla: () -> Unit) {
+            val tv = android.widget.TextView(this).apply {
+                this.text = metin
+                textSize = 15f
+                setTextColor(
+                    com.google.android.material.color.MaterialColors.getColor(
+                        this@MainActivity,
+                        com.google.android.material.R.attr.colorOnSurface,
+                        0xFF3A3226.toInt()
+                    )
+                )
+                setPadding(dp(8), dp(15), dp(8), dp(15))
+                isClickable = true
+                isFocusable = true
+                val tip = android.util.TypedValue()
+                this@MainActivity.theme.resolveAttribute(
+                    android.R.attr.selectableItemBackground, tip, true
+                )
+                setBackgroundResource(tip.resourceId)
+            }
+            tv.setOnClickListener { onTikla() }
+            liste.addView(tv, android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT))
+        }
+
+        // Sarmalayıcı: kısa ekranlarda kaydırılabilir olsun.
+        val sari = android.widget.ScrollView(this)
+        sari.addView(liste)
+
+        val panel = com.google.android.material.bottomsheet.BottomSheetDialog(this)
+        panel.setContentView(sari)
+
+        // Görev
+        satirEkle(getString(R.string.quickadd_task)) {
+            panel.dismiss()
+            open(6)
+            supportFragmentManager.executePendingTransactions()
+            (supportFragmentManager.findFragmentByTag("scr_6") as? TasksFragment)?.showTaskEditor()
+        }
+        // Alışkanlık
+        satirEkle(getString(R.string.quickadd_habit)) {
+            panel.dismiss()
+            open(12)
+            supportFragmentManager.executePendingTransactions()
+            (supportFragmentManager.findFragmentByTag("scr_12") as? HabitsFragment)?.showHabitEditor(null)
+        }
+        // Plan sekmesi
+        satirEkle(getString(R.string.quickadd_plan)) {
+            panel.dismiss()
+            open(16)
+        }
+        // Not
+        satirEkle(getString(R.string.quickadd_note)) {
+            panel.dismiss()
+            open(5)
+            supportFragmentManager.executePendingTransactions()
+            (supportFragmentManager.findFragmentByTag("scr_5") as? NotesFragment)?.showNoteEditor(null)
+        }
+        // Geri sayım (etkinlik)
+        satirEkle(getString(R.string.quickadd_event)) {
+            panel.dismiss()
+            open(11)
+            supportFragmentManager.executePendingTransactions()
+            (supportFragmentManager.findFragmentByTag("scr_11") as? EventsFragment)?.showEventEditor(null)
+        }
+        // Deneme sonucu
+        satirEkle(getString(R.string.quickadd_exam)) {
+            panel.dismiss()
+            open(10)
+            supportFragmentManager.executePendingTransactions()
+            (supportFragmentManager.findFragmentByTag("scr_10") as? ExamsFragment)?.showExamEditor()
+        }
+        // Konu
+        satirEkle(getString(R.string.quickadd_topic)) {
+            panel.dismiss()
+            open(3)
+            (supportFragmentManager.findFragmentByTag("scr_3") as? TopicsFragment)?.showTopicDialog()
+        }
+        // Soru sayısı
+        satirEkle(getString(R.string.quickadd_questions)) {
+            panel.dismiss()
+            showQuestionsQuickAdd()
+        }
+
+        panel.show()
     }
 
     private fun showAddChooser() {

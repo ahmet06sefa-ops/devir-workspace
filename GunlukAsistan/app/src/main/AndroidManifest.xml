@@ -781,13 +781,6 @@
             -->
         </activity>
 
-        <!-- v11.23 · HabitGenius 2. Görünümü — tek APK içinde (Jetpack Compose) -->
-        <activity
-            android:name=".HabitGeniusComposeActivity"
-            android:exported="false"
-            android:configChanges="orientation|screenSize|smallestScreenSize|keyboardHidden"
-            android:theme="@style/Theme.GunlukAsistan" />
-
         <!--
           v9.3: Varsayılan launcher girişi.
           Diğer simge alias'larıyla aynı mantıkta ama enabled="true"

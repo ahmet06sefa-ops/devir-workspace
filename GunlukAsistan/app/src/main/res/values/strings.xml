@@ -87,6 +87,19 @@
     <string name="nav_progress">İlerleme</string>
     <string name="nav_topics">Konular</string>
     <string name="nav_timer">Sayaç</string>
+    <!-- v11.35: HabitGenius alt sekmeleri -->
+    <string name="nav_habits">Alışkanlıklar</string>
+    <string name="nav_tasks">Görevler</string>
+    <string name="nav_stats">İstatistikler</string>
+    <string name="quickadd_title">Hızlı Ekle</string>
+    <string name="quickadd_task">✅ Görev ekle</string>
+    <string name="quickadd_habit">🌱 Alışkanlık ekle</string>
+    <string name="quickadd_plan">📅 Plan sekmesi</string>
+    <string name="quickadd_note">📝 Not ekle</string>
+    <string name="quickadd_event">⏳ Geri sayım</string>
+    <string name="quickadd_exam">📊 Deneme sonucu</string>
+    <string name="quickadd_topic">📚 Konu ekle</string>
+    <string name="quickadd_questions">🔢 Soru sayısı gir</string>
 
     <!-- + menüsü -->
     <string name="add_sheet_title">Ne eklemek istersin?</string>
@@ -158,12 +171,6 @@
     <string name="themes_title">Görünüm</string>
     <string name="themes_caption">Tarzını seç — tema anında uygulanır</string>
     <string name="themes_section">TEMALAR</string>
-    <!-- v11.16 · Görünüm modu seçici -->
-    <string name="gorunum_section">GÖRÜNÜM</string>
-    <string name="gorunum_caption">1. Görünüm: klasik temalar · 2. Görünüm: Habit Genius tarzı</string>
-    <string name="gorunum_klasik">1. Görünüm\nKlasik</string>
-    <string name="gorunum_habit">2. Görünüm\nHabit Genius</string>
-    <string name="gorunum_secildi">Görünüm değişti: %1$s</string>
     <string name="themes_hint">Karanlık temalar: Aurora ve Ember 🌙</string>
     <string name="theme_applied">%1$s teması uygulandı ✨</string>
 

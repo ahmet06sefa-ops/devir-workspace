@@ -355,28 +355,6 @@
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
-    <!-- 2. Görünüm — Habit Genius tarzı (v11.16 · AÇIK, mor-mavi gradyan + beyaz zemin) -->
-    <style name="Theme.GunlukAsistan.HabitGenius" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">#6C5CE7</item>
-        <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="colorPrimaryContainer">#E7E2FB</item>
-        <item name="colorOnPrimaryContainer">#3D2E8A</item>
-        <item name="colorSecondary">#1E9E5A</item>
-        <item name="colorOnSecondary">#FFFFFF</item>
-        <item name="colorSecondaryContainer">#DDF2E5</item>
-        <item name="colorOnSecondaryContainer">#0E4A2A</item>
-        <item name="colorTertiary">#4E8BE8</item>
-        <item name="android:colorBackground">#F6F5FB</item>
-        <item name="colorSurface">#FFFFFF</item>
-        <item name="colorSurfaceVariant">#EDEBF6</item>
-        <item name="colorOnSurface">#1B1B2B</item>
-        <item name="colorOnSurfaceVariant">#6B6B80</item>
-        <item name="colorOutline">#D6D3E8</item>
-        <item name="android:statusBarColor">#6C5CE7</item>
-        <item name="android:navigationBarColor">#FFFFFF</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:fontFamily">@font/poppins_regular</item>
-    </style>
 
     <!-- ==================================================================
          v8.2 · Öneri 6: Açılış ekranı (Splash Screen API)

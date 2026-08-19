@@ -252,32 +252,6 @@
             android:layout_marginTop="8dp"
             android:orientation="vertical" />
 
-        <!-- v11.16 · Görünüm seçimi: 1. Görünüm (Klasik temalar) vs 2. Görünüm (Habit Genius) -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="@string/gorunum_section"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="@dimen/ga_yazi_kucuk" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="@string/gorunum_caption"
-            android:textColor="?attr/colorOnSurfaceVariant"
-            android:textSize="@dimen/ga_yazi_mini" />
-
-        <LinearLayout
-            android:id="@+id/gorunumRow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:baselineAligned="false"
-            android:orientation="horizontal" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
