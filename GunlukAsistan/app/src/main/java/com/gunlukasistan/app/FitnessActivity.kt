@@ -1,9 +1,12 @@
 package com.gunlukasistan.app
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
+import android.webkit.WebSettings
+import android.webkit.WebView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -11,12 +14,15 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
- * v11.40 — Kas iskeleti ekranı.
+ * v11.42 — Kas sistemi 3D ekranı.
  *
- * İnteraktif kas haritası ([KasHaritasiView]) önden ve arkadan gösterilir.
- * Bir kas grubuna tıklandığında: kasın adı, işlevi, nasıl geliştirileceği,
- * set önerisi ve o kas grubunun egzersizleri ([FitnessMotor]) görsel
- * olarak anlatılır.
+ * Gerçek interaktif 3D kas modeli: [WebView] içinde Three.js (WebGL)
+ * ile çizilen, döndürülebilir, yakınlaştırılabilir ve her kas grubu
+ * tıklanabilir bir insan iskeleti/kas modeli. Kasa dokunulunca JS,
+ * [AndroidKopru] üzerinden [kasSecildi]'yi çağırır; alttaki panelde
+ * o kasın rehberi gösterilir ([KasRehber]).
+ *
+ * 3D model ve Three.js, `assets/kas3d/` altındadır → çevrimdışı çalışır.
  */
 class FitnessActivity : AppCompatActivity() {
 
@@ -30,9 +36,7 @@ class FitnessActivity : AppCompatActivity() {
     }
 
     private lateinit var detayAlan: LinearLayout
-    private lateinit var haritaView: KasHaritasiView
-    private var gorunum = KasHaritasiView.GORUNUM_ON
-    private var seciliKas: String? = null
+    private lateinit var webView: WebView
 
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
     private fun renk(attr: Int): Int = com.google.android.material.color.MaterialColors.getColor(
@@ -43,6 +47,7 @@ class FitnessActivity : AppCompatActivity() {
         super.attachBaseContext(GorunumAyar.yaziOlcegiUygula(newBase))
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(ThemeManager.styleFor(this))
         ThemeManager.applyAccent(this)
@@ -54,62 +59,38 @@ class FitnessActivity : AppCompatActivity() {
             setBackgroundColor(renk(com.google.android.material.R.attr.colorSurface))
         }
 
-        // Üst bar
         kok.addView(TextView(this).apply {
-            text = "🦴 Kas İskeleti"
+            text = "🦴 Kas Sistemi — 3D"
             textSize = 20f
             typeface = Typeface.DEFAULT_BOLD
             setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
-            setPadding(dp(16), dp(16), dp(16), dp(4))
+            setPadding(dp(16), dp(14), dp(16), dp(2))
         })
         kok.addView(TextView(this).apply {
-            text = "Vücudundaki kası seç — nasıl geliştireceğini gösterelim."
+            text = "Modeli döndür, yakınlaştır, kasa dokun — nasıl geliştireceğini öğren."
             textSize = 12f
             setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
             setPadding(dp(16), dp(0), dp(16), dp(8))
         })
 
-        // Ön / Arka sekmesi
-        val sekmeSatir = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            setPadding(dp(12), dp(2), dp(12), dp(2))
-        }
-        val onChip = chip("🙍 Ön") { gorunum = KasHaritasiView.GORUNUM_ON; haritaView.gorunum = gorunum; haritaSecimTemiz() }
-        val arkaChip = chip("🙎 Arka") { gorunum = KasHaritasiView.GORUNUM_ARKA; haritaView.gorunum = gorunum; haritaSecimTemiz() }
-        sekmeSatir.addView(onChip)
-        sekmeSatir.addView(arkaChip)
-        kok.addView(sekmeSatir)
-
-        // Harita — dikey alanın üst kısmı
-        haritaView = KasHaritasiView(this) { kod -> kasSec(kod) }
-        haritaView.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.25f
+        // 3D WebView — ekranın üst ~55%
+        webView = WebView(this)
+        val webLp = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.15f
         )
-        kok.addView(haritaView)
-
-        // Kas listesi (tümü) — hızlı seçim
-        val listeSar = ScrollView(this)
-        val liste = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(12), dp(4), dp(12), dp(4))
-            // ScrollView çocuğu FrameLayout.LayoutParams ister (LinearLayout değil!)
-            layoutParams = android.widget.FrameLayout.LayoutParams(
-                android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
-                android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
-            )
+        webView.layoutParams = webLp
+        webView.setBackgroundColor(0xFF121212.toInt())
+        webView.settings.apply {
+            javaScriptEnabled = true
+            allowFileAccess = true
+            domStorageEnabled = true
+            cacheMode = WebSettings.LOAD_NO_CACHE
         }
-        KasRehber.hepsi().forEach { k ->
-            liste.addView(chip(k.emoji + " " + k.ad) { kasSec(k.kod) })
-        }
-        // Liste sabit yükseklikte bir ScrollView içinde — LinearLayout çocuğu olarak
-        listeSar.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            dp(120)
-        )
-        listeSar.addView(liste)
-        kok.addView(listeSar)
+        webView.addJavascriptInterface(AndroidKopru(), "AndroidBridge")
+        webView.loadUrl("file:///android_asset/kas3d/kas3d.html")
+        kok.addView(webView)
 
-        // Detay alanı (kaydırılabilir)
+        // Detay paneli (kaydırılabilir)
         val detaySar = ScrollView(this)
         detayAlan = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -117,90 +98,63 @@ class FitnessActivity : AppCompatActivity() {
         }
         detaySar.addView(detayAlan)
         detaySar.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.35f
+            LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f
         )
         kok.addView(detaySar)
 
         setContentView(kok)
-
-        // Başlangıçta genel açıklama
         baslangicMesaji()
     }
 
-    private fun chip(metin: String, onTikla: () -> Unit): TextView =
-        TextView(this).apply {
-            this.text = metin
-            textSize = 13f
-            setPadding(dp(14), dp(8), dp(14), dp(8))
-            isClickable = true
-            isFocusable = true
-            val tip = android.util.TypedValue()
-            this@FitnessActivity.theme.resolveAttribute(
-                android.R.attr.selectableItemBackground, tip, true
-            )
-            setBackgroundResource(tip.resourceId)
-            setOnClickListener { onTikla() }
+    /** Kotlin ⇄ JS köprüsü. JS "kasSecildi(kod)" çağırınca buraya düşer. */
+    inner class AndroidKopru {
+        @android.webkit.JavascriptInterface
+        fun kasSecildi(kod: String) {
+            runOnUiThread { kasSec(kod) }
         }
-
-    private fun haritaSecimTemiz() {
-        seciliKas = null
-        haritaView.sec(null)
-        baslangicMesaji()
     }
 
     private fun baslangicMesaji() {
         detayAlan.removeAllViews()
         detayAlan.addView(TextView(this).apply {
-            text = "👆 Haritadan bir kas grubuna dokun\nveya aşağıdaki listeden seç."
-            textSize = 15f
+            text = "👆 3D modeldeki kaslara dokun"
+            textSize = 16f
             typeface = Typeface.DEFAULT_BOLD
             setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
-            setPadding(dp(4), dp(12), dp(4), dp(8))
+            setPadding(dp(2), dp(6), dp(2), dp(4))
         })
         detayAlan.addView(TextView(this).apply {
-            text = "Her kas için: ne işe yaradığını, nasıl geliştireceğini, " +
-                "kaç set yapman gerektiğini ve hangi egzersizlerin işe yaradığını göstereceğim."
+            text = "Sürükleyerek döndür, iki parmakla yakınlaştır. Bir kasa dokunduğunda " +
+                "ne işe yaradığını, nasıl geliştireceğini ve hangi egzersizlerin işe " +
+                "yaradığını burada göstereceğim."
             textSize = 13f
             setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
-            setPadding(dp(4), dp(0), dp(4), dp(8))
+            setPadding(dp(2), dp(0), dp(2), dp(6))
         })
     }
 
     private fun kasSec(kod: String) {
-        seciliKas = kod
-        haritaView.sec(kod)
         val rehber = KasRehber.getir(kod)
-        if (rehber == null) {
-            baslangicMesaji()
-            return
-        }
+        if (rehber == null) { baslangicMesaji(); return }
 
         detayAlan.removeAllViews()
 
-        // Başlık
         detayAlan.addView(TextView(this).apply {
             text = "${rehber.emoji} ${rehber.ad}"
             textSize = 20f
             typeface = Typeface.DEFAULT_BOLD
             setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
-            setPadding(dp(2), dp(4), dp(2), dp(2))
+            setPadding(dp(2), dp(2), dp(2), dp(2))
         })
-
-        // İşlev
         detayAlan.addView(altBaslik("📌 Ne işe yarar?"))
         detayAlan.addView(paragraf(rehber.islev))
-
-        // Nasıl geliştirilir
         detayAlan.addView(altBaslik("🏋️ Nasıl geliştirilir?"))
         detayAlan.addView(paragraf(rehber.gelistirme))
-
-        // Set önerisi
         detayAlan.addView(altBaslik("🔁 Önerilen set/tekrar"))
         detayAlan.addView(paragraf(rehber.setOneri))
 
-        // Egzersizler
         detayAlan.addView(altBaslik("💪 Bu kası çalıştıran egzersizler"))
-        val egzersizler = FitnessMotor.kasGrubunaGore(FitnessMotor.tumu(this), kod).take(10)
+        val egzersizler = FitnessMotor.kasGrubunaGore(FitnessMotor.tumu(this), kod).take(8)
         if (egzersizler.isEmpty()) {
             detayAlan.addView(paragraf("Bu kas için veritabanında egzersiz bulunamadı."))
         } else {
@@ -226,19 +180,16 @@ class FitnessActivity : AppCompatActivity() {
                     text = e.isim + "\n" + FitnessMotor.ekipmanTuru(e.ekipman)
                     textSize = 14f
                     setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
-                    setPadding(0, 0, dp(6), 0)
                 })
                 detayAlan.addView(satir)
             }
         }
-
-        // İpucu
         detayAlan.addView(TextView(this).apply {
-            text = "💡 İpucu: kası çalıştırırken hareketi yavaş ve kontrollü yap, " +
-                "sırtını düz tut ve her setin son tekrarını zorlanarak bitir."
+            text = "💡 İpucu: hareketi yavaş ve kontrollü yap, sırtını düz tut, " +
+                "son tekrarı zorlanarak bitir."
             textSize = 12f
             setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
-            setPadding(dp(4), dp(10), dp(4), dp(4))
+            setPadding(dp(2), dp(10), dp(2), dp(2))
         })
     }
 
@@ -289,11 +240,15 @@ class FitnessActivity : AppCompatActivity() {
                 setPadding(0, dp(3), 0, dp(3))
             })
         }
-
         MaterialAlertDialogBuilder(this)
             .setTitle("Egzersiz")
             .setView(ic)
             .setPositiveButton("Kapat", null)
             .show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        webView.destroy()
     }
 }
