@@ -43,6 +43,7 @@ class FitnessActivity : AppCompatActivity() {
     private lateinit var detaySar: ScrollView
     private lateinit var btnSekmeModel: TextView
     private lateinit var btnSekmeProgram: TextView
+    private lateinit var btnSekmeGecmis: TextView
     private var sekme = 0
 
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
@@ -86,9 +87,11 @@ class FitnessActivity : AppCompatActivity() {
             setPadding(dp(12), dp(2), dp(12), dp(4))
         }
         btnSekmeModel = sekmeChip("🧍 3D Model") { gec(0) }
-        btnSekmeProgram = sekmeChip("📋 Antrenman Programı") { gec(1) }
+        btnSekmeProgram = sekmeChip("📋 Program") { gec(1) }
+        btnSekmeGecmis = sekmeChip("📜 Geçmiş") { gec(2) }
         sekmeSatir.addView(btnSekmeModel)
         sekmeSatir.addView(btnSekmeProgram)
+        sekmeSatir.addView(btnSekmeGecmis)
         kok.addView(sekmeSatir)
 
         // İçerik alanı
@@ -154,6 +157,10 @@ class FitnessActivity : AppCompatActivity() {
             if (index == 1) renk(com.google.android.material.R.attr.colorPrimary)
             else renk(com.google.android.material.R.attr.colorOnSurfaceVariant)
         )
+        btnSekmeGecmis.setTextColor(
+            if (index == 2) renk(com.google.android.material.R.attr.colorPrimary)
+            else renk(com.google.android.material.R.attr.colorOnSurfaceVariant)
+        )
         if (index == 0) {
             // Model sekmesi: WebView + detay göster
             icerik.removeAllViews()
@@ -161,8 +168,10 @@ class FitnessActivity : AppCompatActivity() {
             modelKok.addView(webView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.15f))
             modelKok.addView(detaySar, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f))
             icerik.addView(modelKok)
-        } else {
+        } else if (index == 1) {
             programCiz()
+        } else {
+            gecmisCiz()
         }
     }
 
@@ -282,6 +291,120 @@ class FitnessActivity : AppCompatActivity() {
         }
 
         icerik.addView(sari)
+    }
+
+    /** Geçmiş sekmesi: kaydedilen antrenmanların tarihe göre listesi + silme. */
+    private fun gecmisCiz() {
+        icerik.removeAllViews()
+        val sari = ScrollView(this)
+        val ic = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(16), dp(8), dp(16), dp(16))
+        }
+        sari.addView(ic)
+
+        ic.addView(TextView(this).apply {
+            text = "📜 Antrenman Geçmişi"
+            textSize = 18f
+            typeface = Typeface.DEFAULT_BOLD
+            setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
+            setPadding(dp(2), dp(4), dp(2), dp(2))
+        })
+        val kayitlar = FitnessMotor.antrenmanlar(this).reversed()
+        if (kayitlar.isEmpty()) {
+            ic.addView(TextView(this).apply {
+                text = "Henüz antrenman kaydın yok. 3D Model'de kasa dokunup set kaydet, " +
+                    "ya da Program'dan bir gün seç."
+                textSize = 13f
+                setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+                setPadding(dp(2), dp(16), dp(2), dp(8))
+            })
+            icerik.addView(sari)
+            return
+        }
+
+        // Tarihe göre grupla
+        val gunler = kayitlar.groupBy { FitnessMotor.gunAnahtari(it.tarih) }
+        val tarihFormat = java.text.SimpleDateFormat("d MMMM yyyy", java.util.Locale("tr", "TR"))
+        gunler.forEach { (gun, list) ->
+            val ilkTarih = list.firstOrNull()?.tarih ?: System.currentTimeMillis()
+            ic.addView(TextView(this).apply {
+                text = "🗓️ " + (runCatching {
+                    tarihFormat.format(java.util.Date(ilkTarih))
+                }.getOrElse { gun })
+                textSize = 14f
+                typeface = Typeface.DEFAULT_BOLD
+                setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
+                setPadding(dp(2), dp(12), dp(2), dp(4))
+            })
+            list.forEach { k ->
+                val satir = LinearLayout(this).apply {
+                    orientation = LinearLayout.HORIZONTAL
+                    setPadding(dp(12), dp(8), dp(12), dp(8))
+                    background = android.graphics.drawable.GradientDrawable().apply {
+                        cornerRadius = dp(12).toFloat()
+                        setColor(renk(com.google.android.material.R.attr.colorSurfaceVariant))
+                    }
+                    val lp = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    ).apply { bottomMargin = dp(4) }
+                    layoutParams = lp
+                    isClickable = true
+                    isFocusable = true
+                    val tip = android.util.TypedValue()
+                    this@FitnessActivity.theme.resolveAttribute(
+                        android.R.attr.selectableItemBackground, tip, true
+                    )
+                    setBackgroundResource(tip.resourceId)
+                    setOnClickListener { gecmisSil(k, gun) }
+                }
+                satir.addView(TextView(this).apply {
+                    text = FitnessMotor.kasEmoji(k.kasKod)
+                    textSize = 16f
+                    setPadding(0, 0, dp(8), 0)
+                })
+                val metinKol = LinearLayout(this).apply {
+                    orientation = LinearLayout.VERTICAL
+                    layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                }
+                metinKol.addView(TextView(this).apply {
+                    text = k.egzersizAdi
+                    textSize = 14f
+                    typeface = Typeface.DEFAULT_BOLD
+                    setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+                })
+                val setOzet = k.setler.joinToString(", ") { s ->
+                    "${s.tekrar}×${if (s.agirlik > 0) "${s.agirlik}kg" else "kendi"}"
+                }
+                metinKol.addView(TextView(this).apply {
+                    text = "$setOzet · dokun=sil"
+                    textSize = 12f
+                    setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+                })
+                satir.addView(metinKol)
+                ic.addView(satir)
+            }
+        }
+
+        icerik.addView(sari)
+    }
+
+    /** Kayıt silme onayı + silme işlemi. */
+    private fun gecmisSil(k: FitnessMotor.AntrenmanKaydi, gun: String) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Kaydı sil?")
+            .setMessage("${k.egzersizAdi} kaydı silinsin mi?")
+            .setPositiveButton("Sil") { _, _ ->
+                val kayitlar = FitnessMotor.antrenmanlar(this)
+                val idx = kayitlar.indexOfLast { it.egzersizId == k.egzersizId && it.tarih == k.tarih }
+                if (idx >= 0) {
+                    FitnessMotor.antrenmanSil(this, idx)
+                    gecmisCiz()
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .show()
     }
 
     private fun programDetay(p: FitnessMotor.Program) {
