@@ -7,6 +7,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.webkit.WebSettings
 import android.webkit.WebView
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -37,6 +38,12 @@ class FitnessActivity : AppCompatActivity() {
 
     private lateinit var detayAlan: LinearLayout
     private lateinit var webView: WebView
+    private lateinit var kok: LinearLayout
+    private lateinit var icerik: FrameLayout
+    private lateinit var detaySar: ScrollView
+    private lateinit var btnSekmeModel: TextView
+    private lateinit var btnSekmeProgram: TextView
+    private var sekme = 0
 
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
     private fun renk(attr: Int): Int = com.google.android.material.color.MaterialColors.getColor(
@@ -54,7 +61,7 @@ class FitnessActivity : AppCompatActivity() {
         ThemeManager.dinamikRengiUygula(this)
         super.onCreate(savedInstanceState)
 
-        val kok = LinearLayout(this).apply {
+        kok = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setBackgroundColor(renk(com.google.android.material.R.attr.colorSurface))
         }
@@ -67,18 +74,32 @@ class FitnessActivity : AppCompatActivity() {
             setPadding(dp(16), dp(14), dp(16), dp(2))
         })
         kok.addView(TextView(this).apply {
-            text = "Modeli döndür, yakınlaştır, kasa dokun — nasıl geliştireceğini öğren."
+            text = "Modeli döndür, kasa dokun, set kaydet — ya da hazır programları gör."
             textSize = 12f
             setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
             setPadding(dp(16), dp(0), dp(16), dp(8))
         })
 
-        // 3D WebView — ekranın üst ~55%
-        webView = WebView(this)
-        val webLp = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.15f
+        // Sekmeler: Model / Program
+        val sekmeSatir = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            setPadding(dp(12), dp(2), dp(12), dp(4))
+        }
+        btnSekmeModel = sekmeChip("🧍 3D Model") { gec(0) }
+        btnSekmeProgram = sekmeChip("📋 Antrenman Programı") { gec(1) }
+        sekmeSatir.addView(btnSekmeModel)
+        sekmeSatir.addView(btnSekmeProgram)
+        kok.addView(sekmeSatir)
+
+        // İçerik alanı
+        icerik = FrameLayout(this)
+        icerik.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f
         )
-        webView.layoutParams = webLp
+        kok.addView(icerik)
+
+        // 3D WebView — model sekmesi içeriği
+        webView = WebView(this)
         webView.setBackgroundColor(0xFF121212.toInt())
         webView.settings.apply {
             javaScriptEnabled = true
@@ -88,22 +109,174 @@ class FitnessActivity : AppCompatActivity() {
         }
         webView.addJavascriptInterface(AndroidKopru(), "AndroidBridge")
         webView.loadUrl("file:///android_asset/kas3d/kas3d.html")
-        kok.addView(webView)
 
-        // Detay paneli (kaydırılabilir)
-        val detaySar = ScrollView(this)
+        // Detay paneli (model sekmesi)
+        detaySar = ScrollView(this)
         detayAlan = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(16), dp(8), dp(16), dp(16))
         }
         detaySar.addView(detayAlan)
-        detaySar.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f
-        )
-        kok.addView(detaySar)
+
+        val modelKok = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        modelKok.addView(webView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.15f))
+        modelKok.addView(detaySar, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f))
+        icerik.addView(modelKok)
 
         setContentView(kok)
+        gec(0)
         baslangicMesaji()
+    }
+
+    private fun sekmeChip(metin: String, onTikla: () -> Unit): TextView =
+        TextView(this).apply {
+            this.text = metin
+            textSize = 13f
+            typeface = Typeface.DEFAULT_BOLD
+            setPadding(dp(14), dp(8), dp(14), dp(8))
+            isClickable = true
+            isFocusable = true
+            val tip = android.util.TypedValue()
+            this@FitnessActivity.theme.resolveAttribute(
+                android.R.attr.selectableItemBackground, tip, true
+            )
+            setBackgroundResource(tip.resourceId)
+            setOnClickListener { onTikla() }
+        }
+
+    private fun gec(index: Int) {
+        sekme = index
+        btnSekmeModel.setTextColor(
+            if (index == 0) renk(com.google.android.material.R.attr.colorPrimary)
+            else renk(com.google.android.material.R.attr.colorOnSurfaceVariant)
+        )
+        btnSekmeProgram.setTextColor(
+            if (index == 1) renk(com.google.android.material.R.attr.colorPrimary)
+            else renk(com.google.android.material.R.attr.colorOnSurfaceVariant)
+        )
+        if (index == 0) {
+            // Model sekmesi: WebView + detay göster
+            icerik.removeAllViews()
+            val modelKok = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+            modelKok.addView(webView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.15f))
+            modelKok.addView(detaySar, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f))
+            icerik.addView(modelKok)
+        } else {
+            programCiz()
+        }
+    }
+
+    /** Program sekmesini (ayrı içerik) çizer. */
+    private fun programCiz() {
+        icerik.removeAllViews()
+        val sari = ScrollView(this)
+        val ic = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(16), dp(8), dp(16), dp(16))
+        }
+        sari.addView(ic)
+        ic.addView(TextView(this).apply {
+            text = "🏆 Hazır Antrenman Programları"
+            textSize = 18f
+            typeface = Typeface.DEFAULT_BOLD
+            setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
+            setPadding(dp(2), dp(4), dp(2), dp(4))
+        })
+        ic.addView(TextView(this).apply {
+            text = "Bir program seç, haftalık planını gör. Egzersizleri Kas Sistemi'nden takip et."
+            textSize = 12.5f
+            setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+            setPadding(dp(2), dp(0), dp(2), dp(8))
+        })
+
+        FitnessMotor.programlar.forEach { p ->
+            val kart = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(dp(14), dp(12), dp(14), dp(12))
+                background = android.graphics.drawable.GradientDrawable().apply {
+                    cornerRadius = dp(14).toFloat()
+                    setColor(renk(com.google.android.material.R.attr.colorSurfaceVariant))
+                }
+                val lp = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply { bottomMargin = dp(8) }
+                layoutParams = lp
+                isClickable = true
+                isFocusable = true
+                val tip = android.util.TypedValue()
+                this@FitnessActivity.theme.resolveAttribute(
+                    android.R.attr.selectableItemBackground, tip, true
+                )
+                setBackgroundResource(tip.resourceId)
+                setOnClickListener { programDetay(p) }
+            }
+            kart.addView(TextView(this).apply {
+                text = p.ad
+                textSize = 16f
+                typeface = Typeface.DEFAULT_BOLD
+                setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+            })
+            kart.addView(TextView(this).apply {
+                text = "Haftada ${p.haftadaGun} gün · ${p.seviye} · ${p.gunler.size} gün planı"
+                textSize = 12f
+                setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
+                setPadding(0, dp(2), 0, dp(2))
+            })
+            kart.addView(TextView(this).apply {
+                text = p.aciklama
+                textSize = 12.5f
+                setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+            })
+            ic.addView(kart)
+        }
+
+        icerik.addView(sari)
+    }
+
+    private fun programDetay(p: FitnessMotor.Program) {
+        val ic = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(20), dp(12), dp(20), dp(8))
+        }
+        ic.addView(TextView(this).apply {
+            text = p.ad
+            textSize = 18f
+            typeface = Typeface.DEFAULT_BOLD
+            setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+        })
+        ic.addView(TextView(this).apply {
+            text = p.aciklama
+            textSize = 13f
+            setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+            setPadding(0, dp(4), 0, dp(8))
+        })
+        val kaslar = FitnessMotor.programKaslari(p)
+        ic.addView(TextView(this).apply {
+            text = "🎯 Hedef kaslar: " + kaslar.joinToString(", ") { FitnessMotor.kasTuru(it) }
+            textSize = 12.5f
+            setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
+            setPadding(0, dp(2), 0, dp(6))
+        })
+        p.gunler.forEachIndexed { i, g ->
+            ic.addView(TextView(this).apply {
+                text = "${i + 1}. ${g.ad} — ${g.odak}"
+                textSize = 14f
+                typeface = Typeface.DEFAULT_BOLD
+                setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+                setPadding(0, dp(8), 0, dp(2))
+            })
+            ic.addView(TextView(this).apply {
+                text = g.kaslar.joinToString(", ") { FitnessMotor.kasTuru(it) }
+                textSize = 13f
+                setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+            })
+        }
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Antrenman Programı")
+            .setView(ic)
+            .setPositiveButton("Kapat", null)
+            .show()
     }
 
     /** Kotlin ⇄ JS köprüsü. JS "kasSecildi(kod)" çağırınca buraya düşer. */

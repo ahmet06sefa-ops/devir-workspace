@@ -371,6 +371,7 @@ class MainActivity : AppCompatActivity() {
             val secenekler = arrayOf(
                 "🌱 Kişisel Gelişim ve Farkındalık",
                 "🎨 Canva Çalışma Ekranı (10 Uygulama)",
+                "🦴 Kas Sistemi 3D",
                 "🎬 Günlük Film Önerisi",
                 "👥 İki Kişilik Paylaşım",
                 "🕌 Namaz Vakitleri & Planı",
@@ -384,12 +385,13 @@ class MainActivity : AppCompatActivity() {
                     when (idx) {
                         0 -> KisiselGelisimActivity.ac(this)
                         1 -> CanvaCalismaAtolyeActivity.ac(this)
-                        2 -> FilmActivity.ac(this)
-                        3 -> OnlineActivity.ac(this)
-                        4 -> if (NamazVakti.acikMi(this)) NamazActivity.ac(this) else NamazAyarActivity.ac(this)
-                        5 -> komutPaletiPenceresi()
-                        6 -> ManuelKontrolActivity.ac(this)
-                        7 -> OtonomMerkezActivity.ac(this)
+                        2 -> FitnessActivity.ac(this)
+                        3 -> FilmActivity.ac(this)
+                        4 -> OnlineActivity.ac(this)
+                        5 -> if (NamazVakti.acikMi(this)) NamazActivity.ac(this) else NamazAyarActivity.ac(this)
+                        6 -> komutPaletiPenceresi()
+                        7 -> ManuelKontrolActivity.ac(this)
+                        8 -> OtonomMerkezActivity.ac(this)
                     }
                 }
                 .show()

@@ -306,6 +306,81 @@ object FitnessMotor {
             .filter { it.kasKod == kasKod }
             .maxOfOrNull { it.tarih } ?: 0L
 
+    // ══════════════════════════════════════════════════════════
+    // Hazır antrenman programları
+    // ══════════════════════════════════════════════════════════
+
+    data class ProgramGunu(val ad: String, val kaslar: List<String>, val odak: String)
+    data class Program(
+        val id: String,
+        val ad: String,
+        val aciklama: String,
+        val haftadaGun: Int,
+        val seviye: String,
+        val gunler: List<ProgramGunu>
+    )
+
+    val programlar: List<Program> = listOf(
+        Program(
+            id = "baslangic", ad = "Başlangıç (Tüm Vücut)",
+            aciklama = "Haftada 3 gün, tüm vücut. Yeni başlayanlar için ideal; her gün tüm ana kaslar çalışır.",
+            haftadaGun = 3, seviye = "Başlangıç",
+            gunler = listOf(
+                ProgramGunu("Gün 1 — Tüm Vücut A", listOf("chest", "shoulders", "quadriceps", "hamstrings", "lats", "abdominals"), "İtme + bacak + sırt"),
+                ProgramGunu("Gün 2 — Tüm Vücut B", listOf("chest", "biceps", "triceps", "glutes", "middle back", "abdominals"), "İtme/çekme + bacak"),
+                ProgramGunu("Gün 3 — Tüm Vücut C", listOf("shoulders", "lats", "quadriceps", "calves", "traps", "abdominals"), "Dengeleyici gün")
+            )
+        ),
+        Program(
+            id = "ust_alt", ad = "Üst / Alt Bölünmesi",
+            aciklama = "Haftada 4 gün: üst vücut, alt vücut, üst vücut, alt vücut. Dengeli ve hızlı sonuç.",
+            haftadaGun = 4, seviye = "Orta",
+            gunler = listOf(
+                ProgramGunu("Gün 1 — Üst Vücut", listOf("chest", "shoulders", "biceps", "triceps", "lats", "traps"), "İtme + çekme"),
+                ProgramGunu("Gün 2 — Alt Vücut", listOf("quadriceps", "hamstrings", "glutes", "calves", "abdominals"), "Bacak + karın"),
+                ProgramGunu("Gün 3 — Üst Vücut", listOf("chest", "shoulders", "biceps", "triceps", "middle back", "lats"), "İtme + çekme"),
+                ProgramGunu("Gün 4 — Alt Vücut", listOf("quadriceps", "hamstrings", "glutes", "calves", "lower back", "abdominals"), "Bacak + bel + karın")
+            )
+        ),
+        Program(
+            id = "push_pull", ad = "İt / Çek / Bacak (PPL)",
+            aciklama = "Haftada 6 gün: İtme, Çekme, Bacak döngüsü iki kez. İleri düzey, yoğun.",
+            haftadaGun = 6, seviye = "İleri",
+            gunler = listOf(
+                ProgramGunu("Gün 1 — İtme", listOf("chest", "shoulders", "triceps"), "Göğüs + omuz + triceps"),
+                ProgramGunu("Gün 2 — Çekme", listOf("lats", "middle back", "biceps", "forearms", "traps"), "Sırt + biceps"),
+                ProgramGunu("Gün 3 — Bacak", listOf("quadriceps", "hamstrings", "glutes", "calves", "abdominals"), "Bacak + karın"),
+                ProgramGunu("Gün 4 — İtme", listOf("chest", "shoulders", "triceps"), "Göğüs + omuz + triceps"),
+                ProgramGunu("Gün 5 — Çekme", listOf("lats", "middle back", "biceps", "forearms", "lower back"), "Sırt + biceps + bel"),
+                ProgramGunu("Gün 6 — Bacak", listOf("quadriceps", "hamstrings", "glutes", "calves", "abdominals"), "Bacak + karın")
+            )
+        ),
+        Program(
+            id = "karin", ad = "Karın & Çekirdek",
+            aciklama = "Haftada 3-4 gün, 15-20 dk. Karın ve çekirdek gücüne odaklı.",
+            haftadaGun = 4, seviye = "Başlangıç",
+            gunler = listOf(
+                ProgramGunu("Gün 1 — Çekirdek", listOf("abdominals", "obliques", "lower back"), "Karın + yan karın + bel"),
+                ProgramGunu("Gün 2 — Üst Karın", listOf("abdominals"), "Üst karın vurgulu"),
+                ProgramGunu("Gün 3 — Alt Karın & Oblik", listOf("abdominals", "obliques"), "Alt karın + yan karın"),
+                ProgramGunu("Gün 4 — Karın Dayanıklılık", listOf("abdominals", "lower back", "obliques"), "Tüm çekirdek")
+            )
+        ),
+        Program(
+            id = "bacak", ad = "Bacak Güçlendirme",
+            aciklama = "Haftada 2 gün, alt vücut odaklı. Güç ve dayanıklılık.",
+            haftadaGun = 2, seviye = "Orta",
+            gunler = listOf(
+                ProgramGunu("Gün 1 — Bacak Güç", listOf("quadriceps", "hamstrings", "glutes"), "Ağır temel hareketler"),
+                ProgramGunu("Gün 2 — Bacak Hipertrofi", listOf("quadriceps", "hamstrings", "glutes", "calves", "abductors", "adductors"), "Hacim + denge")
+            )
+        )
+    )
+
+    /** Belirli bir programın tüm kas kodları seti. */
+    fun programKaslari(p: Program): Set<String> =
+        p.gunler.flatMap { it.kaslar }.toSet()
+
     fun gunAnahtari(millis: Long = System.currentTimeMillis()): String =
         SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(millis))
 }
