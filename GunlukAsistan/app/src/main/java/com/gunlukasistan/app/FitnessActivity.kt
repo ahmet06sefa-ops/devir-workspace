@@ -121,10 +121,9 @@ class FitnessActivity : AppCompatActivity() {
         }
         detaySar.addView(detayAlan)
 
-        val modelKok = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
-        modelKok.addView(webView, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.15f))
-        modelKok.addView(detaySar, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1.0f))
-        icerik.addView(modelKok)
+        // Not: model içeriği (webView + detaySar) burada değil, `gec(0)` içinde
+        // kuruluyor. Burada kurulursa `gec(0)` tekrar eklemeye çalışınca
+        // "child already has a parent" çökmesi oluşur (v11.51 düzeltmesi).
 
         setContentView(kok)
         gec(0)
