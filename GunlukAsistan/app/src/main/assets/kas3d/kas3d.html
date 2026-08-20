@@ -282,7 +282,13 @@
     kasSecildi(kod,TR[kod]||kod);
   }
 
+  // Otomatik yavaş dönüş — kullanıcı dokununca durur
+  var oto=true;
+  el.addEventListener('touchstart',function(){oto=false;},{passive:true});
+  el.addEventListener('click',function(){oto=false;});
+  document.getElementById('btnAyrık').addEventListener('click',function(){oto=false;});
   function anim(){requestAnimationFrame(anim);
+    if(oto){group.rotation.y+=0.004;}
     camera.position.z=teker;camera.lookAt(0,0.4,0);renderer.render(scene,camera);}
   anim();
   window.addEventListener('resize',function(){w=window.innerWidth;h=window.innerHeight;

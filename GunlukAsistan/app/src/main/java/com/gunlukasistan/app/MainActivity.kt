@@ -967,9 +967,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * v11.35 — HabitGenius tarzı "Hızlı Ekle" alt paneli.
-     * Alt ortadaki + butonundan açılır; Görev, Alışkanlık, Plan ve
-     * diğer hızlı ekleme işlemlerini tek yerden sunar.
+     * v11.45 — Geliştirilmiş "Hızlı Ekle" alt paneli.
+     * Alt ortadaki + butonundan açılır; "Yeni Ekle" ve "Araçlar & Modüller"
+     * olarak gruplu, ikonlu ve bölümlü, kaydırılabilir bir panel sunar.
      */
     private fun habitusHizliEkle() {
         val yogunluk = resources.displayMetrics.density
@@ -984,6 +984,7 @@ class MainActivity : AppCompatActivity() {
         liste.addView(
             android.widget.TextView(this).apply {
                 text = getString(R.string.quickadd_title)
+                textSize = 20f
                 setTextColor(
                     com.google.android.material.color.MaterialColors.getColor(
                         this@MainActivity,
@@ -992,15 +993,68 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
                 setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD)
-                setPadding(dp(8), dp(0), dp(8), dp(4))
+                setPadding(dp(8), dp(0), dp(8), dp(2))
+            },
+            android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT)
+        )
+        liste.addView(
+            android.widget.TextView(this).apply {
+                text = getString(R.string.quickadd_subtitle)
+                textSize = 12f
+                setTextColor(
+                    com.google.android.material.color.MaterialColors.getColor(
+                        this@MainActivity,
+                        com.google.android.material.R.attr.colorOnSurfaceVariant,
+                        0xFF8A7F6E.toInt()
+                    )
+                )
+                setPadding(dp(8), dp(0), dp(8), dp(6))
             },
             android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT)
         )
 
-        // Her eylem satırı için ortak oluşturucu (ripple'lı).
-        fun satirEkle(metin: String, onTikla: () -> Unit) {
-            val tv = android.widget.TextView(this).apply {
-                this.text = metin
+        // Bölüm başlığı
+        fun bolumBasligi(metin: String) {
+            liste.addView(
+                android.widget.TextView(this).apply {
+                    text = metin.uppercase(java.util.Locale("tr", "TR"))
+                    textSize = 11.5f
+                    setTextColor(
+                        com.google.android.material.color.MaterialColors.getColor(
+                            this@MainActivity,
+                            com.google.android.material.R.attr.colorOnSurfaceVariant,
+                            0xFF8A7F6E.toInt()
+                        )
+                    )
+                    setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD)
+                    setPadding(dp(8), dp(12), dp(8), dp(4))
+                },
+                android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT)
+            )
+        }
+
+        // Her eylem satırı — ikonlu, kısaltmalı (çizgi), ripple'lı
+        fun satirEkle(metin: String, alt: String = "", onTikla: () -> Unit) {
+            val satir = android.widget.LinearLayout(this).apply {
+                orientation = android.widget.LinearLayout.HORIZONTAL
+                setPadding(dp(8), dp(12), dp(8), dp(12))
+                gravity = android.view.Gravity.CENTER_VERTICAL
+                isClickable = true
+                isFocusable = true
+                val tip = android.util.TypedValue()
+                this@MainActivity.theme.resolveAttribute(
+                    android.R.attr.selectableItemBackground, tip, true
+                )
+                setBackgroundResource(tip.resourceId)
+                setOnClickListener { onTikla() }
+            }
+            // Metin sütunu
+            val metinKol = android.widget.LinearLayout(this).apply {
+                orientation = android.widget.LinearLayout.VERTICAL
+                layoutParams = android.widget.LinearLayout.LayoutParams(0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+            }
+            metinKol.addView(android.widget.TextView(this).apply {
+                text = metin
                 textSize = 15f
                 setTextColor(
                     com.google.android.material.color.MaterialColors.getColor(
@@ -1009,97 +1063,103 @@ class MainActivity : AppCompatActivity() {
                         0xFF3A3226.toInt()
                     )
                 )
-                setPadding(dp(8), dp(15), dp(8), dp(15))
-                isClickable = true
-                isFocusable = true
-                val tip = android.util.TypedValue()
-                this@MainActivity.theme.resolveAttribute(
-                    android.R.attr.selectableItemBackground, tip, true
-                )
-                setBackgroundResource(tip.resourceId)
+            })
+            if (alt.isNotBlank()) {
+                metinKol.addView(android.widget.TextView(this).apply {
+                    text = alt
+                    textSize = 11.5f
+                    setTextColor(
+                        com.google.android.material.color.MaterialColors.getColor(
+                            this@MainActivity,
+                            com.google.android.material.R.attr.colorOnSurfaceVariant,
+                            0xFF8A7F6E.toInt()
+                        )
+                    )
+                })
             }
-            tv.setOnClickListener { onTikla() }
-            liste.addView(tv, android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT))
+            satir.addView(metinKol)
+            satir.addView(android.widget.TextView(this).apply {
+                text = "›"
+                textSize = 22f
+                setTextColor(
+                    com.google.android.material.color.MaterialColors.getColor(
+                        this@MainActivity,
+                        com.google.android.material.R.attr.colorPrimary,
+                        0xFFB08968.toInt()
+                    )
+                )
+            })
+            liste.addView(satir, android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT))
         }
 
-        // Sarmalayıcı: kısa ekranlarda kaydırılabilir olsun.
+        // Sarmalayıcı: kısa ekranlarda kaydırılabilir, yükseklik sınırlı.
         val sari = android.widget.ScrollView(this)
         sari.addView(liste)
+        sari.layoutParams = android.widget.FrameLayout.LayoutParams(
+            android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
+            (resources.displayMetrics.heightPixels * 0.7f).toInt()
+        )
 
         val panel = com.google.android.material.bottomsheet.BottomSheetDialog(this)
         panel.setContentView(sari)
 
-        // İstatistikler (v11.35-2: alt sekmeden + butonuna taşındı)
-        satirEkle(getString(R.string.quickadd_stats)) {
+        // ── Yeni Ekle ──
+        bolumBasligi(getString(R.string.quickadd_group_ekle))
+        satirEkle(getString(R.string.quickadd_task), getString(R.string.quickadd_task_alt)) {
             panel.dismiss()
-            AnalitikActivity.ac(this)
-        }
-        // Sayaç (v11.37: alt bardan + butonuna taşındı)
-        satirEkle(getString(R.string.quickadd_timer)) {
-            panel.dismiss()
-            openTimer()
-        }
-        // Bütçe & Finans (v11.38: ekran görüntüsündeki finans aracı.
-        // Butce motoru üzerine kurulu TakipActivity bütçe ekranını açar.)
-        satirEkle(getString(R.string.quickadd_butce)) {
-            panel.dismiss()
-            TakipActivity.ac(this, TakipActivity.S_BUTCE)
-        }
-        // Fitness & Egzersiz (v11.39: free-exercise-db + antrenman günlüğü)
-        satirEkle(getString(R.string.quickadd_fitness)) {
-            panel.dismiss()
-            FitnessActivity.ac(this)
-        }
-        // Görev
-        satirEkle(getString(R.string.quickadd_task)) {
-            panel.dismiss()
-            open(6)
-            supportFragmentManager.executePendingTransactions()
+            open(6); supportFragmentManager.executePendingTransactions()
             (supportFragmentManager.findFragmentByTag("scr_6") as? TasksFragment)?.showTaskEditor()
         }
-        // Alışkanlık
-        satirEkle(getString(R.string.quickadd_habit)) {
+        satirEkle(getString(R.string.quickadd_habit), getString(R.string.quickadd_habit_alt)) {
             panel.dismiss()
-            open(12)
-            supportFragmentManager.executePendingTransactions()
+            open(12); supportFragmentManager.executePendingTransactions()
             (supportFragmentManager.findFragmentByTag("scr_12") as? HabitsFragment)?.showHabitEditor(null)
         }
-        // Plan sekmesi
-        satirEkle(getString(R.string.quickadd_plan)) {
+        satirEkle(getString(R.string.quickadd_note), getString(R.string.quickadd_note_alt)) {
+            panel.dismiss()
+            open(5); supportFragmentManager.executePendingTransactions()
+            (supportFragmentManager.findFragmentByTag("scr_5") as? NotesFragment)?.showNoteEditor(null)
+        }
+        satirEkle(getString(R.string.quickadd_event), getString(R.string.quickadd_event_alt)) {
+            panel.dismiss()
+            open(11); supportFragmentManager.executePendingTransactions()
+            (supportFragmentManager.findFragmentByTag("scr_11") as? EventsFragment)?.showEventEditor(null)
+        }
+        satirEkle(getString(R.string.quickadd_exam), getString(R.string.quickadd_exam_alt)) {
+            panel.dismiss()
+            open(10); supportFragmentManager.executePendingTransactions()
+            (supportFragmentManager.findFragmentByTag("scr_10") as? ExamsFragment)?.showExamEditor()
+        }
+        satirEkle(getString(R.string.quickadd_topic), getString(R.string.quickadd_topic_alt)) {
+            panel.dismiss()
+            open(3); (supportFragmentManager.findFragmentByTag("scr_3") as? TopicsFragment)?.showTopicDialog()
+        }
+        satirEkle(getString(R.string.quickadd_questions), getString(R.string.quickadd_questions_alt)) {
+            panel.dismiss()
+            showQuestionsQuickAdd()
+        }
+        satirEkle(getString(R.string.quickadd_plan), getString(R.string.quickadd_plan_alt)) {
             panel.dismiss()
             open(16)
         }
-        // Not
-        satirEkle(getString(R.string.quickadd_note)) {
+
+        // ── Araçlar & Modüller ──
+        bolumBasligi(getString(R.string.quickadd_group_arac))
+        satirEkle(getString(R.string.quickadd_stats), getString(R.string.quickadd_stats_alt)) {
             panel.dismiss()
-            open(5)
-            supportFragmentManager.executePendingTransactions()
-            (supportFragmentManager.findFragmentByTag("scr_5") as? NotesFragment)?.showNoteEditor(null)
+            AnalitikActivity.ac(this)
         }
-        // Geri sayım (etkinlik)
-        satirEkle(getString(R.string.quickadd_event)) {
+        satirEkle(getString(R.string.quickadd_timer), getString(R.string.quickadd_timer_alt)) {
             panel.dismiss()
-            open(11)
-            supportFragmentManager.executePendingTransactions()
-            (supportFragmentManager.findFragmentByTag("scr_11") as? EventsFragment)?.showEventEditor(null)
+            openTimer()
         }
-        // Deneme sonucu
-        satirEkle(getString(R.string.quickadd_exam)) {
+        satirEkle(getString(R.string.quickadd_butce), getString(R.string.quickadd_butce_alt)) {
             panel.dismiss()
-            open(10)
-            supportFragmentManager.executePendingTransactions()
-            (supportFragmentManager.findFragmentByTag("scr_10") as? ExamsFragment)?.showExamEditor()
+            TakipActivity.ac(this, TakipActivity.S_BUTCE)
         }
-        // Konu
-        satirEkle(getString(R.string.quickadd_topic)) {
+        satirEkle(getString(R.string.quickadd_fitness), getString(R.string.quickadd_fitness_alt)) {
             panel.dismiss()
-            open(3)
-            (supportFragmentManager.findFragmentByTag("scr_3") as? TopicsFragment)?.showTopicDialog()
-        }
-        // Soru sayısı
-        satirEkle(getString(R.string.quickadd_questions)) {
-            panel.dismiss()
-            showQuestionsQuickAdd()
+            FitnessActivity.ac(this)
         }
 
         panel.show()

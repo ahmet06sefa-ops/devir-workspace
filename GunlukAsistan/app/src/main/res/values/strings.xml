@@ -104,6 +104,21 @@
     <string name="quickadd_timer">⏱️ Sayaç</string>
     <string name="quickadd_butce">💰 Bütçe &amp; Finans</string>
     <string name="quickadd_fitness">🦴 Kas Sistemi 3D</string>
+    <string name="quickadd_group_ekle">Yeni Ekle</string>
+    <string name="quickadd_group_arac">Araçlar &amp; Modüller</string>
+    <string name="quickadd_subtitle">Bir şey eklemek veya bir aracı açmak için dokun</string>
+    <string name="quickadd_task_alt">Yeni bir görev oluştur</string>
+    <string name="quickadd_habit_alt">Yeni bir alışkanlık oluştur</string>
+    <string name="quickadd_note_alt">Hızlı bir not al</string>
+    <string name="quickadd_event_alt">Geri sayım / etkinlik ekle</string>
+    <string name="quickadd_exam_alt">Deneme sonucu kaydet</string>
+    <string name="quickadd_topic_alt">Yeni konu maddesi ekle</string>
+    <string name="quickadd_questions_alt">Bugünkü çözülen soru sayısına ekle</string>
+    <string name="quickadd_plan_alt">Vakit planı sekmesini aç</string>
+    <string name="quickadd_stats_alt">Detaylı analiz ve grafikler</string>
+    <string name="quickadd_timer_alt">Sayaç / zamanlayıcı</string>
+    <string name="quickadd_butce_alt">Harcama ve gelir takibi</string>
+    <string name="quickadd_fitness_alt">İnteraktif 3D kas sistemi</string>
     <string name="fitness_baslik">Kas Sistemi 3D</string>
 
     <!-- + menüsü -->
