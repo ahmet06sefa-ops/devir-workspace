@@ -100,6 +100,7 @@
     <string name="quickadd_exam">📊 Deneme sonucu</string>
     <string name="quickadd_topic">📚 Konu ekle</string>
     <string name="quickadd_questions">🔢 Soru sayısı gir</string>
+    <string name="quickadd_stats">📊 İstatistikler</string>
 
     <!-- + menüsü -->
     <string name="add_sheet_title">Ne eklemek istersin?</string>

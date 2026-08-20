@@ -209,14 +209,15 @@
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav" />
 
-        <!-- v11.35: HabitGenius tarzı alt ortada + butonu.
-             Ortadaki boşluğa (Alışkanlıklar ↔ Görevler arası) yüzer. -->
+        <!-- + butonu: eski düzen sağ altta.
+             İstatistikler dahil Hızlı Ekle panelini açıyor (v11.35). -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="10dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="88dp"
             android:contentDescription="@string/add"
             app:fabSize="normal"
             app:srcCompat="@drawable/ic_add" />

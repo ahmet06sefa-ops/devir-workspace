@@ -415,13 +415,11 @@ class MainActivity : AppCompatActivity() {
                 // v8.2 · Öneri 2: sekme değişiminde hafif dokunuş
                 Titresim.dokunus(bottomNav)
                 when (item.itemId) {
-                    // v11.35: HabitGenius tarzı alt sekmeler
-                    R.id.nav_today -> open(2)          // Bugün
-                    R.id.nav_habits -> open(12)        // Alışkanlıklar
-                    R.id.nav_tasks -> open(6)          // Görevler
-                    R.id.nav_stats -> AnalitikActivity.ac(this) // İstatistikler
-                    // Eski sekmeler artık sol üst menü/çekmece üzerinden:
-                    // nav_home→0, nav_topics→3, nav_plan→16, nav_timer→4
+                    R.id.nav_home -> open(0)
+                    R.id.nav_today -> open(2)
+                    R.id.nav_topics -> open(3)
+                    R.id.nav_plan -> open(16)
+                    R.id.nav_timer -> open(4)
                 }
             }
             true
@@ -558,10 +556,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navItemFor(index: Int): Int? = when (index) {
-        // v11.35: HabitGenius alt sekmeleri; diğer ekranlar menü/çekmecede.
-        2 -> R.id.nav_today        // Bugün
-        12 -> R.id.nav_habits      // Alışkanlıklar
-        6 -> R.id.nav_tasks        // Görevler
+        0 -> R.id.nav_home
+        2 -> R.id.nav_today
+        3 -> R.id.nav_topics
+        16 -> R.id.nav_plan
+        4 -> R.id.nav_timer
         else -> null
     }
 
@@ -1030,6 +1029,11 @@ class MainActivity : AppCompatActivity() {
         val panel = com.google.android.material.bottomsheet.BottomSheetDialog(this)
         panel.setContentView(sari)
 
+        // İstatistikler (v11.35-2: alt sekmeden + butonuna taşındı)
+        satirEkle(getString(R.string.quickadd_stats)) {
+            panel.dismiss()
+            AnalitikActivity.ac(this)
+        }
         // Görev
         satirEkle(getString(R.string.quickadd_task)) {
             panel.dismiss()
