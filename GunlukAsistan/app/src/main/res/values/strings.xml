@@ -119,6 +119,8 @@
     <string name="quickadd_timer_alt">Sayaç / zamanlayıcı</string>
     <string name="quickadd_butce_alt">Harcama ve gelir takibi</string>
     <string name="quickadd_fitness_alt">İnteraktif 3D kas sistemi</string>
+    <string name="quickadd_search">Hızlı ara (örn. görev, kas, sayaç)…</string>
+    <string name="quickadd_noresult">Sonuç bulunamadı.</string>
     <string name="fitness_baslik">Kas Sistemi 3D</string>
 
     <!-- + menüsü -->

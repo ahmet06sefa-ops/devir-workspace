@@ -146,6 +146,43 @@ class FitnessActivity : AppCompatActivity() {
             setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
             setPadding(dp(2), dp(2), dp(2), dp(2))
         })
+
+        // ── Gelişim istatistik kartı ──
+        val toplam = FitnessMotor.kasToplamYapilma(this, kod)
+        val bugun = FitnessMotor.kasBugunSet(this, kod)
+        val sonMs = FitnessMotor.kasSonAntrenmanMs(this, kod)
+        val kart = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(12), dp(10), dp(12), dp(10))
+            background = android.graphics.drawable.GradientDrawable().apply {
+                cornerRadius = dp(14).toFloat()
+                setColor(renk(com.google.android.material.R.attr.colorSurfaceVariant))
+            }
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { topMargin = dp(4); bottomMargin = dp(4) }
+            layoutParams = lp
+        }
+        kart.addView(TextView(this).apply {
+            text = if (toplam == 0) "📈 Henüz bu kas için antrenman kaydın yok."
+            else "📈 Bu kası $toplam kez çalıştın · Bugün $bugun set"
+            textSize = 14f
+            typeface = Typeface.DEFAULT_BOLD
+            setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+        })
+        if (sonMs > 0) {
+            kart.addView(TextView(this).apply {
+                text = "Son antrenman: " + java.text.SimpleDateFormat(
+                    "d MMM yyyy HH:mm", java.util.Locale("tr", "TR")
+                ).format(java.util.Date(sonMs))
+                textSize = 12f
+                setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+                setPadding(0, dp(2), 0, 0)
+            })
+        }
+        detayAlan.addView(kart)
+
         detayAlan.addView(altBaslik("📌 Ne işe yarar?"))
         detayAlan.addView(paragraf(rehber.islev))
         detayAlan.addView(altBaslik("🏋️ Nasıl geliştirilir?"))
@@ -154,14 +191,22 @@ class FitnessActivity : AppCompatActivity() {
         detayAlan.addView(paragraf(rehber.setOneri))
 
         detayAlan.addView(altBaslik("💪 Bu kası çalıştıran egzersizler"))
+        detayAlan.addView(TextView(this).apply {
+            text = "Egzersize dokun: talimatları gör ve set kaydet."
+            textSize = 12f
+            setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+            setPadding(dp(2), dp(0), dp(2), dp(4))
+        })
         val egzersizler = FitnessMotor.kasGrubunaGore(FitnessMotor.tumu(this), kod).take(8)
         if (egzersizler.isEmpty()) {
             detayAlan.addView(paragraf("Bu kas için veritabanında egzersiz bulunamadı."))
         } else {
             egzersizler.forEach { e ->
+                val yapilma = FitnessMotor.egzersizYapilmaSayisi(this, e.id)
                 val satir = LinearLayout(this).apply {
                     orientation = LinearLayout.HORIZONTAL
                     setPadding(dp(8), dp(10), dp(8), dp(10))
+                    gravity = android.view.Gravity.CENTER_VERTICAL
                     isClickable = true
                     isFocusable = true
                     val tip = android.util.TypedValue()
@@ -169,17 +214,33 @@ class FitnessActivity : AppCompatActivity() {
                         android.R.attr.selectableItemBackground, tip, true
                     )
                     setBackgroundResource(tip.resourceId)
-                    setOnClickListener { egzersizDetay(e) }
+                    setOnClickListener { egzersizKaydi(e, kod) }
                 }
                 satir.addView(TextView(this).apply {
                     text = FitnessMotor.kasEmoji(kod)
                     textSize = 18f
                     setPadding(0, 0, dp(8), 0)
                 })
-                satir.addView(TextView(this).apply {
-                    text = e.isim + "\n" + FitnessMotor.ekipmanTuru(e.ekipman)
+                val metinKol = LinearLayout(this).apply {
+                    orientation = LinearLayout.VERTICAL
+                    layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+                }
+                metinKol.addView(TextView(this).apply {
+                    text = e.isim
                     textSize = 14f
                     setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+                })
+                metinKol.addView(TextView(this).apply {
+                    text = FitnessMotor.ekipmanTuru(e.ekipman) +
+                        (if (yapilma > 0) " · $yapilma× yaptın" else "")
+                    textSize = 12f
+                    setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+                })
+                satir.addView(metinKol)
+                satir.addView(TextView(this).apply {
+                    text = "＋"
+                    textSize = 20f
+                    setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
                 })
                 detayAlan.addView(satir)
             }
@@ -208,7 +269,8 @@ class FitnessActivity : AppCompatActivity() {
         setPadding(dp(2), dp(2), dp(2), dp(2))
     }
 
-    private fun egzersizDetay(e: FitnessMotor.Egzersiz) {
+    /** Egzersize dokununca: talimatlar + set/tekrar/ağırlık kaydetme. */
+    private fun egzersizKaydi(e: FitnessMotor.Egzersiz, kasKod: String) {
         val ic = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(20), dp(12), dp(20), dp(8))
@@ -225,6 +287,8 @@ class FitnessActivity : AppCompatActivity() {
             setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
             setPadding(0, dp(4), 0, dp(6))
         })
+
+        // Talimatlar (kısa, kaydırılabilir olmasın diye 5 ile sınırlı)
         ic.addView(TextView(this).apply {
             text = "📖 Talimatlar"
             textSize = 13f
@@ -232,7 +296,7 @@ class FitnessActivity : AppCompatActivity() {
             setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
             setPadding(0, dp(6), 0, dp(2))
         })
-        e.talimatlar.forEachIndexed { i, t ->
+        e.talimatlar.take(5).forEachIndexed { i, t ->
             ic.addView(TextView(this).apply {
                 text = "${i + 1}. $t"
                 textSize = 13f
@@ -240,10 +304,65 @@ class FitnessActivity : AppCompatActivity() {
                 setPadding(0, dp(3), 0, dp(3))
             })
         }
+
+        // Set kaydetme alanları
+        ic.addView(TextView(this).apply {
+            text = "🧾 Bu egzersizi kaydet"
+            textSize = 14f
+            typeface = Typeface.DEFAULT_BOLD
+            setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
+            setPadding(0, dp(10), 0, dp(2))
+        })
+        val tekrarEt = android.widget.EditText(this).apply {
+            hint = "Tekrar (örn: 10)"
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER
+            setSingleLine(true)
+            setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+            setHintTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+        }
+        val agirlikEt = android.widget.EditText(this).apply {
+            hint = "Ağırlık kg (örn: 20)"
+            inputType = android.text.InputType.TYPE_CLASS_NUMBER or
+                android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL
+            setSingleLine(true)
+            setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+            setHintTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+        }
+        val alanlar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        val lp = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
+        tekrarEt.layoutParams = lp
+        agirlikEt.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f).apply {
+            marginStart = dp(10)
+        }
+        alanlar.addView(tekrarEt)
+        alanlar.addView(agirlikEt)
+        ic.addView(alanlar)
+
         MaterialAlertDialogBuilder(this)
-            .setTitle("Egzersiz")
+            .setTitle("Antrenmana Ekle")
             .setView(ic)
-            .setPositiveButton("Kapat", null)
+            .setPositiveButton("💾 Kaydet") { _, _ ->
+                val tekrar = tekrarEt.text.toString().toIntOrNull() ?: 0
+                val agirlik = agirlikEt.text.toString().replace(',', '.').toDoubleOrNull() ?: 0.0
+                if (tekrar > 0) {
+                    FitnessMotor.antrenmanEkle(
+                        this,
+                        FitnessMotor.AntrenmanKaydi(
+                            egzersizId = e.id,
+                            egzersizAdi = e.isim,
+                            kasKod = kasKod,
+                            setler = listOf(FitnessMotor.AntrenmanSeti(tekrar, agirlik)),
+                            tarih = System.currentTimeMillis()
+                        )
+                    )
+                    Titresim.basari(this)
+                    // İstatistiklerin güncellenmesi için kası yeniden çiz
+                    kasSec(kasKod)
+                } else {
+                    Titresim.ret(tekrarEt)
+                }
+            }
+            .setNegativeButton(android.R.string.cancel, null)
             .show()
     }
 

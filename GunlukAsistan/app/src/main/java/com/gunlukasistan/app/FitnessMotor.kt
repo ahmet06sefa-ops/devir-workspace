@@ -288,6 +288,24 @@ object FitnessMotor {
     fun egzersizYapilmaSayisi(context: Context, egzersizId: String): Int =
         antrenmanlar(context).count { it.egzersizId == egzersizId }
 
+    /** Bir kas grubunun toplam kaç kez çalışıldığı (antrenman kaydı sayısı). */
+    fun kasToplamYapilma(context: Context, kasKod: String): Int =
+        antrenmanlar(context).count { it.kasKod == kasKod }
+
+    /** Bir kas grubunun bugün yapılan toplam set sayısı. */
+    fun kasBugunSet(context: Context, kasKod: String): Int {
+        val gun = gunAnahtari()
+        return antrenmanlar(context)
+            .filter { it.kasKod == kasKod && gunAnahtari(it.tarih) == gun }
+            .sumOf { it.setler.size }
+    }
+
+    /** Bir kas grubunun son antrenman tarihi (ms; kayıt yoksa 0). */
+    fun kasSonAntrenmanMs(context: Context, kasKod: String): Long =
+        antrenmanlar(context)
+            .filter { it.kasKod == kasKod }
+            .maxOfOrNull { it.tarih } ?: 0L
+
     fun gunAnahtari(millis: Long = System.currentTimeMillis()): String =
         SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(millis))
 }

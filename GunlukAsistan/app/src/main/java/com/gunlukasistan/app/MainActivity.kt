@@ -967,21 +967,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * v11.45 — Geliştirilmiş "Hızlı Ekle" alt paneli.
-     * Alt ortadaki + butonundan açılır; "Yeni Ekle" ve "Araçlar & Modüller"
-     * olarak gruplu, ikonlu ve bölümlü, kaydırılabilir bir panel sunar.
+     * v11.46 — Geliştirilmiş "Hızlı Ekle" alt paneli.
+     * Arama kutusu + gruplu + ikonlu + alt açıklamalı, kaydırılabilir.
      */
     private fun habitusHizliEkle() {
         val yogunluk = resources.displayMetrics.density
         fun dp(v: Int) = (v * yogunluk).toInt()
 
-        val liste = android.widget.LinearLayout(this).apply {
+        val kok = android.widget.LinearLayout(this).apply {
             orientation = android.widget.LinearLayout.VERTICAL
             setPadding(dp(20), dp(18), dp(20), dp(28))
         }
 
         // Başlık
-        liste.addView(
+        kok.addView(
             android.widget.TextView(this).apply {
                 text = getString(R.string.quickadd_title)
                 textSize = 20f
@@ -997,7 +996,7 @@ class MainActivity : AppCompatActivity() {
             },
             android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT)
         )
-        liste.addView(
+        kok.addView(
             android.widget.TextView(this).apply {
                 text = getString(R.string.quickadd_subtitle)
                 textSize = 12f
@@ -1013,28 +1012,111 @@ class MainActivity : AppCompatActivity() {
             android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT)
         )
 
-        // Bölüm başlığı
-        fun bolumBasligi(metin: String) {
-            liste.addView(
-                android.widget.TextView(this).apply {
-                    text = metin.uppercase(java.util.Locale("tr", "TR"))
-                    textSize = 11.5f
-                    setTextColor(
-                        com.google.android.material.color.MaterialColors.getColor(
-                            this@MainActivity,
-                            com.google.android.material.R.attr.colorOnSurfaceVariant,
-                            0xFF8A7F6E.toInt()
-                        )
-                    )
-                    setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD)
-                    setPadding(dp(8), dp(12), dp(8), dp(4))
-                },
-                android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT)
+        // Arama kutusu
+        val arama = android.widget.EditText(this).apply {
+            hint = getString(R.string.quickadd_search)
+            setSingleLine(true)
+            textSize = 14f
+            setTextColor(
+                com.google.android.material.color.MaterialColors.getColor(
+                    this@MainActivity,
+                    com.google.android.material.R.attr.colorOnSurface,
+                    0xFF3A3226.toInt()
+                )
             )
+            setHintTextColor(
+                com.google.android.material.color.MaterialColors.getColor(
+                    this@MainActivity,
+                    com.google.android.material.R.attr.colorOnSurfaceVariant,
+                    0xFF8A7F6E.toInt()
+                )
+            )
+            setPadding(dp(12), dp(10), dp(12), dp(10))
+            background = null
+            setBackgroundColor(0x22B08968)
+        }
+        kok.addView(arama, android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT))
+
+        // İçerik alanı — arama sonucuna göre yeniden çizilir
+        val liste = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+        }
+        kok.addView(liste, android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT))
+
+        // Sarmalayıcı: kaydırılabilir + yükseklik sınırlı.
+        val sari = android.widget.ScrollView(this)
+        sari.addView(kok)
+        sari.layoutParams = android.widget.FrameLayout.LayoutParams(
+            android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
+            (resources.displayMetrics.heightPixels * 0.72f).toInt()
+        )
+        val panel = com.google.android.material.bottomsheet.BottomSheetDialog(this)
+        panel.setContentView(sari)
+
+        // Bölüm başlığı
+        fun bolumBasligi(metin: String): TextView = TextView(this).apply {
+            text = metin.uppercase(java.util.Locale("tr", "TR"))
+            textSize = 11.5f
+            setTextColor(
+                com.google.android.material.color.MaterialColors.getColor(
+                    this@MainActivity,
+                    com.google.android.material.R.attr.colorOnSurfaceVariant,
+                    0xFF8A7F6E.toInt()
+                )
+            )
+            setTypeface(android.graphics.Typeface.DEFAULT, android.graphics.Typeface.BOLD)
+            setPadding(dp(8), dp(12), dp(8), dp(4))
         }
 
-        // Her eylem satırı — ikonlu, kısaltmalı (çizgi), ripple'lı
-        fun satirEkle(metin: String, alt: String = "", onTikla: () -> Unit) {
+        // Eylem tanımı
+        data class Eylem(val grup: String, val metin: String, val alt: String, val calis: () -> Unit)
+
+        val eylemler = listOf(
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_task), getString(R.string.quickadd_task_alt)) {
+                panel.dismiss(); open(6); supportFragmentManager.executePendingTransactions()
+                (supportFragmentManager.findFragmentByTag("scr_6") as? TasksFragment)?.showTaskEditor()
+            },
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_habit), getString(R.string.quickadd_habit_alt)) {
+                panel.dismiss(); open(12); supportFragmentManager.executePendingTransactions()
+                (supportFragmentManager.findFragmentByTag("scr_12") as? HabitsFragment)?.showHabitEditor(null)
+            },
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_note), getString(R.string.quickadd_note_alt)) {
+                panel.dismiss(); open(5); supportFragmentManager.executePendingTransactions()
+                (supportFragmentManager.findFragmentByTag("scr_5") as? NotesFragment)?.showNoteEditor(null)
+            },
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_event), getString(R.string.quickadd_event_alt)) {
+                panel.dismiss(); open(11); supportFragmentManager.executePendingTransactions()
+                (supportFragmentManager.findFragmentByTag("scr_11") as? EventsFragment)?.showEventEditor(null)
+            },
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_exam), getString(R.string.quickadd_exam_alt)) {
+                panel.dismiss(); open(10); supportFragmentManager.executePendingTransactions()
+                (supportFragmentManager.findFragmentByTag("scr_10") as? ExamsFragment)?.showExamEditor()
+            },
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_topic), getString(R.string.quickadd_topic_alt)) {
+                panel.dismiss(); open(3); (supportFragmentManager.findFragmentByTag("scr_3") as? TopicsFragment)?.showTopicDialog()
+            },
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_questions), getString(R.string.quickadd_questions_alt)) {
+                panel.dismiss(); showQuestionsQuickAdd()
+            },
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_plan), getString(R.string.quickadd_plan_alt)) {
+                panel.dismiss(); open(16)
+            },
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_stats), getString(R.string.quickadd_stats_alt)) {
+                panel.dismiss(); AnalitikActivity.ac(this)
+            },
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_timer), getString(R.string.quickadd_timer_alt)) {
+                panel.dismiss(); openTimer()
+            },
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_butce), getString(R.string.quickadd_butce_alt)) {
+                panel.dismiss(); TakipActivity.ac(this, TakipActivity.S_BUTCE)
+            },
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_fitness), getString(R.string.quickadd_fitness_alt)) {
+                panel.dismiss(); FitnessActivity.ac(this)
+            }
+        )
+
+        // Eylem satırı
+        fun satirEkle(e: Eylem) {
             val satir = android.widget.LinearLayout(this).apply {
                 orientation = android.widget.LinearLayout.HORIZONTAL
                 setPadding(dp(8), dp(12), dp(8), dp(12))
@@ -1046,15 +1128,14 @@ class MainActivity : AppCompatActivity() {
                     android.R.attr.selectableItemBackground, tip, true
                 )
                 setBackgroundResource(tip.resourceId)
-                setOnClickListener { onTikla() }
+                setOnClickListener { e.calis() }
             }
-            // Metin sütunu
             val metinKol = android.widget.LinearLayout(this).apply {
                 orientation = android.widget.LinearLayout.VERTICAL
                 layoutParams = android.widget.LinearLayout.LayoutParams(0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
             }
             metinKol.addView(android.widget.TextView(this).apply {
-                text = metin
+                text = e.metin
                 textSize = 15f
                 setTextColor(
                     com.google.android.material.color.MaterialColors.getColor(
@@ -1064,9 +1145,9 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
             })
-            if (alt.isNotBlank()) {
+            if (e.alt.isNotBlank()) {
                 metinKol.addView(android.widget.TextView(this).apply {
-                    text = alt
+                    text = e.alt
                     textSize = 11.5f
                     setTextColor(
                         com.google.android.material.color.MaterialColors.getColor(
@@ -1092,76 +1173,51 @@ class MainActivity : AppCompatActivity() {
             liste.addView(satir, android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT))
         }
 
-        // Sarmalayıcı: kısa ekranlarda kaydırılabilir, yükseklik sınırlı.
-        val sari = android.widget.ScrollView(this)
-        sari.addView(liste)
-        sari.layoutParams = android.widget.FrameLayout.LayoutParams(
-            android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
-            (resources.displayMetrics.heightPixels * 0.7f).toInt()
-        )
-
-        val panel = com.google.android.material.bottomsheet.BottomSheetDialog(this)
-        panel.setContentView(sari)
-
-        // ── Yeni Ekle ──
-        bolumBasligi(getString(R.string.quickadd_group_ekle))
-        satirEkle(getString(R.string.quickadd_task), getString(R.string.quickadd_task_alt)) {
-            panel.dismiss()
-            open(6); supportFragmentManager.executePendingTransactions()
-            (supportFragmentManager.findFragmentByTag("scr_6") as? TasksFragment)?.showTaskEditor()
-        }
-        satirEkle(getString(R.string.quickadd_habit), getString(R.string.quickadd_habit_alt)) {
-            panel.dismiss()
-            open(12); supportFragmentManager.executePendingTransactions()
-            (supportFragmentManager.findFragmentByTag("scr_12") as? HabitsFragment)?.showHabitEditor(null)
-        }
-        satirEkle(getString(R.string.quickadd_note), getString(R.string.quickadd_note_alt)) {
-            panel.dismiss()
-            open(5); supportFragmentManager.executePendingTransactions()
-            (supportFragmentManager.findFragmentByTag("scr_5") as? NotesFragment)?.showNoteEditor(null)
-        }
-        satirEkle(getString(R.string.quickadd_event), getString(R.string.quickadd_event_alt)) {
-            panel.dismiss()
-            open(11); supportFragmentManager.executePendingTransactions()
-            (supportFragmentManager.findFragmentByTag("scr_11") as? EventsFragment)?.showEventEditor(null)
-        }
-        satirEkle(getString(R.string.quickadd_exam), getString(R.string.quickadd_exam_alt)) {
-            panel.dismiss()
-            open(10); supportFragmentManager.executePendingTransactions()
-            (supportFragmentManager.findFragmentByTag("scr_10") as? ExamsFragment)?.showExamEditor()
-        }
-        satirEkle(getString(R.string.quickadd_topic), getString(R.string.quickadd_topic_alt)) {
-            panel.dismiss()
-            open(3); (supportFragmentManager.findFragmentByTag("scr_3") as? TopicsFragment)?.showTopicDialog()
-        }
-        satirEkle(getString(R.string.quickadd_questions), getString(R.string.quickadd_questions_alt)) {
-            panel.dismiss()
-            showQuestionsQuickAdd()
-        }
-        satirEkle(getString(R.string.quickadd_plan), getString(R.string.quickadd_plan_alt)) {
-            panel.dismiss()
-            open(16)
+        // Listeyi (arama filtreli) çiz
+        fun ciz(sorgu: String) {
+            liste.removeAllViews()
+            val q = sorgu.trim().lowercase(java.util.Locale("tr", "TR"))
+            val sonuc = if (q.isEmpty()) eylemler
+            else eylemler.filter { e ->
+                e.metin.lowercase(java.util.Locale("tr", "TR")).contains(q) ||
+                    e.alt.lowercase(java.util.Locale("tr", "TR")).contains(q) ||
+                    e.grup.lowercase(java.util.Locale("tr", "TR")).contains(q)
+            }
+            if (sonuc.isEmpty()) {
+                liste.addView(android.widget.TextView(this).apply {
+                    text = getString(R.string.quickadd_noresult)
+                    textSize = 13f
+                    setTextColor(
+                        com.google.android.material.color.MaterialColors.getColor(
+                            this@MainActivity,
+                            com.google.android.material.R.attr.colorOnSurfaceVariant,
+                            0xFF8A7F6E.toInt()
+                        )
+                    )
+                    setPadding(dp(8), dp(20), dp(8), dp(8))
+                })
+                return
+            }
+            var sonGrup: String? = null
+            sonuc.forEach { e ->
+                if (e.grup != sonGrup) {
+                    sonGrup = e.grup
+                    liste.addView(bolumBasligi(e.grup))
+                }
+                satirEkle(e)
+            }
         }
 
-        // ── Araçlar & Modüller ──
-        bolumBasligi(getString(R.string.quickadd_group_arac))
-        satirEkle(getString(R.string.quickadd_stats), getString(R.string.quickadd_stats_alt)) {
-            panel.dismiss()
-            AnalitikActivity.ac(this)
-        }
-        satirEkle(getString(R.string.quickadd_timer), getString(R.string.quickadd_timer_alt)) {
-            panel.dismiss()
-            openTimer()
-        }
-        satirEkle(getString(R.string.quickadd_butce), getString(R.string.quickadd_butce_alt)) {
-            panel.dismiss()
-            TakipActivity.ac(this, TakipActivity.S_BUTCE)
-        }
-        satirEkle(getString(R.string.quickadd_fitness), getString(R.string.quickadd_fitness_alt)) {
-            panel.dismiss()
-            FitnessActivity.ac(this)
-        }
+        // Arama dinleyicisi
+        arama.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
+            override fun onTextChanged(s: CharSequence?, a: Int, b: Int, c: Int) = Unit
+            override fun afterTextChanged(s: android.text.Editable?) {
+                ciz(s?.toString() ?: "")
+            }
+        })
 
+        ciz("")
         panel.show()
     }
 
