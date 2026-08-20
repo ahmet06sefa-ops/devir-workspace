@@ -209,15 +209,14 @@
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav" />
 
-        <!-- + butonu: eski düzen sağ altta.
-             İstatistikler dahil Hızlı Ekle panelini açıyor (v11.35). -->
+        <!-- v11.37: Ortadaki yuvarlak + butonu → Hızlı Ekle panelini açıyor.
+             Alt barın ortasında, 4 sekmenin (Bugün ↔ Konular) arasına oturuyor. -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="88dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="32dp"
             android:contentDescription="@string/add"
             app:fabSize="normal"
             app:srcCompat="@drawable/ic_add" />

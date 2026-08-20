@@ -101,6 +101,7 @@
     <string name="quickadd_topic">📚 Konu ekle</string>
     <string name="quickadd_questions">🔢 Soru sayısı gir</string>
     <string name="quickadd_stats">📊 İstatistikler</string>
+    <string name="quickadd_timer">⏱️ Sayaç</string>
 
     <!-- + menüsü -->
     <string name="add_sheet_title">Ne eklemek istersin?</string>

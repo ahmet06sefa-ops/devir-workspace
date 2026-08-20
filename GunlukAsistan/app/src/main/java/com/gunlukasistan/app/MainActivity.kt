@@ -419,7 +419,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.nav_today -> open(2)
                     R.id.nav_topics -> open(3)
                     R.id.nav_plan -> open(16)
-                    R.id.nav_timer -> open(4)
+                    // v11.37: Sayaç alt bardan kaldırıldı, Hızlı Ekle panelinde.
                 }
             }
             true
@@ -560,7 +560,7 @@ class MainActivity : AppCompatActivity() {
         2 -> R.id.nav_today
         3 -> R.id.nav_topics
         16 -> R.id.nav_plan
-        4 -> R.id.nav_timer
+        // v11.37: Sayaç (4) alt barda değil → null döner (Hızlı Ekle'de).
         else -> null
     }
 
@@ -1033,6 +1033,11 @@ class MainActivity : AppCompatActivity() {
         satirEkle(getString(R.string.quickadd_stats)) {
             panel.dismiss()
             AnalitikActivity.ac(this)
+        }
+        // Sayaç (v11.37: alt bardan + butonuna taşındı)
+        satirEkle(getString(R.string.quickadd_timer)) {
+            panel.dismiss()
+            openTimer()
         }
         // Görev
         satirEkle(getString(R.string.quickadd_task)) {

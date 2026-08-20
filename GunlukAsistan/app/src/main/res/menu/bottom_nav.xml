@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- v11.35-2: Alt sekmeler eski düzene geri alındı.
-     İstatistikler sekmesi kaldırıldı; "+" butonunun içine taşındı. -->
+<!-- v11.37: Alt bar 4 sekme + ortada yuvarlak '+' (Hızlı Ekle).
+     Sayaç sekmesi alt bardan kaldırıldı; Hızlı Ekle panelinde. -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_home"
@@ -19,9 +19,4 @@
         android:id="@+id/nav_plan"
         android:icon="@drawable/ic_plan"
         android:title="@string/nav_plan" />
-    <!-- v11.13: Plan yerine Sayaç sekmesi -->
-    <item
-        android:id="@+id/nav_timer"
-        android:icon="@drawable/ic_timer"
-        android:title="@string/nav_timer" />
 </menu>
