@@ -407,6 +407,45 @@ object FitnessMotor {
         return kasGruplari.filter { it !in yapilan }
     }
 
+    // ══════════════════════════════════════════════════════════
+    // Gelişim / kişisel rekor istatistikleri
+    // ══════════════════════════════════════════════════════════
+
+    /** Bir egzersizin kaydedilen en yüksek ağırlığı (PR). */
+    fun egzersizEnYuksekAgirlik(context: Context, egzersizId: String): Double? =
+        antrenmanlar(context)
+            .filter { it.egzersizId == egzersizId }
+            .flatMap { it.setler }
+            .filter { it.agirlik > 0 }
+            .maxOfOrNull { it.agirlik }
+
+    /** Tüm egzersizlerin toplam hacmi (set sayısı × ağırlık × tekrar). */
+    fun toplamHacim(context: Context): Double =
+        antrenmanlar(context)
+            .flatMap { it.setler }
+            .sumOf { it.tekrar * it.agirlik }
+
+    /** En çok çalışılan kas grupları (kayıt sayısına göre, ilk N). */
+    fun enCokCalisilanKaslar(context: Context, n: Int = 5): List<Pair<String, Int>> {
+        val sayim = mutableMapOf<String, Int>()
+        antrenmanlar(context).forEach { k ->
+            sayim[k.kasKod] = (sayim[k.kasKod] ?: 0) + 1
+        }
+        return sayim.toList().sortedByDescending { it.second }.take(n)
+    }
+
+    /** Egzersiz başına PR sıralaması (ağırlığı olanlar, en yüksekten). */
+    fun prListesi(context: Context, n: Int = 8): List<Triple<String, String, Double>> =
+        antrenmanlar(context)
+            .groupBy { it.egzersizId }
+            .mapNotNull { (id, kayitlar) ->
+                val max = kayitlar.flatMap { it.setler }.filter { it.agirlik > 0 }.maxOfOrNull { it.agirlik }
+                if (max == null) null
+                else Triple(id, kayitlar.first().egzersizAdi, max)
+            }
+            .sortedByDescending { it.third }
+            .take(n)
+
     fun gunAnahtari(millis: Long = System.currentTimeMillis()): String =
         SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(millis))
 }

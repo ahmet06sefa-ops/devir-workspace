@@ -304,12 +304,82 @@ class FitnessActivity : AppCompatActivity() {
         sari.addView(ic)
 
         ic.addView(TextView(this).apply {
-            text = "📜 Antrenman Geçmişi"
+            text = "📜 Antrenman Geçmişi & Gelişim"
             textSize = 18f
             typeface = Typeface.DEFAULT_BOLD
             setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
             setPadding(dp(2), dp(4), dp(2), dp(2))
         })
+
+        // ── Gelişim özeti kartı ──
+        val gelisim = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(14), dp(12), dp(14), dp(12))
+            background = android.graphics.drawable.GradientDrawable().apply {
+                cornerRadius = dp(14).toFloat()
+                setColor(renk(com.google.android.material.R.attr.colorSurfaceVariant))
+            }
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).apply { bottomMargin = dp(10) }
+            layoutParams = lp
+        }
+        gelisim.addView(TextView(this).apply {
+            text = "📊 Gelişim Özeti"
+            textSize = 15f
+            typeface = Typeface.DEFAULT_BOLD
+            setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+        })
+        val kayitSayisi = FitnessMotor.antrenmanlar(this).size
+        if (kayitSayisi == 0) {
+            gelisim.addView(TextView(this).apply {
+                text = "Henüz veri yok. Set kaydettikçe PR ve hacim istatistiklerin burada oluşur."
+                textSize = 12.5f
+                setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+                setPadding(0, dp(4), 0, 0)
+            })
+        } else {
+            val hacim = FitnessMotor.toplamHacim(this)
+            gelisim.addView(TextView(this).apply {
+                text = "🏋️ Toplam hacim: ${String.format(java.util.Locale("tr", "TR"), "%.0f", hacim)} kg·tekrar"
+                textSize = 13f
+                setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+                setPadding(0, dp(2), 0, dp(2))
+            })
+            val enCok = FitnessMotor.enCokCalisilanKaslar(this, 3)
+            if (enCok.isNotEmpty()) {
+                gelisim.addView(TextView(this).apply {
+                    text = "🎯 En çok çalışılanlar: " + enCok.joinToString(", ") { (kod, adet) ->
+                        "${FitnessMotor.kasTuru(kod)} ($adet×)"
+                    }
+                    textSize = 12.5f
+                    setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+                    setPadding(0, dp(2), 0, dp(2))
+                })
+            }
+            // PR listesi
+            val pr = FitnessMotor.prListesi(this, 5)
+            if (pr.isNotEmpty()) {
+                gelisim.addView(TextView(this).apply {
+                    text = "🏆 Kişisel rekorlar:"
+                    textSize = 12.5f
+                    typeface = Typeface.DEFAULT_BOLD
+                    setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
+                    setPadding(0, dp(4), 0, dp(2))
+                })
+                pr.forEach { (_, ad, kg) ->
+                    gelisim.addView(TextView(this).apply {
+                        text = "· $ad — ${kg}kg"
+                        textSize = 12f
+                        setTextColor(renk(com.google.android.material.R.attr.colorOnSurfaceVariant))
+                        setPadding(0, dp(1), 0, 0)
+                    })
+                }
+            }
+        }
+        ic.addView(gelisim)
+
         val kayitlar = FitnessMotor.antrenmanlar(this).reversed()
         if (kayitlar.isEmpty()) {
             ic.addView(TextView(this).apply {
