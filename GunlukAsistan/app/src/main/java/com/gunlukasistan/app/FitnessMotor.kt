@@ -191,6 +191,12 @@ object FitnessMotor {
         if (kasKod.isNullOrBlank()) liste
         else liste.filter { it.kaslar.contains(kasKod) }
 
+    /** Birden çok kas grubuna göre filtreler (boşsa hepsini verir). */
+    fun kasGrubuListesineGore(liste: List<Egzersiz>, kaslar: Collection<String>): List<Egzersiz> {
+        if (kaslar.isEmpty()) return liste
+        return liste.filter { e -> e.kaslar.any { it in kaslar } }
+    }
+
     /** Ekipmana göre filtreler. ekipman boşsa hepsini verir. */
     fun ekipmanaGore(liste: List<Egzersiz>, ekipman: String?): List<Egzersiz> =
         if (ekipman.isNullOrBlank()) liste
@@ -380,6 +386,26 @@ object FitnessMotor {
     /** Belirli bir programın tüm kas kodları seti. */
     fun programKaslari(p: Program): Set<String> =
         p.gunler.flatMap { it.kaslar }.toSet()
+
+    // ══════════════════════════════════════════════════════════
+    // Haftalık durum (son 7 gün)
+    // ══════════════════════════════════════════════════════════
+
+    /** Son 7 günde her kas grubunun kaç set yapıldığı. */
+    fun haftalikKasSetleri(context: Context): Map<String, Int> {
+        val esik = System.currentTimeMillis() - 7L * 24 * 60 * 60 * 1000
+        val sonuc = mutableMapOf<String, Int>()
+        antrenmanlar(context)
+            .filter { it.tarih >= esik }
+            .forEach { k -> sonuc[k.kasKod] = (sonuc[k.kasKod] ?: 0) + k.setler.size }
+        return sonuc
+    }
+
+    /** Son 7 günde hiç çalışılmamış kas grupları. */
+    fun ihmalEdilenKaslar(context: Context): List<String> {
+        val yapilan = haftalikKasSetleri(context).keys
+        return kasGruplari.filter { it !in yapilan }
+    }
 
     fun gunAnahtari(millis: Long = System.currentTimeMillis()): String =
         SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(millis))
