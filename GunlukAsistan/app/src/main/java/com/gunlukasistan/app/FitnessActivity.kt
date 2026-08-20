@@ -92,15 +92,21 @@ class FitnessActivity : AppCompatActivity() {
         val liste = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(12), dp(4), dp(12), dp(4))
+            // ScrollView çocuğu FrameLayout.LayoutParams ister (LinearLayout değil!)
+            layoutParams = android.widget.FrameLayout.LayoutParams(
+                android.widget.FrameLayout.LayoutParams.MATCH_PARENT,
+                android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
+            )
         }
-        listeSar.addView(liste)
-        liste.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            dp(110)
-        )
         KasRehber.hepsi().forEach { k ->
             liste.addView(chip(k.emoji + " " + k.ad) { kasSec(k.kod) })
         }
+        // Liste sabit yükseklikte bir ScrollView içinde — LinearLayout çocuğu olarak
+        listeSar.layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            dp(120)
+        )
+        listeSar.addView(liste)
         kok.addView(listeSar)
 
         // Detay alanı (kaydırılabilir)
