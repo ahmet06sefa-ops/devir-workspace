@@ -3,191 +3,208 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Kas Sistemi 3D</title>
+<title>Kas Sistemi 3D — Ayrık Görünüm</title>
 <style>
-  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#0d0f14;
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#0a0c10;
     font-family:sans-serif;-webkit-user-select:none;user-select:none;touch-action:none;}
   #c{display:block;width:100%;height:100%;}
   #ui{position:absolute;left:0;right:0;bottom:0;padding:10px 14px 14px 14px;
-    background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;pointer-events:none;}
+    background:linear-gradient(transparent,rgba(0,0,0,.9));color:#fff;pointer-events:none;}
   #kas{font-size:18px;font-weight:bold;}
   #bilgi{font-size:13px;opacity:.85;margin-top:2px;line-height:1.3;}
-  #yazi{position:absolute;top:8px;left:0;right:0;text-align:center;color:#fff;opacity:.55;
+  #yazi{position:absolute;top:8px;left:0;right:0;text-align:center;color:#fff;opacity:.6;
     font-size:12px;pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.8);}
-  #legends{position:absolute;top:52px;left:8px;pointer-events:none;opacity:.92;
-    background:rgba(0,0,0,.35);border-radius:8px;padding:6px 8px;}
+  #legends{position:absolute;top:52px;left:8px;pointer-events:none;opacity:.95;
+    background:rgba(0,0,0,.4);border-radius:8px;padding:6px 8px;max-height:55%;overflow:auto;}
   .lg{display:flex;align-items:center;font-size:11px;color:#eee;margin-bottom:2px;}
   .sw{width:12px;height:12px;border-radius:2px;margin-right:6px;flex:none;}
+  #kontrol{position:absolute;top:52px;right:8px;display:flex;flex-direction:column;gap:6px;}
+  .btn{background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:20px;
+    padding:8px 14px;font-size:13px;cursor:pointer;font-weight:bold;}
+  .btn.aktif{background:#ff5252;}
 </style>
 </head>
 <body>
 <div id="c"></div>
 <div id="yazi">☝️ Sürükle = döndür · İki parmak/tekerlek = yakınlaştır · Kasa dokun = detay</div>
-<div id="ui"><div id="kas">İnsan Kas Sistemi — 3D</div><div id="bilgi">Modeli döndür, bir kasa dokunarak geliştirme rehberini aç.</div></div>
+<div id="kontrol">
+  <button id="btnAyrık" class="btn">🧩 Kasları Ayır</button>
+  <button id="btnOn" class="btn">Ön</button>
+  <button id="btnArka" class="btn">Arka</button>
+</div>
+<div id="ui"><div id="kas">İnsan Kas Sistemi — 3D</div><div id="bilgi">"Kasları Ayır" ile her kası tek tek gör, kasa dokunarak rehberi aç.</div></div>
 <div id="legends"></div>
 <script src="three.min.js"></script>
 <script>
 (function(){
-  function kasSecildi(kod, ad){
-    document.getElementById('kas').textContent = ad;
-    if(window.AndroidBridge && window.AndroidBridge.kasSecildi){ window.AndroidBridge.kasSecildi(kod); }
-  }
+  function kasSecildi(kod,ad){document.getElementById('kas').textContent=ad;
+    if(window.AndroidBridge&&window.AndroidBridge.kasSecildi)window.AndroidBridge.kasSecildi(kod);}
 
-  // ---------- Renderer ----------
-  var w=window.innerWidth, h=window.innerHeight;
+  var w=window.innerWidth,h=window.innerHeight;
   var renderer=new THREE.WebGLRenderer({antialias:true,alpha:false});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
-  renderer.setSize(w,h);
-  renderer.setClearColor(0x0d0f14);
-  renderer.shadowMap.enabled=true;
-  renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.setSize(w,h);renderer.setClearColor(0x0a0c10);
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
   renderer.outputEncoding=THREE.sRGBEncoding;
-  renderer.toneMapping=THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure=1.05;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.0;
   document.getElementById('c').appendChild(renderer.domElement);
 
   var scene=new THREE.Scene();
   var camera=new THREE.PerspectiveCamera(38,w/h,0.1,100);
-  camera.position.set(0,0.5,5.6);
-  camera.lookAt(0,0.4,0);
+  camera.position.set(0,0.5,6.0);camera.lookAt(0,0.4,0);
 
-  // ---------- Işıklar (gerçekçi) ----------
-  var hemi=new THREE.HemisphereLight(0xbdd7ff,0x3a3226,0.75); scene.add(hemi);
-  var amb=new THREE.AmbientLight(0xffffff,0.18); scene.add(amb);
-  var key=new THREE.DirectionalLight(0xfff2e0,1.15); key.position.set(2.5,4,4); key.castShadow=true;
-  key.shadow.mapSize.width=1024; key.shadow.mapSize.height=1024; scene.add(key);
-  var rim=new THREE.DirectionalLight(0x4a6cff,0.5); rim.position.set(-3,-1,3); scene.add(rim);
-  var fill=new THREE.DirectionalLight(0xffffff,0.22); fill.position.set(-1,1,-2); scene.add(fill);
+  var hemi=new THREE.HemisphereLight(0xcfe0ff,0x2e2a24,0.8);scene.add(hemi);
+  scene.add(new THREE.AmbientLight(0xffffff,0.15));
+  var key=new THREE.DirectionalLight(0xfff1de,1.2);key.position.set(2.5,4,4);key.castShadow=true;
+  key.shadow.mapSize.width=1024;key.shadow.mapSize.height=1024;scene.add(key);
+  var rim=new THREE.DirectionalLight(0x5a7bff,0.55);rim.position.set(-3,-1,3);scene.add(rim);
+  scene.add(new THREE.DirectionalLight(0xffffff,0.2).translateX(-1).translateY(1).translateZ(-2));
 
-  // ---------- Renkler ----------
+  // Renkler — her kas grubuna ayrı
   var R={
-    neck:0xC97B4A,traps:0xB8860B,shoulders:0xE07B39,chest:0xE5533D,
-    abdominals:0xD48A32,biceps:0x2E86AB,triceps:0x3D8B96,forearms:0x6A8CAF,
+    neck:0xC97B4A,traps:0xB8860B,shoulders:0xE07B39,chest:0xE5533D,abdominals:0xD48A32,
+    obliques:0xE0A93A,biceps:0x2E86AB,triceps:0x3D8B96,forearms:0x6A8CAF,brachialis:0x3FA08C,
     lats:0x7B5EA7,"middle back":0x8E6C88,"lower back":0xA66A46,glutes:0xC05A7A,
     quadriceps:0x4C9A5B,hamstrings:0x5B8C5A,calves:0x7BA05B,
-    abductors:0xB08C3B,adductors:0x9C6B93
+    abductors:0xB08C3B,adductors:0x9C6B93,chestL:0xE5533D,chestU:0xF06B4F,chestLower:0xD84430,
+    absU:0xD48A32,absL:0xCB7C2E,gluteM:0xB84E70
   };
   var TR={
-    neck:"Boyun",traps:"Trapez",shoulders:"Omuz",chest:"Göğüs",abdominals:"Karın",
-    biceps:"Biceps",triceps:"Triceps",forearms:"Ön Kol",lats:"Sırt Kanadı",
-    "middle back":"Orta Sırt","lower back":"Bel",glutes:"Kalça",
-    quadriceps:"Ön Bacak",hamstrings:"Arka Bacak",calves:"Baldır",
-    abductors:"Kaçıranlar",adductors:"Yaklaştırıcılar"
+    neck:"Boyun",traps:"Trapez",shoulders:"Omuz",chest:"Göğüs (Pektoral)",abdominals:"Karın",
+    obliques:"Oblik (Yan Karın)",biceps:"Biceps",triceps:"Triceps",forearms:"Ön Kol",
+    brachialis:"Brakialis",lats:"Sırt Kanadı (Lats)","middle back":"Orta Sırt",
+    "lower back":"Bel",glutes:"Kalça (Glute)",quadriceps:"Ön Bacak (Kuadriseps)",
+    hamstrings:"Arka Bacak (Hamstring)",calves:"Baldır (Gastroknemius)",
+    abductors:"Kaçıranlar",adductors:"Yaklaştırıcılar",
+    chestL:"Göğüs (Sol Pektoral)",chestU:"Göğüs (Üst Pektoral)",chestLower:"Göğüs (Alt Pektoral)",
+    absU:"Karın (Üst)",absL:"Karın (Alt)",gluteM:"Kalça (Gluteus Medius)"
   };
-  var secili=null, secilenOklar=[];
-  var group=new THREE.Group(); scene.add(group);
+  var secili=null,oklar=[], ayrik=false, gorunum='on';
 
-  function mat(kod){ return new THREE.MeshStandardMaterial({
-    color:R[kod],roughness:0.62,metalness:0.05 }); }
+  // Her kas: {k, base:[x,y,z], yon:[x,y,z] (ayrık yönü)}
+  var kaslar=[];
+  function kas(k,base,yon,ac){kaslar.push({k:k,base:base,yon:yon||[0,0,0],ac:ac||0});}
 
-  // ---------- Yardımcılar ----------
-  // yumuşak kapsül iki nokta arası
-  function kasil(a,b,radR,radT,kod){
-    var dir=new THREE.Vector3().subVectors(b,a), len=dir.length();
-    var geo=new THREE.CylinderGeometry(radT,radR,len,28,1,true);
-    var m=new THREE.Mesh(geo,mat(kod));
+  // Merkeze göre dışa itme yönleri
+  // Gövde
+  kas('neck',[0,1.34,0],[0,0.5,0],0.20);
+  kas('traps',[0,1.12,0.04],[0,0.4,0.2],0.25);
+  kas('chestL',[-0.26,0.60,0.10],[-0.6,0,0.4],0.35);
+  kas('chestU',[0.26,0.60,0.10],[0.6,0,0.4],0.35);
+  kas('chestLower',[0,0.42,0.16],[0,-0.4,0.3],0.28);
+  kas('abdominals',[0,0.22,0.18],[0,-0.5,0.3],0.30);
+  kas('obliques',[-0.30,0.16,0.14],[-0.7,0,0.2],0.30);
+  kas('obliques',[0.30,0.16,0.14],[0.7,0,0.2],0.30);
+  // Omuzlar
+  kas('shoulders',[-0.46,1.10,0.05],[-0.9,0.3,0.1],0.40);
+  kas('shoulders',[0.46,1.10,0.05],[0.9,0.3,0.1],0.40);
+  // Kollar
+  kas('biceps',[-0.72,0.78,0.03],[-0.9,0,0.2],0.38);
+  kas('biceps',[0.72,0.78,0.03],[0.9,0,0.2],0.38);
+  kas('triceps',[-0.72,0.78,-0.06],[-0.9,0,-0.2],0.38);
+  kas('triceps',[0.72,0.78,-0.06],[0.9,0,-0.2],0.38);
+  kas('brachialis',[-0.72,0.60,0.06],[-0.9,0,0.15],0.35);
+  kas('brachialis',[0.72,0.60,0.06],[0.9,0,0.15],0.35);
+  kas('forearms',[-0.90,0.24,0],[-1.1,0,0.1],0.42);
+  kas('forearms',[0.90,0.24,0],[1.1,0,0.1],0.42);
+  // Bacaklar
+  kas('quadriceps',[-0.28,-0.65,0.04],[-0.5,0,0.3],0.35);
+  kas('quadriceps',[0.28,-0.65,0.04],[0.5,0,0.3],0.35);
+  kas('hamstrings',[-0.28,-0.65,-0.05],[-0.5,0,-0.3],0.35);
+  kas('hamstrings',[0.28,-0.65,-0.05],[0.5,0,-0.3],0.35);
+  kas('calves',[-0.28,-1.30,0],[-0.5,0,0.2],0.35);
+  kas('calves',[0.28,-1.30,0],[0.5,0,0.2],0.35);
+  kas('glutes',[0,-0.32,0.02],[0,0,0.6],0.40);
+  kas('abductors',[-0.43,-0.55,0.05],[-0.8,0,0.2],0.35);
+  kas('abductors',[0.43,-0.55,0.05],[0.8,0,0.2],0.35);
+  kas('adductors',[-0.12,-0.75,0.08],[-0.3,0,0.2],0.30);
+  kas('adductors',[0.12,-0.75,0.08],[0.3,0,0.2],0.30);
+  // Sırt
+  kas('lats',[0,0.58,-0.26],[0,0.3,-0.6],0.38);
+  kas('middle back',[0,0.14,-0.26],[0,0.2,-0.6],0.36);
+  kas('lower back',[0,-0.10,-0.26],[0,-0.2,-0.6],0.34);
+  kas('gluteM',[-0.30,-0.32,0.02],[-0.4,0,0.4],0.30);
+  kas('gluteM',[0.30,-0.32,0.02],[0.4,0,0.4],0.30);
+
+  var group=new THREE.Group();scene.add(group);
+  function mat(k){return new THREE.MeshStandardMaterial({color:R[k],roughness:0.60,metalness:0.05});}
+
+  function topa(base,rx,ry,rz,r,k){var m=new THREE.Mesh(new THREE.SphereGeometry(r,30,26),mat(k));
+    m.position.set(base[0],base[1],base[2]);m.scale.set(rx,ry,rz);m.castShadow=true;m.receiveShadow=true;
+    m.userData.kas=k;m.userData.base=base.slice();m.userData.yon=(kaslar.find(q=>q.k===k&&q.ac)||{ac:0});group.add(m);return m;}
+  function kutu(base,sx,sy,sz,k,rot){var m=new THREE.Mesh(new THREE.BoxGeometry(sx,sy,sz,6,6,6),mat(k));
+    m.position.set(base[0],base[1],base[2]);if(rot){m.rotation.set(rot[0]||0,rot[1]||0,rot[2]||0);}
+    m.castShadow=true;m.receiveShadow=true;m.userData.kas=k;m.userData.base=base.slice();m.userData.yon=(kaslar.find(q=>q.k===k&&q.ac)||{ac:0});group.add(m);return m;}
+  function silin(a,b,rR,rT,k,rot){var dir=new THREE.Vector3().subVectors(b,a);var len=dir.length();
+    var m=new THREE.Mesh(new THREE.CylinderGeometry(rT,rR,len,24,1,true),mat(k));
     m.position.copy(a).add(b).multiplyScalar(0.5);
     m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir.clone().normalize());
-    m.castShadow=true; m.receiveShadow=true; m.userData.kas=kod; return m;
-  }
-  function kutulu(x,y,z,sx,sy,sz,kod,rx,ry,rz){
-    var geo=new THREE.BoxGeometry(sx,sy,sz,8,8,8);
-    var m=new THREE.Mesh(geo,mat(kod));
-    m.position.set(x,y,z);
-    if(rx)m.rotation.x=rx; if(ry)m.rotation.y=ry; if(rz)m.rotation.z=rz;
-    m.castShadow=true; m.receiveShadow=true; m.userData.kas=kod; return m;
-  }
-  function topa(x,y,z,rx,ry,rz,r,kod){
-    var m=new THREE.Mesh(new THREE.SphereGeometry(r,28,24),mat(kod));
-    m.position.set(x,y,z); m.scale.set(rx,ry,rz);
-    m.castShadow=true; m.receiveShadow=true; m.userData.kas=kod; return m;
-  }
+    if(rot)m.rotateZ(rot);
+    m.castShadow=true;m.receiveShadow=true;m.userData.kas=k;
+    // ortasını base olarak al (ayrık için)
+    var mid=new THREE.Vector3().copy(a).add(b).multiplyScalar(0.5);
+    m.userData.base=[mid.x,mid.y,mid.z];m.userData.yon=(kaslar.find(q=>q.k===k&&q.ac)||{ac:0});
+    group.add(m);return m;}
 
-  // ---------- Ana gövde ----------
+  // Ayrık yönünü uygulayan helper
+  function epoze(mesh,mesafeler){ }
+
+  // ============ Kasları çiz ============
   // Boyun + trapez
-  group.add(topa(0,1.32,0, 1,0.9,1, 0.13,'neck'));
-  group.add(kutulu(0,1.12,0.04, 0.72,0.32,0.60,'traps',0.12,0,0));
-  // Göğüs — iki parça (pektoral)
-  group.add(kutulu(-0.26,0.60,0.10, 0.55,0.52,0.34,'chest',0,0.08,0.18));
-  group.add(kutulu(0.26,0.60,0.10, 0.55,0.52,0.34,'chest',0,-0.08,0.18));
-  // Karın — 6 paket
-  for(var satir=0;satir<3;satir++){
-    var y=0.22-satir*0.12;
-    group.add(kutulu(-0.13,y,0.18, 0.22,0.10,0.16,'abdominals'));
-    group.add(kutulu(0.13,y,0.18, 0.22,0.10,0.16,'abdominals'));
-  }
-  // Omuzlar (deltoid)
-  group.add(topa(-0.46,1.10,0.05, 0.42,0.30,0.40, 0.30,'shoulders'));
-  group.add(topa(0.46,1.10,0.05, 0.42,0.30,0.40, 0.30,'shoulders'));
+  topa([0,1.34,0],1,0.9,1,0.13,'neck');
+  kutu([0,1.12,0.04],0.74,0.32,0.62,'traps',[0.12,0,0]);
+  // Göğüs — pektoraller
+  kutu([-0.26,0.60,0.10],0.55,0.42,0.34,'chestL',[0,0.08,0.18]);
+  kutu([0.26,0.60,0.10],0.55,0.42,0.34,'chestU',[0,-0.08,0.18]);
+  kutu([0,0.42,0.16],0.95,0.18,0.30,'chestLower',[0,0,0.10]);
+  // Karın
+  kutu([0,0.22,0.18],0.52,0.16,0.26,'abdominals');
+  kutu([-0.32,0.16,0.14],0.28,0.30,0.22,'obliques',[0,0,0.2]);
+  kutu([0.32,0.16,0.14],0.28,0.30,0.22,'obliques',[0,0,0.2]);
+  // Omuzlar
+  topa([-0.46,1.10,0.05],0.44,0.30,0.40,0.30,'shoulders');
+  topa([0.46,1.10,0.05],0.44,0.30,0.40,0.30,'shoulders');
+  // Kollar
+  silin([-0.62,1.02,0.04],[-0.82,0.48,0.02],0.14,0.12,'biceps',0.15);
+  silin([0.62,1.02,0.04],[0.82,0.48,0.02],0.14,0.12,'biceps',-0.15);
+  silin([-0.60,1.02,-0.07],[-0.80,0.48,-0.05],0.12,0.10,'triceps',0.15);
+  silin([0.60,1.02,-0.07],[0.80,0.48,-0.05],0.12,0.10,'triceps',-0.15);
+  silin([-0.70,0.72,0.06],[-0.82,0.52,0.05],0.05,0.04,'brachialis',0.15);
+  silin([0.70,0.72,0.06],[0.82,0.52,0.05],0.05,0.04,'brachialis',-0.15);
+  silin([-0.84,0.46,0],[-0.96,-0.05,0],0.09,0.07,'forearms');
+  silin([0.84,0.46,0],[0.96,-0.05,0],0.09,0.07,'forearms');
+  // Bacaklar
+  silin([-0.28,-0.30,0.05],[-0.28,-1.00,0.02],0.20,0.16,'quadriceps');
+  silin([0.28,-0.30,0.05],[0.28,-1.00,0.02],0.20,0.16,'quadriceps');
+  silin([-0.28,-0.30,-0.07],[-0.28,-1.00,-0.04],0.15,0.12,'hamstrings');
+  silin([0.28,-0.30,-0.07],[0.28,-1.00,-0.04],0.15,0.12,'hamstrings');
+  silin([-0.28,-1.03,0],[-0.28,-1.62,0],0.11,0.09,'calves');
+  silin([0.28,-1.03,0],[0.28,-1.62,0],0.11,0.09,'calves');
+  silin([-0.40,-0.40,0.06],[-0.46,-0.72,0.02],0.08,0.06,'abductors');
+  silin([0.40,-0.40,0.06],[0.46,-0.72,0.02],0.08,0.06,'abductors');
+  silin([-0.12,-0.42,0.12],[-0.12,-0.95,0.06],0.09,0.07,'adductors');
+  silin([0.12,-0.42,0.12],[0.12,-0.95,0.06],0.09,0.07,'adductors');
+  kutu([0,-0.32,0.02],0.92,0.30,0.60,'glutes',[0.06,0,0]);
+  topa([-0.30,-0.32,0.05],0.34,0.22,0.34,0.20,'gluteM');
+  topa([0.30,-0.32,0.05],0.34,0.22,0.34,0.20,'gluteM');
+  // Sırt
+  kutu([0,0.58,-0.26],0.98,0.90,0.18,'lats',[0,0,0.04]);
+  kutu([0,0.14,-0.26],0.86,0.55,0.16,'middle back',[0,0,0.04]);
+  kutu([0,-0.10,-0.26],0.82,0.34,0.16,'lower back',[0,0,0.04]);
 
-  // ---- Kollar ----
-  // Üst kol: biceps (ön) + triceps (arka) + lateral
-  (function(s){
-    var a=new THREE.Vector3(-0.62*s,1.02,0.04), b=new THREE.Vector3(-0.82*s,0.48,0.02);
-    var m=kasil(a,b,0.14,0.12,'biceps'); m.rotation.z=0.15*s; group.add(m);
-    var a2=new THREE.Vector3(-0.60*s,1.02,-0.07), b2=new THREE.Vector3(-0.80*s,0.48,-0.05);
-    var m2=kasil(a2,b2,0.12,0.10,'triceps'); m2.rotation.z=0.15*s; group.add(m2);
-    // Ön kol
-    var a3=new THREE.Vector3(-0.85*s,0.46,0), b3=new THREE.Vector3(-0.97*s,-0.05,0);
-    var m3=kasil(a3,b3,0.09,0.07,'forearms'); group.add(m3);
-  })(1);
-  (function(s){
-    var a=new THREE.Vector3(-0.62*s,1.02,0.04), b=new THREE.Vector3(-0.82*s,0.48,0.02);
-    var m=kasil(a,b,0.14,0.12,'biceps'); m.rotation.z=0.15*s; group.add(m);
-    var a2=new THREE.Vector3(-0.60*s,1.02,-0.07), b2=new THREE.Vector3(-0.80*s,0.48,-0.05);
-    var m2=kasil(a2,b2,0.12,0.10,'triceps'); m2.rotation.z=0.15*s; group.add(m2);
-    var a3=new THREE.Vector3(-0.85*s,0.46,0), b3=new THREE.Vector3(-0.97*s,-0.05,0);
-    var m3=kasil(a3,b3,0.09,0.07,'forearms'); group.add(m3);
-  })(-1);
-
-  // ---- Bacaklar ----
-  (function(s){
-    // Kalça
-    var hiz=0.60;
-    // Ön bacak (quad)
-    var a=new THREE.Vector3(-0.28*s,-0.30,0.05), b=new THREE.Vector3(-0.28*s,-1.00,0.02);
-    var m=kasil(a,b,0.19,0.15,'quadriceps'); group.add(m);
-    // Arka bacak (hamstring)
-    var a2=new THREE.Vector3(-0.28*s,-0.30,-0.07), b2=new THREE.Vector3(-0.28*s,-1.00,-0.04);
-    var m2=kasil(a2,b2,0.15,0.12,'hamstrings'); group.add(m2);
-    // Baldır
-    var a3=new THREE.Vector3(-0.28*s,-1.03,0), b3=new THREE.Vector3(-0.28*s,-1.62,0);
-    var m3=kasil(a3,b3,0.10,0.08,'calves'); group.add(m3);
-    // Kaçıranlar
-    var a4=new THREE.Vector3(-0.40*s,-0.40,0.06), b4=new THREE.Vector3(-0.46*s,-0.72,0.02);
-    var m4=kasil(a4,b4,0.08,0.06,'abductors'); group.add(m4);
-  })(1);
-  (function(s){
-    var a=new THREE.Vector3(-0.28*s,-0.30,0.05), b=new THREE.Vector3(-0.28*s,-1.00,0.02);
-    var m=kasil(a,b,0.19,0.15,'quadriceps'); group.add(m);
-    var a2=new THREE.Vector3(-0.28*s,-0.30,-0.07), b2=new THREE.Vector3(-0.28*s,-1.00,-0.04);
-    var m2=kasil(a2,b2,0.15,0.12,'hamstrings'); group.add(m2);
-    var a3=new THREE.Vector3(-0.28*s,-1.03,0), b3=new THREE.Vector3(-0.28*s,-1.62,0);
-    var m3=kasil(a3,b3,0.10,0.08,'calves'); group.add(m3);
-    var a4=new THREE.Vector3(-0.40*s,-0.40,0.06), b4=new THREE.Vector3(-0.46*s,-0.72,0.02);
-    var m4=kasil(a4,b4,0.08,0.06,'abductors'); group.add(m4);
-  })(-1);
-  // Kalça kasları (glutes)
-  group.add(kutulu(0,-0.32,0.02, 0.92,0.30,0.60,'glutes',0.06,0,0));
-
-  // ---- Sırt (arka) ----
-  group.add(kutulu(0,0.58,-0.26, 0.98,0.90,0.18,'lats',0,0,0.04));
-  group.add(kutulu(0,0.14,-0.26, 0.86,0.55,0.16,'middle back',0,0,0.04));
-  group.add(kutulu(0,-0.10,-0.26, 0.82,0.34,0.16,'lower back',0,0,0.04));
-
-  // Kafa (görsel — kas değil)
+  // Kafa
   var kafa=new THREE.Mesh(new THREE.SphereGeometry(0.28,32,28),
     new THREE.MeshStandardMaterial({color:0xE2B98A,roughness:0.55}));
-  kafa.position.y=1.55; kafa.castShadow=true; group.add(kafa);
+  kafa.position.y=1.55;kafa.castShadow=true;group.add(kafa);
 
-  // Zemin (yumuşak gölge alanı)
-  var zemin=new THREE.Mesh(new THREE.CircleGeometry(2.4,48),
-    new THREE.MeshStandardMaterial({color:0x1a1d24,roughness:0.9}));
-  zemin.rotation.x=-Math.PI/2; zemin.position.y=-1.68; zemin.receiveShadow=true; scene.add(zemin);
+  // Zemin
+  var zemin=new THREE.Mesh(new THREE.CircleGeometry(2.6,48),
+    new THREE.MeshStandardMaterial({color:0x161a20,roughness:0.9}));
+  zemin.rotation.x=-Math.PI/2;zemin.position.y=-1.68;zemin.receiveShadow=true;scene.add(zemin);
 
   group.rotation.x=0.04;
 
-  // ---------- Lejant ----------
+  // Lejant
   var lg=document.getElementById('legends');
   Object.keys(R).forEach(function(k){
     var d=document.createElement('div');d.className='lg';
@@ -195,59 +212,81 @@
     lg.appendChild(d);
   });
 
-  // ---------- Orbit (elle) ----------
-  var aktif=false,x=0,y=0, teker=5.6;
-  var el=renderer.domElement;
+  // ============ Ayrık görünüm ============
+  // Mesh'lere ayrık yönünü kaydet (kaslar listesinden bul, sol/sağ işareti)
+  var meshList=[];group.traverse(function(o){if(o.isMesh&&o.userData.kas)meshList.push(o);});
+  meshList.forEach(function(m){
+    var entry=null;
+    // base'e en yakın kaydı bul
+    var bd=m.userData.base;
+    kaslar.forEach(function(kk){ if(!entry&&kk.base[0]===bd[0]&&Math.abs(kk.base[1]-bd[1])<0.05&&Math.abs(kk.base[2]-bd[2])<0.05)entry=kk; });
+    if(!entry){kaslar.forEach(function(kk){if(!entry&&kk.k===m.userData.kas)entry=kk;});}
+    m.userData.ayik=entry?entry.yon:[0,0,0];
+    m.userData.ac = entry?entry.ac:0.3;
+  });
+
+  function ayrıkUygula2(){
+    meshList.forEach(function(m){
+      if(ayrik){
+        var y=m.userData.ayik, a=m.userData.ac;
+        m.position.set(m.userData.base[0]+y[0]*a, m.userData.base[1]+y[1]*a, m.userData.base[2]+y[2]*a);
+      }else{
+        m.position.set(m.userData.base[0],m.userData.base[1],m.userData.base[2]);
+      }
+    });
+  }
+
+  document.getElementById('btnAyrık').addEventListener('click',function(){
+    ayrik=!ayrik;this.classList.toggle('aktif',ayrik);
+    this.textContent=ayrik?'🧩 Birleştir':'🧩 Kasları Ayır';
+    ayrıkUygula2();
+  });
+
+  function setGorunum(v){
+    gorunum=v;
+    document.getElementById('btnOn').classList.toggle('aktif',v==='on');
+    document.getElementById('btnArka').classList.toggle('aktif',v==='arka');
+    // Görünümü döndür — ön ya da arka
+    if(v==='on'){group.rotation.y=0;}else{group.rotation.y=Math.PI;}
+  }
+  document.getElementById('btnOn').addEventListener('click',function(){setGorunum('on');});
+  document.getElementById('btnArka').addEventListener('click',function(){setGorunum('arka');});
+  setGorunum('on');
+
+  // Orbit (elle)
+  var aktif=false,x=0,y=0,teker=6.0, el=renderer.domElement;
   el.addEventListener('touchstart',function(e){if(e.touches.length===1){aktif=true;x=e.touches[0].clientX;y=e.touches[0].clientY;}else if(e.touches.length>=2){aktif=false;}},{passive:true});
-  el.addEventListener('touchmove',function(e){if(aktif&&e.touches.length===1){group.rotation.y+=(e.touches[0].clientX-x)*0.012;group.rotation.x+=(e.touches[0].clientY-y)*0.012;group.rotation.x=Math.max(-0.6,Math.min(0.9,group.rotation.x));x=e.touches[0].clientX;y=e.touches[0].clientY;}else if(e.touches.length===2){var oldD=Math.hypot(x-e.touches[0].clientX,0);}},{passive:true});
+  el.addEventListener('touchmove',function(e){if(aktif&&e.touches.length===1){group.rotation.y+=(e.touches[0].clientX-x)*0.012;group.rotation.x=Math.max(-0.6,Math.min(0.9,group.rotation.x+(e.touches[0].clientY-y)*0.012));x=e.touches[0].clientX;y=e.touches[0].clientY;}},{passive:true});
   el.addEventListener('touchend',function(){aktif=false;},{passive:true});
   el.addEventListener('wheel',function(e){teker=Math.max(3,Math.min(10,teker+e.deltaY*0.005));},{passive:true});
 
-  // ---------- Raycast ile kas seçimi ----------
-  var raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2();
-  function dokun(clientX,clientY){
-    var rect=el.getBoundingClientRect();
-    pointer.x=((clientX-rect.left)/rect.width)*2-1;
-    pointer.y=-(((clientY-rect.top)/rect.height)*2-1);
+  // Raycast
+  var raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
+  function dokun(cx,cy){var rect=el.getBoundingClientRect();
+    pointer.x=((cx-rect.left)/rect.width)*2-1;pointer.y=-(((cy-rect.top)/rect.height)*2-1);
     raycaster.setFromCamera(pointer,camera);
-    var meshes=[]; group.traverse(function(o){if(o.isMesh&&o.userData.kas)meshes.push(o);});
-    var hits=raycaster.intersectObjects(meshes,false);
-    if(hits.length>0) sec(hits[0].object.userData.kas);
-  }
-  el.addEventListener('click',function(e){ if(e.clientX!==undefined) dokun(e.clientX,e.clientY); });
+    var ms=[];group.traverse(function(o){if(o.isMesh&&o.userData.kas)ms.push(o);});
+    var h=raycaster.intersectObjects(ms,false);
+    if(h.length>0)sec(h[0].object.userData.kas);}
+  el.addEventListener('click',function(e){if(e.clientX!==undefined)dokun(e.clientX,e.clientY);});
 
   function sec(kod){
-    if(secili){
-      secili.material.color.setHex(secili._renk);
-      secili.material.emissive.setHex(0x000000);
-    }
-    secilenOklar.forEach(function(o){group.remove(o);}); secilenOklar=[];
-    var hedef=null;
-    group.traverse(function(o){if(o.isMesh&&o.userData.kas===kod&&!hedef)hedef=o;});
+    if(secili){secili.material.color.setHex(secili._renk);secili.material.emissive.setHex(0x000000);}
+    oklar.forEach(function(o){group.remove(o);});oklar=[];
+    var hedef=null;group.traverse(function(o){if(o.isMesh&&o.userData.kas===kod&&!hedef)hedef=o;});
     if(!hedef)return;
-    hedef._renk=hedef.material.color.getHex();
-    hedef.material.color.setHex(0xFF5252);
-    hedef.material.emissive.setHex(0x551111);
+    hedef._renk=hedef.material.color.getHex();hedef.material.color.setHex(0xFF5252);hedef.material.emissive.setHex(0x551111);
     secili=hedef;
-    var nokta=new THREE.Mesh(new THREE.SphereGeometry(0.06,16,12),
-      new THREE.MeshBasicMaterial({color:0xFFD54A}));
-    nokta.position.copy(hedef.position); nokta.position.x+=0.28;
-    group.add(nokta); secilenOklar.push(nokta);
-    kasSecildi(kod, TR[kod]);
+    var n=new THREE.Mesh(new THREE.SphereGeometry(0.06,16,12),new THREE.MeshBasicMaterial({color:0xFFD54A}));
+    n.position.copy(hedef.position);n.position.x+=0.28;group.add(n);oklar.push(n);
+    kasSecildi(kod,TR[kod]||kod);
   }
 
-  // ---------- Animasyon ----------
-  function anim(){
-    requestAnimationFrame(anim);
-    camera.position.z=teker;
-    camera.lookAt(0,0.4,0);
-    renderer.render(scene,camera);
-  }
+  function anim(){requestAnimationFrame(anim);
+    camera.position.z=teker;camera.lookAt(0,0.4,0);renderer.render(scene,camera);}
   anim();
-  window.addEventListener('resize',function(){
-    w=window.innerWidth;h=window.innerHeight;
-    renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();
-  });
+  window.addEventListener('resize',function(){w=window.innerWidth;h=window.innerHeight;
+    renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix();});
 })();
 </script>
 </body>
