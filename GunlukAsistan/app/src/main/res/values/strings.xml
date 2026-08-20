@@ -102,6 +102,7 @@
     <string name="quickadd_questions">🔢 Soru sayısı gir</string>
     <string name="quickadd_stats">📊 İstatistikler</string>
     <string name="quickadd_timer">⏱️ Sayaç</string>
+    <string name="quickadd_butce">💰 Bütçe &amp; Finans</string>
 
     <!-- + menüsü -->
     <string name="add_sheet_title">Ne eklemek istersin?</string>

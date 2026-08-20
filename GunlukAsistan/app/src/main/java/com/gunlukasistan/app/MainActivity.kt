@@ -1039,6 +1039,12 @@ class MainActivity : AppCompatActivity() {
             panel.dismiss()
             openTimer()
         }
+        // Bütçe & Finans (v11.38: ekran görüntüsündeki finans aracı.
+        // Butce motoru üzerine kurulu TakipActivity bütçe ekranını açar.)
+        satirEkle(getString(R.string.quickadd_butce)) {
+            panel.dismiss()
+            TakipActivity.ac(this, TakipActivity.S_BUTCE)
+        }
         // Görev
         satirEkle(getString(R.string.quickadd_task)) {
             panel.dismiss()
