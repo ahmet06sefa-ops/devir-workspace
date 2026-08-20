@@ -1252,6 +1252,13 @@
                 android:name="android.accessibilityservice.AccessibilityService"
                 android:resource="@xml/accessibility_service_config" />
         </service>
+        <!-- v11.39: Fitness & Egzersiz (free-exercise-db) -->
+        <activity
+            android:name=".FitnessActivity"
+            android:exported="false"
+            android:label="@string/fitness_baslik"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

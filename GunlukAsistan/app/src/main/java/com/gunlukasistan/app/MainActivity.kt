@@ -1045,6 +1045,11 @@ class MainActivity : AppCompatActivity() {
             panel.dismiss()
             TakipActivity.ac(this, TakipActivity.S_BUTCE)
         }
+        // Fitness & Egzersiz (v11.39: free-exercise-db + antrenman günlüğü)
+        satirEkle(getString(R.string.quickadd_fitness)) {
+            panel.dismiss()
+            FitnessActivity.ac(this)
+        }
         // Görev
         satirEkle(getString(R.string.quickadd_task)) {
             panel.dismiss()

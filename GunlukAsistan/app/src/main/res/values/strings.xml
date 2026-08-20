@@ -103,6 +103,8 @@
     <string name="quickadd_stats">📊 İstatistikler</string>
     <string name="quickadd_timer">⏱️ Sayaç</string>
     <string name="quickadd_butce">💰 Bütçe &amp; Finans</string>
+    <string name="quickadd_fitness">💪 Fitness &amp; Egzersiz</string>
+    <string name="fitness_baslik">Fitness &amp; Egzersiz</string>
 
     <!-- + menüsü -->
     <string name="add_sheet_title">Ne eklemek istersin?</string>
