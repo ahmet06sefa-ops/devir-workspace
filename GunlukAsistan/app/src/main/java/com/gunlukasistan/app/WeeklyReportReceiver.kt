@@ -99,6 +99,20 @@ class WeeklyReportReceiver : BroadcastReceiver() {
                 } catch (e: Exception) {
                     android.util.Log.w("WeeklyReport", "Öğrenme özeti eklenemedi", e)
                 }
+
+                // v11.59: Sağlık özeti — haftalık sağlık karnesi
+                try {
+                    val saglikSatirlari = SaglikOzetMotor.karnesi(context)
+                    if (saglikSatirlari.isNotEmpty()) {
+                        append("\n\n🩺 Sağlık Karnesi")
+                        saglikSatirlari.forEach { s ->
+                            append("\n").append(s.emoji).append(" ").append(s.baslik).append(": ").append(s.detay)
+                        }
+                    }
+                } catch (e: Exception) {
+                    android.util.Log.w("WeeklyReport", "Sağlık özeti eklenemedi", e)
+                }
+
                 append("\n\nYeni haftaya bomba gibi gir! 💪")
             }
 
@@ -150,6 +164,15 @@ class WeeklyReportReceiver : BroadcastReceiver() {
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .apply {
+                    // v11.59: Sağlık Karnesi kısayol eylemi
+                    val saglikAc = PendingIntent.getActivity(
+                        context, 2,
+                        Intent(context, SaglikOzetActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        },
+                        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                    )
+                    addAction(0, "🩺 Sağlık Karnesi", saglikAc)
                     // Tekrar edilecek soru varsa kısayol göster
                     runCatching {
                         val bekleyen = Hatalarim.bugunkuSayi(context)
