@@ -63,15 +63,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         view.findViewById<View>(R.id.openSettings).setOnClickListener {
             (activity as? MainActivity)?.openSettings()
         }
-        // v7.87: zamanlayıcı düğmesi — hem ekrana hem ayarlara giriş.
-        //
-        // v7.86'da kısa dokunuş ayarları açıyordu, sayaç ekranı yalnızca
-        // uzun basmayla geliyordu. Kullanıcı haklı olarak "sadece ayarlara
-        // değil, zamanlayıcı ekranına da girsin" dedi: uzun basma keşfedilmesi
-        // zor bir hareket. Artık kısa dokunuş küçük bir seçim penceresi açıyor,
-        // uzun basma ise kısayol olarak doğrudan sayaç ekranını veriyor.
+        // v11.53: zamanlayıcı düğmesi — tıklayınca direkt sayaç ekranı açılır.
+        // (Eski davranış: kısa dokunuş seçim penceresi açıyordu; kullanıcı
+        // isteğiyle artık tek dokunuş sayaç ekranına gidiyor.)
         view.findViewById<View>(R.id.openTimerMenu).setOnClickListener {
-            zamanlayiciMenusu()
+            (activity as? MainActivity)?.openTimer()
         }
         view.findViewById<View>(R.id.openTimerMenu).setOnLongClickListener {
             (activity as? MainActivity)?.openTimer()
@@ -1055,52 +1051,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onStart()
         Yenileyici.kur(this) { refreshData() }
         Yenileyici.gorunurluguEsitle(this)
-    }
-
-    /**
-     * v7.87 — Zamanlayıcı hızlı menüsü.
-     *
-     * İki giriş sunar: sayaç ekranı ve ayarlar. Sayaç çalışıyorsa kalan
-     * süre de gösterilir — kullanıcı menüyü açtığında durumu görebilsin.
-     */
-    private fun zamanlayiciMenusu() {
-        val ctx = context ?: return
-
-        val calisiyor = TimerEngine.isRunning(ctx)
-        val ekranEtiketi = if (calisiyor) {
-            getString(R.string.zm_ekran_calisiyor, TimerEngine.format(TimerEngine.displayMs(ctx)))
-        } else {
-            getString(R.string.zm_ekran)
-        }
-
-        val secenekler = arrayOf(
-            ekranEtiketi,
-            getString(R.string.zm_ayarlar),
-            getString(
-                if (calisiyor) R.string.zm_duraklat else R.string.zm_baslat
-            )
-        )
-
-        com.google.android.material.dialog.MaterialAlertDialogBuilder(ctx)
-            .setTitle(R.string.zm_baslik)
-            .setItems(secenekler) { _, hangi ->
-                when (hangi) {
-                    0 -> (activity as? MainActivity)?.openTimer()
-                    1 -> SayacAyarActivity.ac(ctx)
-                    2 -> {
-                        // Menüden hızlı başlat/duraklat — ekrana girmeden
-                        if (TimerEngine.isRunning(ctx)) {
-                            TimerEngine.creditWatch(ctx)
-                            TimerEngine.pause(ctx)
-                        } else {
-                            TimerEngine.start(ctx)
-                        }
-                        TimerAlarm.reschedule(ctx)
-                    }
-                }
-            }
-            .setNegativeButton(R.string.cancel, null)
-            .show()
     }
 
     // v10.59: Ana ekrandaki atölye/modül butonlarını açma/kapama kuralını uygula
