@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- v11.62: Alt gezinme çubuğu üst aksan çizgisi -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Üst ince renkli çizgi -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#33B08968" />
+        </shape>
+    </item>
+    <!-- Çizginin altında arka plan (2dp çizgi bırakılır) -->
+    <item android:top="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/colorSurface" />
+        </shape>
+    </item>
+</layer-list>

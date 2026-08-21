@@ -201,7 +201,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="?attr/colorSurface"
+            android:background="@drawable/bottom_nav_bg"
             app:itemIconSize="22dp"
             app:itemIconTint="@color/tab_item_color"
             app:itemRippleColor="#22000000"

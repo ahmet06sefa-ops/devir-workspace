@@ -826,7 +826,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             in 18..22 -> R.string.greet_evening
             else -> R.string.greet_night
         }
-        view.findViewById<TextView>(R.id.greetingText).setText(greetingRes)
+        view.findViewById<TextView>(R.id.greetingText).apply {
+            setText(greetingRes)
+            // v11.62: karşılama metnini vurgu rengine çevir
+            runCatching {
+                setTextColor(
+                    com.google.android.material.color.MaterialColors.getColor(
+                        this@HomeFragment.requireContext(),
+                        com.google.android.material.R.attr.colorPrimary,
+                        0xFFB08968.toInt()
+                    )
+                )
+            }
+        }
         view.findViewById<TextView>(R.id.dateText).text =
             SimpleDateFormat("d MMMM, EEEE", turkish).format(Date())
 
