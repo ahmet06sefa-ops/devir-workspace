@@ -1266,6 +1266,13 @@
             android:label="@string/beslenme_baslik"
             android:theme="@style/Theme.GunlukAsistan"
             android:windowSoftInputMode="adjustResize" />
+        <!-- v11.55: Uyku Takibi -->
+        <activity
+            android:name=".UykuActivity"
+            android:exported="false"
+            android:label="@string/uyku_baslik"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

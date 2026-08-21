@@ -26,8 +26,8 @@ android {
         applicationId = "com.gunlukasistan.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 309
-        versionName = "11.54"
+        versionCode = 310
+        versionName = "11.55"
     }
 
     buildTypes {

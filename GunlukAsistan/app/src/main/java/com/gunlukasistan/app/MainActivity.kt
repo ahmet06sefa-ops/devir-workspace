@@ -1117,6 +1117,9 @@ class MainActivity : AppCompatActivity() {
             },
             Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_beslenme), getString(R.string.quickadd_beslenme_alt)) {
                 panel.dismiss(); BeslenmeActivity.ac(this)
+            },
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_uyku), getString(R.string.quickadd_uyku_alt)) {
+                panel.dismiss(); UykuActivity.ac(this)
             }
         )
 

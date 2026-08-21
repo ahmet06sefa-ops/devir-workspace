@@ -122,6 +122,9 @@
     <string name="quickadd_beslenme">🍽️ Beslenme &amp; Kalori</string>
     <string name="quickadd_beslenme_alt">Öğün, kalori ve su takibi</string>
     <string name="beslenme_baslik">Beslenme &amp; Kalori</string>
+    <string name="quickadd_uyku">😴 Uyku Takibi</string>
+    <string name="quickadd_uyku_alt">Uyku süresi ve kalite kaydı</string>
+    <string name="uyku_baslik">Uyku Takibi</string>
     <string name="quickadd_search">Hızlı ara (örn. görev, kas, sayaç)…</string>
     <string name="quickadd_noresult">Sonuç bulunamadı.</string>
     <string name="fitness_baslik">Kas Sistemi 3D</string>
