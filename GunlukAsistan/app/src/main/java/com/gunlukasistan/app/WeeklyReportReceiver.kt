@@ -109,6 +109,11 @@ class WeeklyReportReceiver : BroadcastReceiver() {
                             append("\n").append(s.emoji).append(" ").append(s.baslik).append(": ").append(s.detay)
                         }
                     }
+                    // v11.64: Ruh-Uyku ilişki içgörüsü (veri varsa)
+                    val icgoru = IliskiAnalizMotor.analiz(context)
+                    if (icgoru.isNotBlank() && !icgoru.contains("Yeterli eşleşen veri")) {
+                        append("\n\n🧠 İçgörü:\n").append(icgoru.trim())
+                    }
                 } catch (e: Exception) {
                     android.util.Log.w("WeeklyReport", "Sağlık özeti eklenemedi", e)
                 }

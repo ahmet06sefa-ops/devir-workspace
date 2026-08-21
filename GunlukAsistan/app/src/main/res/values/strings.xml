@@ -4346,6 +4346,8 @@ Dosyanın bir kopyası "bozuk" klasörüne alındı; elle kurtarmayı deneyebili
     <string name="wg_desc_kokpit">Saat · sayaç · görevler · seri — birleşik panel</string>
     <string name="wg_desc_ay">Ay takvimi ve günlük görev yoğunluğu</string>
     <string name="wg_desc_uyku">Son 7 gecenin uyku grafiği</string>
+    <string name="wg_saglik_baslik">🩺 Sağlık Karnesi</string>
+    <string name="wg_desc_saglik">Beslenme, su, uyku ve ruh hali özeti</string>
     <string name="wg_desc_odak">Tek dokunuşla 25 dk odak</string>
     <!-- ═══════════ v10.14 · ULTRA-30 / GRUP E (E25–E30) ═══════════ -->
     <!-- E25 · Sabah planı -->

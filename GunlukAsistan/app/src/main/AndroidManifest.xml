@@ -1005,6 +1005,19 @@
         </receiver>
         -->
 
+        <!-- v11.64: Saglik Karnesi widget -->
+        <receiver
+            android:name=".SaglikWidget"
+            android:exported="true"
+            android:label="@string/wg_desc_saglik">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/w_saglik_info" />
+        </receiver>
+
         <receiver
             android:name=".SummaryWidget"
             android:exported="true"

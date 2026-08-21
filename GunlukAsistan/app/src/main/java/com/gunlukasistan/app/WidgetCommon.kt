@@ -151,7 +151,9 @@ object WidgetCommon {
         UykuWidget::class.java,
         OdakKutusuWidget::class.java,
         // v10.16: birleştirilebilir widget (modül ızgarası)
-        ModulWidget::class.java
+        ModulWidget::class.java,
+        // v11.64: Sağlık Karnesi widget'ı
+        SaglikWidget::class.java
     )
 
     /**
