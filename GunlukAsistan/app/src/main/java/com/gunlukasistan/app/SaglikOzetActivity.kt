@@ -91,11 +91,31 @@ class SaglikOzetActivity : AppCompatActivity() {
                 setBackgroundResource(tip.resourceId)
                 setOnClickListener { modulAc(satir.baslik) }
             }
-            kart.addView(TextView(this).apply {
+            // Modül rengi
+            val modulRenk = when {
+                satir.baslik.contains("Kas") -> 0xFFE64A19.toInt()
+                satir.baslik.contains("Beslenme") || satir.baslik.contains("Su") -> 0xFFFF7043.toInt()
+                satir.baslik.contains("Uyku") -> 0xFF5C6BC0.toInt()
+                satir.baslik.contains("Mood") -> 0xFFFFEB3B.toInt()
+                satir.baslik.contains("harcama") -> 0xFF4CAF50.toInt()
+                else -> 0xFF2196F3.toInt()
+            }
+            // Renkli yarı saydam ikon çemberi
+            val ikonKap = FrameLayout(this).apply {
+                layoutParams = LinearLayout.LayoutParams(dp(48), dp(48)).apply {
+                    marginEnd = dp(12)
+                }
+            }
+            ikonKap.addView(TextView(this).apply {
                 text = satir.emoji
                 textSize = 22f
-                setPadding(0, 0, dp(10), 0)
+                gravity = android.view.Gravity.CENTER
+                background = android.graphics.drawable.GradientDrawable().apply {
+                    shape = android.graphics.drawable.GradientDrawable.OVAL
+                    setColor((modulRenk and 0x00FFFFFF) or (0x47 shl 24))
+                }
             })
+            kart.addView(ikonKap)
             val metinKol = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
                 layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)

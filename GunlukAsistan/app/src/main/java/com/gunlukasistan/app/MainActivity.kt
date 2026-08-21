@@ -1071,63 +1071,63 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Eylem tanımı
-        data class Eylem(val grup: String, val metin: String, val alt: String, val calis: () -> Unit)
+        data class Eylem(val grup: String, val metin: String, val alt: String, val renk: Int, val calis: () -> Unit)
 
         val eylemler = listOf(
-            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_task), getString(R.string.quickadd_task_alt)) {
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_task), getString(R.string.quickadd_task_alt), 4283215696.toInt()) {
                 panel.dismiss(); open(6); supportFragmentManager.executePendingTransactions()
                 (supportFragmentManager.findFragmentByTag("scr_6") as? TasksFragment)?.showTaskEditor()
             },
-            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_habit), getString(R.string.quickadd_habit_alt)) {
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_habit), getString(R.string.quickadd_habit_alt), 4287349578.toInt()) {
                 panel.dismiss(); open(12); supportFragmentManager.executePendingTransactions()
                 (supportFragmentManager.findFragmentByTag("scr_12") as? HabitsFragment)?.showHabitEditor(null)
             },
-            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_note), getString(R.string.quickadd_note_alt)) {
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_note), getString(R.string.quickadd_note_alt), 4278430196.toInt()) {
                 panel.dismiss(); open(5); supportFragmentManager.executePendingTransactions()
                 (supportFragmentManager.findFragmentByTag("scr_5") as? NotesFragment)?.showNoteEditor(null)
             },
-            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_event), getString(R.string.quickadd_event_alt)) {
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_event), getString(R.string.quickadd_event_alt), 4294940672.toInt()) {
                 panel.dismiss(); open(11); supportFragmentManager.executePendingTransactions()
                 (supportFragmentManager.findFragmentByTag("scr_11") as? EventsFragment)?.showEventEditor(null)
             },
-            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_exam), getString(R.string.quickadd_exam_alt)) {
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_exam), getString(R.string.quickadd_exam_alt), 4288423856.toInt()) {
                 panel.dismiss(); open(10); supportFragmentManager.executePendingTransactions()
                 (supportFragmentManager.findFragmentByTag("scr_10") as? ExamsFragment)?.showExamEditor()
             },
-            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_topic), getString(R.string.quickadd_topic_alt)) {
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_topic), getString(R.string.quickadd_topic_alt), 4294198070.toInt()) {
                 panel.dismiss(); open(3); (supportFragmentManager.findFragmentByTag("scr_3") as? TopicsFragment)?.showTopicDialog()
             },
-            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_questions), getString(R.string.quickadd_questions_alt)) {
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_questions), getString(R.string.quickadd_questions_alt), 4286141768.toInt()) {
                 panel.dismiss(); showQuestionsQuickAdd()
             },
-            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_plan), getString(R.string.quickadd_plan_alt)) {
+            Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_plan), getString(R.string.quickadd_plan_alt), 4278238420.toInt()) {
                 panel.dismiss(); open(16)
             },
-            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_saglik), getString(R.string.quickadd_saglik_alt)) {
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_saglik), getString(R.string.quickadd_saglik_alt), 4293467747.toInt()) {
                 panel.dismiss(); SaglikOzetActivity.ac(this)
             },
-            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_mood), getString(R.string.quickadd_mood_alt)) {
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_mood), getString(R.string.quickadd_mood_alt), 4294961979.toInt()) {
                 panel.dismiss(); MoodActivity.ac(this)
             },
-            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_rapor), getString(R.string.quickadd_rapor_alt)) {
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_rapor), getString(R.string.quickadd_rapor_alt), 4282339765.toInt()) {
                 panel.dismiss(); SaglikRaporuActivity.ac(this)
             },
-            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_stats), getString(R.string.quickadd_stats_alt)) {
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_stats), getString(R.string.quickadd_stats_alt), 4280391411.toInt()) {
                 panel.dismiss(); AnalitikActivity.ac(this)
             },
-            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_timer), getString(R.string.quickadd_timer_alt)) {
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_timer), getString(R.string.quickadd_timer_alt), 4294924066.toInt()) {
                 panel.dismiss(); openTimer()
             },
-            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_butce), getString(R.string.quickadd_butce_alt)) {
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_butce), getString(R.string.quickadd_butce_alt), 4283215696.toInt()) {
                 panel.dismiss(); TakipActivity.ac(this, TakipActivity.S_BUTCE)
             },
-            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_fitness), getString(R.string.quickadd_fitness_alt)) {
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_fitness), getString(R.string.quickadd_fitness_alt), 4293282329.toInt()) {
                 panel.dismiss(); FitnessActivity.ac(this)
             },
-            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_beslenme), getString(R.string.quickadd_beslenme_alt)) {
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_beslenme), getString(R.string.quickadd_beslenme_alt), 4294930499.toInt()) {
                 panel.dismiss(); BeslenmeActivity.ac(this)
             },
-            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_uyku), getString(R.string.quickadd_uyku_alt)) {
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_uyku), getString(R.string.quickadd_uyku_alt), 4284246976.toInt()) {
                 panel.dismiss(); UykuActivity.ac(this)
             }
         )
@@ -1147,13 +1147,43 @@ class MainActivity : AppCompatActivity() {
                 setBackgroundResource(tip.resourceId)
                 setOnClickListener { e.calis() }
             }
+            // Emoji'yi ayır (metnin başındaki ilk 2 UTF-16 char çoğu emoji için yeterli)
+            var emoji = "📌"
+            var baslikMetni = e.metin
+            runCatching {
+                if (e.metin.isNotEmpty()) {
+                    val cp = e.metin.codePointAt(0)
+                    val len = Character.charCount(cp)
+                    emoji = e.metin.substring(0, len)
+                    baslikMetni = e.metin.substring(len).trim()
+                }
+            }
+            // Renkli ikon çemberi
+            val ikon = android.widget.FrameLayout(this).apply {
+                layoutParams = android.widget.LinearLayout.LayoutParams(dp(46), dp(46)).apply {
+                    marginEnd = dp(12)
+                }
+            }
+            ikon.addView(android.widget.TextView(this).apply {
+                text = emoji
+                textSize = 20f
+                gravity = android.view.Gravity.CENTER
+                background = android.graphics.drawable.GradientDrawable().apply {
+                    shape = android.graphics.drawable.GradientDrawable.OVAL
+                    // Renkli ama yarı saydam çember (%28 opak)
+                    setColor((e.renk and 0x00FFFFFF) or (0x47 shl 24))
+                }
+            })
+            satir.addView(ikon)
+
             val metinKol = android.widget.LinearLayout(this).apply {
                 orientation = android.widget.LinearLayout.VERTICAL
                 layoutParams = android.widget.LinearLayout.LayoutParams(0, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f)
             }
             metinKol.addView(android.widget.TextView(this).apply {
-                text = e.metin
+                text = baslikMetni
                 textSize = 15f
+                typeface = android.graphics.Typeface.DEFAULT_BOLD
                 setTextColor(
                     com.google.android.material.color.MaterialColors.getColor(
                         this@MainActivity,
