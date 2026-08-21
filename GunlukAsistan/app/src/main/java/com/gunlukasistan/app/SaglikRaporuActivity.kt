@@ -51,8 +51,15 @@ class SaglikRaporuActivity : AppCompatActivity() {
             text = "📋 Haftalık Sağlık Raporu"
             textSize = 20f
             typeface = Typeface.DEFAULT_BOLD
-            setTextColor(renk(com.google.android.material.R.attr.colorOnSurface))
+            setTextColor(renk(com.google.android.material.R.attr.colorPrimary))
             setPadding(dp(16), dp(14), dp(16), dp(2))
+        })
+        // v11.61: renkli aksan şeridi
+        kok.addView(android.view.View(this).apply {
+            setBackgroundColor(renk(com.google.android.material.R.attr.colorPrimary))
+            layoutParams = android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT, dp(3)
+            )
         })
         kok.addView(TextView(this).apply {
             text = "Tüm sağlık modüllerinin özeti — paylaşabilirsin."
