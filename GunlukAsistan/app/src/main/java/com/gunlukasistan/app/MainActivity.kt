@@ -1112,6 +1112,9 @@ class MainActivity : AppCompatActivity() {
             Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_rapor), getString(R.string.quickadd_rapor_alt), 4282339765.toInt()) {
                 panel.dismiss(); SaglikRaporuActivity.ac(this)
             },
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_iliski), getString(R.string.quickadd_iliski_alt), 0xFF7B1FA2.toInt()) {
+                panel.dismiss(); IliskiAnalizActivity.ac(this)
+            },
             Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_stats), getString(R.string.quickadd_stats_alt), 4280391411.toInt()) {
                 panel.dismiss(); AnalitikActivity.ac(this)
             },

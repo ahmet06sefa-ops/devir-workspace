@@ -1294,6 +1294,13 @@
             android:label="@string/rapor_baslik"
             android:theme="@style/Theme.GunlukAsistan"
             android:windowSoftInputMode="adjustResize" />
+        <!-- v11.63: Ruh-Uyku-Beslenme İlişki Analizi -->
+        <activity
+            android:name=".IliskiAnalizActivity"
+            android:exported="false"
+            android:label="@string/iliski_baslik"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
