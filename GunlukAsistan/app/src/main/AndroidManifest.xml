@@ -1273,6 +1273,13 @@
             android:label="@string/uyku_baslik"
             android:theme="@style/Theme.GunlukAsistan"
             android:windowSoftInputMode="adjustResize" />
+        <!-- v11.56: Sağlık Karnesi -->
+        <activity
+            android:name=".SaglikOzetActivity"
+            android:exported="false"
+            android:label="@string/saglik_baslik"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

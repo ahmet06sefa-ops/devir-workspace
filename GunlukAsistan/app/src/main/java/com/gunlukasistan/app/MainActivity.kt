@@ -1103,6 +1103,9 @@ class MainActivity : AppCompatActivity() {
             Eylem(getString(R.string.quickadd_group_ekle), getString(R.string.quickadd_plan), getString(R.string.quickadd_plan_alt)) {
                 panel.dismiss(); open(16)
             },
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_saglik), getString(R.string.quickadd_saglik_alt)) {
+                panel.dismiss(); SaglikOzetActivity.ac(this)
+            },
             Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_stats), getString(R.string.quickadd_stats_alt)) {
                 panel.dismiss(); AnalitikActivity.ac(this)
             },
