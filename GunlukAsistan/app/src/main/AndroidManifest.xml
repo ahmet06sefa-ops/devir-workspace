@@ -1259,6 +1259,13 @@
             android:label="@string/fitness_baslik"
             android:theme="@style/Theme.GunlukAsistan"
             android:windowSoftInputMode="adjustResize" />
+        <!-- v11.54: Beslenme & Kalori -->
+        <activity
+            android:name=".BeslenmeActivity"
+            android:exported="false"
+            android:label="@string/beslenme_baslik"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
