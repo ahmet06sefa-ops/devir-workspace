@@ -128,6 +128,9 @@
     <string name="quickadd_saglik">🩺 Sağlık Karnesi</string>
     <string name="quickadd_saglik_alt">Tüm sağlık &amp; fitness özeti</string>
     <string name="saglik_baslik">Sağlık Karnesi</string>
+    <string name="quickadd_mood">🎭 Ruh Hali</string>
+    <string name="quickadd_mood_alt">Günlük ruh hali ve not takibi</string>
+    <string name="mood_baslik">Ruh Hali Takibi</string>
     <string name="quickadd_search">Hızlı ara (örn. görev, kas, sayaç)…</string>
     <string name="quickadd_noresult">Sonuç bulunamadı.</string>
     <string name="fitness_baslik">Kas Sistemi 3D</string>

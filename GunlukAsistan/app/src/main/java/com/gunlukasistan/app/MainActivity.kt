@@ -1106,6 +1106,9 @@ class MainActivity : AppCompatActivity() {
             Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_saglik), getString(R.string.quickadd_saglik_alt)) {
                 panel.dismiss(); SaglikOzetActivity.ac(this)
             },
+            Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_mood), getString(R.string.quickadd_mood_alt)) {
+                panel.dismiss(); MoodActivity.ac(this)
+            },
             Eylem(getString(R.string.quickadd_group_arac), getString(R.string.quickadd_stats), getString(R.string.quickadd_stats_alt)) {
                 panel.dismiss(); AnalitikActivity.ac(this)
             },
