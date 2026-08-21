@@ -131,6 +131,9 @@
     <string name="quickadd_mood">🎭 Ruh Hali</string>
     <string name="quickadd_mood_alt">Günlük ruh hali ve not takibi</string>
     <string name="mood_baslik">Ruh Hali Takibi</string>
+    <string name="quickadd_rapor">📋 Sağlık Raporu</string>
+    <string name="quickadd_rapor_alt">Haftalık özet &amp; paylaş</string>
+    <string name="rapor_baslik">Haftalık Sağlık Raporu</string>
     <string name="quickadd_search">Hızlı ara (örn. görev, kas, sayaç)…</string>
     <string name="quickadd_noresult">Sonuç bulunamadı.</string>
     <string name="fitness_baslik">Kas Sistemi 3D</string>

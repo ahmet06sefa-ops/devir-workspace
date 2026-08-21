@@ -1287,6 +1287,13 @@
             android:label="@string/mood_baslik"
             android:theme="@style/Theme.GunlukAsistan"
             android:windowSoftInputMode="adjustResize" />
+        <!-- v11.58: Haftalık Sağlık Raporu -->
+        <activity
+            android:name=".SaglikRaporuActivity"
+            android:exported="false"
+            android:label="@string/rapor_baslik"
+            android:theme="@style/Theme.GunlukAsistan"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
