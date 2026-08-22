@@ -74,6 +74,25 @@ object AlarmScheduler {
         }
     }
 
+    /** v11.66: Her akşam 21:00 için günlük sağlık hatırlatma alarmı kurar. */
+    fun scheduleDailyHealth(context: Context) {
+        val at = GunlukSaglikHatirlatmaReceiver.nextEvening()
+        try {
+            val intent = Intent(context, GunlukSaglikHatirlatmaReceiver::class.java)
+            val pi = PendingIntent.getBroadcast(
+                context, 4243, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+            val am = alarmManager(context)
+            if (Build.VERSION.SDK_INT >= 31 && !am.canScheduleExactAlarms()) {
+                am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
+            } else {
+                am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
+            }
+        } catch (_: Exception) {
+        }
+    }
+
     /** Telefon yeniden başlatıldığında tüm gelecek hatırlatıcıları yeniden kurar. */
     /**
      * Bekleyen tüm görev alarmlarını yeniden kurar.

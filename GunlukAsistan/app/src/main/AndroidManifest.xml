@@ -975,6 +975,11 @@
             android:name=".WeeklyReportReceiver"
             android:exported="false" />
 
+        <!-- v11.66: Gunluk saglik hatirlatma -->
+        <receiver
+            android:name=".GunlukSaglikHatirlatmaReceiver"
+            android:exported="false" />
+
         <receiver
             android:name=".TaskActionReceiver"
             android:exported="false">

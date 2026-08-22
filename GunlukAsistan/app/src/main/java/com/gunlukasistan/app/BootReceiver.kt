@@ -14,6 +14,8 @@ class BootReceiver : BroadcastReceiver() {
         when (intent.action) {
             Intent.ACTION_BOOT_COMPLETED -> {
                 AlarmScheduler.rescheduleAll(context)
+                AlarmScheduler.scheduleWeeklyReport(context)
+                AlarmScheduler.scheduleDailyHealth(context)
                 CourseReminderReceiver.schedule(context)
                 WidgetCommon.refreshAll(context)
                 // v7.43: bildirim turlarini yeniden zamanla

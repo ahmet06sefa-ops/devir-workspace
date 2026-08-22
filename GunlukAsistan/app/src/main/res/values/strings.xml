@@ -335,6 +335,7 @@
 
     <!-- v5.1: Haftalık rapor -->
     <string name="weekly_channel_name">Haftalık Rapor</string>
+    <string name="gunluk_saglik_kanal">Günlük Sağlık Hatırlatması</string>
 
     <!-- v5.2: Geri sayımlar -->
     <string name="nav_events">Geri Sayım</string>

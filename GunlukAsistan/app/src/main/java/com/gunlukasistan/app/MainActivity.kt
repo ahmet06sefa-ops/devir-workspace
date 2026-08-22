@@ -481,6 +481,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 AlarmScheduler.rescheduleAll(this)
                 AlarmScheduler.scheduleWeeklyReport(this)
+                AlarmScheduler.scheduleDailyHealth(this)
                 CourseReminderReceiver.schedule(this)
             } catch (e: Exception) {
                 android.util.Log.w("MainActivity", "Alarmlar kurulamadı", e)
