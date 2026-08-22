@@ -1380,12 +1380,10 @@ object AsistanKomut {
      * Erişilebilirlik servisi üzerinden iletir; servis kapalıysa başarısız.
      */
     private fun ekranaYaz(context: Context, deger: String): Sonuc {
+        // v11.65: Erişilebilirlik servisi kaldırıldığı için ekrana yazma
+        // özelliği kullanılamıyor — güvenle "erişim kapalı" döndür.
         if (deger.isBlank()) return Sonuc(false, "")
-        val iletildi = runCatching {
-            EkranDokunmaServisi.istekGonderStatik("yaz", deger)
-        }.getOrDefault(false)
-        return if (iletildi) Sonuc(true, context.getString(R.string.cmd_yazildi))
-        else Sonuc(false, context.getString(R.string.cmd_erisim_kapali))
+        return Sonuc(false, context.getString(R.string.cmd_erisim_kapali))
     }
 
     private fun dersDevam(context: Context, activity: Activity?): Sonuc {
